@@ -108,6 +108,28 @@ Minimal dependencies:
 
 ## Installation
 
+### Option 1: Docker (Recommended)
+
+**Fastest way to get started!**
+
+```bash
+cd /Users/gabe/ai/bm/poc
+
+# Configure environment
+cp .env.example .env
+vi .env  # Add your NetBox URL, token, and iLO password
+
+# Run all workers in single container
+docker-compose --profile all-in-one up -d
+
+# View logs
+docker-compose logs -f
+```
+
+See [DOCKER.md](DOCKER.md) for complete Docker documentation.
+
+### Option 2: Native Installation
+
 ### 1. Clone and Setup
 
 ```bash
