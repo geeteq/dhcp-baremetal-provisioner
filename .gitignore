@@ -17,6 +17,11 @@ __pycache__/
 env/
 venv/
 ENV/
+poc/venv/
+poc/bin/
+poc/lib/python*/
+poc/include/
+poc/pyvenv.cfg
 build/
 develop-eggs/
 dist/
