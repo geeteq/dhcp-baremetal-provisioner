@@ -7,7 +7,7 @@ requests==2.31.0
 flask==3.0.0
 
 # Ansible for BMC hardening
-ansible==9.0.0
+ansible==9.10.0
 
 # Optional: For development/testing
 # pytest==7.4.3

@@ -13,7 +13,8 @@
 set -e
 
 # Configuration
-LOG_FILE="${LOG_FILE:-/var/log/bm/dhcp_events.log}"
+#LOG_FILE="${LOG_FILE:-/var/log/bm/dhcp_events.log}"
+LOG_FILE="${LOG_FILE:-log/bm/dhcp_events.log}"
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 # Get lease information from environment or arguments

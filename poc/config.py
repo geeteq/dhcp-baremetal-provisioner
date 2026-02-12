@@ -13,6 +13,13 @@ NETBOX_TENANT = os.getenv('NETBOX_TENANT', 'baremetal-staging')
 REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = int(os.getenv('REDIS_PORT', '6379'))
 REDIS_DB = int(os.getenv('REDIS_DB', '0'))
+REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')  # Optional password for authentication
+REDIS_USE_TLS = os.getenv('REDIS_USE_TLS', 'false').lower() == 'true'
+
+# Redis TLS Configuration (optional)
+REDIS_TLS_CERT = os.getenv('REDIS_TLS_CERT')
+REDIS_TLS_KEY = os.getenv('REDIS_TLS_KEY')
+REDIS_TLS_CA = os.getenv('REDIS_TLS_CA')
 
 # Queue Names
 QUEUE_DHCP_LEASE = 'bm:events:dhcp_lease'

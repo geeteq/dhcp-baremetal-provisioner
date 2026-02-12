@@ -1,30 +1,61 @@
 """
 Simple Redis queue wrapper.
 Uses Redis lists for queue operations.
+Supports authentication and TLS encryption.
 """
 import json
 import redis
+import ssl
 from typing import Optional, Dict, Any
 
 
 class Queue:
-    """Simple Redis-based queue."""
+    """Simple Redis-based queue with authentication support."""
 
-    def __init__(self, host='localhost', port=6379, db=0):
+    def __init__(self, host='localhost', port=6379, db=0, password=None,
+                 use_tls=False, tls_cert=None, tls_key=None, tls_ca=None):
         """
-        Initialize Redis connection.
+        Initialize Redis connection with optional authentication and TLS.
 
         Args:
             host: Redis host
             port: Redis port
             db: Redis database number
+            password: Redis password (optional)
+            use_tls: Enable TLS encryption
+            tls_cert: Client certificate path (for mTLS)
+            tls_key: Client key path (for mTLS)
+            tls_ca: CA certificate path
         """
-        self.client = redis.Redis(
-            host=host,
-            port=port,
-            db=db,
-            decode_responses=True
-        )
+        connection_kwargs = {
+            'host': host,
+            'port': port,
+            'db': db,
+            'decode_responses': True
+        }
+
+        # Add password if provided
+        if password:
+            connection_kwargs['password'] = password
+
+        # Add TLS if enabled
+        if use_tls:
+            ssl_context = ssl.create_default_context()
+            if tls_ca:
+                ssl_context.load_verify_locations(cafile=tls_ca)
+            if tls_cert and tls_key:
+                ssl_context.load_cert_chain(certfile=tls_cert, keyfile=tls_key)
+
+            connection_kwargs['ssl'] = True
+            connection_kwargs['ssl_cert_reqs'] = ssl.CERT_REQUIRED if tls_ca else ssl.CERT_NONE
+            if tls_ca:
+                connection_kwargs['ssl_ca_certs'] = tls_ca
+            if tls_cert:
+                connection_kwargs['ssl_certfile'] = tls_cert
+            if tls_key:
+                connection_kwargs['ssl_keyfile'] = tls_key
+
+        self.client = redis.Redis(**connection_kwargs)
 
     def publish(self, queue_name: str, message: Dict[Any, Any]) -> bool:
         """
