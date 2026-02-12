@@ -1,0 +1,33 @@
+# Docker ignore file
+.git
+.gitignore
+.cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+venv
+env
+ENV
+
+# Documentation
+README.md
+*.md
+
+# Logs and data
+logs/
+metrics/
+*.log
+
+# Docker files (don't copy into container)
+Dockerfile
+docker-compose.yml
+.dockerignore
+.env
+.env.example

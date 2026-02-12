@@ -1,0 +1,202 @@
+version: '3.8'
+
+services:
+  # Redis - Event Queue
+  redis:
+    image: redis:7-alpine
+    container_name: bm-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # All Workers in Single Container
+  workers-all:
+    build: .
+    container_name: bm-workers-all
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      # Worker Configuration
+      WORKER_TYPE: all
+
+      # NetBox Configuration
+      NETBOX_URL: ${NETBOX_URL}
+      NETBOX_TOKEN: ${NETBOX_TOKEN}
+      NETBOX_TENANT: ${NETBOX_TENANT:-baremetal-staging}
+
+      # Redis Configuration
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+
+      # iLO Configuration
+      ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
+      ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
+      ILO_VERIFY_SSL: "false"
+
+      # Callback API Configuration
+      CALLBACK_API_HOST: 0.0.0.0
+      CALLBACK_API_PORT: 5000
+      CALLBACK_API_URL: ${CALLBACK_API_URL:-http://workers-all:5000}
+
+      # Paths
+      LOG_DIR: /var/log/bm
+      ANSIBLE_PLAYBOOK_DIR: /app/ansible
+
+      # Monitoring Configuration
+      MONITORING_INTERVAL_SECONDS: ${MONITORING_INTERVAL_SECONDS:-300}
+
+    ports:
+      - "5000:5000"  # Callback API
+
+    volumes:
+      - ./logs:/var/log/bm
+      - ./metrics:/var/log/bm/metrics
+
+    restart: unless-stopped
+
+    profiles:
+      - all-in-one
+
+  # OR: Run workers separately (comment out workers-all, uncomment these)
+
+  dhcp-tailer:
+    build: .
+    container_name: bm-dhcp-tailer
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      WORKER_TYPE: dhcp-tailer
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      LOG_DIR: /var/log/bm
+    volumes:
+      - ./logs:/var/log/bm
+    restart: unless-stopped
+    profiles:
+      - separate
+
+  discovery:
+    build: .
+    container_name: bm-discovery
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      WORKER_TYPE: discovery
+      NETBOX_URL: ${NETBOX_URL}
+      NETBOX_TOKEN: ${NETBOX_TOKEN}
+      NETBOX_TENANT: ${NETBOX_TENANT:-baremetal-staging}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      LOG_DIR: /var/log/bm
+    volumes:
+      - ./logs:/var/log/bm
+    restart: unless-stopped
+    profiles:
+      - separate
+
+  provisioning:
+    build: .
+    container_name: bm-provisioning
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      WORKER_TYPE: provisioning
+      NETBOX_URL: ${NETBOX_URL}
+      NETBOX_TOKEN: ${NETBOX_TOKEN}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
+      ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
+      ILO_VERIFY_SSL: "false"
+      LOG_DIR: /var/log/bm
+    volumes:
+      - ./logs:/var/log/bm
+    restart: unless-stopped
+    profiles:
+      - separate
+
+  callback-api:
+    build: .
+    container_name: bm-callback-api
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      WORKER_TYPE: callback-api
+      NETBOX_URL: ${NETBOX_URL}
+      NETBOX_TOKEN: ${NETBOX_TOKEN}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CALLBACK_API_HOST: 0.0.0.0
+      CALLBACK_API_PORT: 5000
+      LOG_DIR: /var/log/bm
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./logs:/var/log/bm
+    restart: unless-stopped
+    profiles:
+      - separate
+
+  hardening:
+    build: .
+    container_name: bm-hardening
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      WORKER_TYPE: hardening
+      NETBOX_URL: ${NETBOX_URL}
+      NETBOX_TOKEN: ${NETBOX_TOKEN}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
+      ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
+      ILO_VERIFY_SSL: "false"
+      ANSIBLE_PLAYBOOK_DIR: /app/ansible
+      LOG_DIR: /var/log/bm
+    volumes:
+      - ./logs:/var/log/bm
+    restart: unless-stopped
+    profiles:
+      - separate
+
+  monitoring:
+    build: .
+    container_name: bm-monitoring
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      WORKER_TYPE: monitoring
+      NETBOX_URL: ${NETBOX_URL}
+      NETBOX_TOKEN: ${NETBOX_TOKEN}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
+      ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
+      ILO_VERIFY_SSL: "false"
+      MONITORING_INTERVAL_SECONDS: ${MONITORING_INTERVAL_SECONDS:-300}
+      LOG_DIR: /var/log/bm
+    volumes:
+      - ./logs:/var/log/bm
+      - ./metrics:/var/log/bm/metrics
+    restart: unless-stopped
+    profiles:
+      - separate
+
+volumes:
+  redis-data:
