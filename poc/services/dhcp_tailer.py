@@ -98,11 +98,16 @@ def main():
 
     logger.info("DHCP Tailer starting...")
 
-    # Initialize Redis queue
+    # Initialize Redis queue with authentication
     queue = Queue(
         host=config.REDIS_HOST,
         port=config.REDIS_PORT,
-        db=config.REDIS_DB
+        db=config.REDIS_DB,
+        password=config.REDIS_PASSWORD,
+        use_tls=config.REDIS_USE_TLS,
+        tls_cert=config.REDIS_TLS_CERT,
+        tls_key=config.REDIS_TLS_KEY,
+        tls_ca=config.REDIS_TLS_CA
     )
 
     # Test Redis connection

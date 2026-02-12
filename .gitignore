@@ -59,6 +59,12 @@ Thumbs.db
 *.log
 logs/
 
+# PKI - Private keys and CSRs (never commit!)
+poc/pki/*/.*-key.pem
+poc/pki/*/*.key
+poc/pki/*/*.csr
+poc/pki/ca/ca-key.pem
+
 # Temporary files
 *.tmp
 *.temp
