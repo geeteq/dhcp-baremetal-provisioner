@@ -1,0 +1,66 @@
+---
+#
+# BMC Hardening Playbook for HPE iLO
+# Applies security hardening to iLO BMC
+#
+- name: Harden HPE iLO BMC
+  hosts: all
+  gather_facts: no
+  connection: local
+
+  vars:
+    ilo_username: "{{ lookup('env', 'ILO_DEFAULT_USER') | default('Administrator') }}"
+    ilo_password: "{{ lookup('env', 'ILO_DEFAULT_PASSWORD') }}"
+    new_admin_password: "{{ lookup('env', 'ILO_NEW_ADMIN_PASSWORD') | default(ilo_password) }}"
+
+  tasks:
+    - name: Display target iLO
+      debug:
+        msg: "Hardening iLO at {{ inventory_hostname }}"
+
+    - name: Get iLO information
+      uri:
+        url: "https://{{ inventory_hostname }}/redfish/v1/Systems/1"
+        user: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
+        method: GET
+        validate_certs: no
+        force_basic_auth: yes
+      register: ilo_info
+      ignore_errors: yes
+
+    - name: Display iLO model
+      debug:
+        msg: "Model: {{ ilo_info.json.Model | default('Unknown') }}"
+      when: ilo_info is success
+
+    # Note: HPE iLO hardening via Ansible requires the hpe.ilo collection
+    # For PoC, we'll use direct Redfish API calls via uri module
+    # In production, install: ansible-galaxy collection install hpe.ilo
+
+    - name: Disable IPMI over LAN (if supported)
+      uri:
+        url: "https://{{ inventory_hostname }}/redfish/v1/Managers/1/NetworkProtocol"
+        user: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
+        method: PATCH
+        validate_certs: no
+        force_basic_auth: yes
+        body_format: json
+        body:
+          IPMI:
+            ProtocolEnabled: false
+        status_code: [200, 204]
+      ignore_errors: yes
+      register: disable_ipmi
+
+    - name: Log IPMI disable result
+      debug:
+        msg: "IPMI disable: {{ 'Success' if disable_ipmi is success else 'Failed or not supported' }}"
+
+    # Note: Password changes and advanced settings typically require hpe.ilo collection
+    # or vendor-specific tools. For PoC, we demonstrate the structure.
+
+    - name: Hardening complete
+      debug:
+        msg: "BMC hardening completed for {{ inventory_hostname }}"
