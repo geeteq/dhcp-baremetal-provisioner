@@ -97,19 +97,19 @@ def process_dhcp_event(event, netbox, queue, logger):
             # IP might already exist, that's OK
             logger.warning(f"Failed to assign IP (may already exist): {e}")
 
-        # Step 3: Update device state to 'discovered'
+        # Step 3: Update device state to 'planned'
         timestamp = datetime.utcnow().isoformat() + 'Z'
 
-        logger.info(f"Updating device {device_id} state to 'discovered'")
+        logger.info(f"Updating device {device_id} state to 'planned'")
         netbox.update_device(device_id, {
             'custom_fields': {
-                config.NETBOX_FIELD_LIFECYCLE_STATE: config.STATE_DISCOVERED,
+                config.NETBOX_FIELD_LIFECYCLE_STATE: config.STATE_PLANNED,
                 config.NETBOX_FIELD_DISCOVERED_AT: timestamp
             }
         })
 
         log_event(logger, 'device_state_updated', device_id=device_name, data={
-            'state': config.STATE_DISCOVERED,
+            'state': config.STATE_PLANNED,
             'timestamp': timestamp
         })
 

@@ -139,17 +139,17 @@ def process_validation_completed(event, netbox, queue, logger):
 
         log_event(logger, 'hardening_completed', device_id=device_name)
 
-        # Step 4: Update state to 'ready'
-        logger.info(f"Updating device {device_id} state to 'ready'")
+        # Step 4: Update state to 'staged'
+        logger.info(f"Updating device {device_id} state to 'staged'")
         netbox.update_device(device_id, {
             'custom_fields': {
-                config.NETBOX_FIELD_LIFECYCLE_STATE: config.STATE_READY,
+                config.NETBOX_FIELD_LIFECYCLE_STATE: config.STATE_STAGED,
                 config.NETBOX_FIELD_HARDENED_AT: timestamp
             }
         })
 
         log_event(logger, 'device_state_updated', device_id=device_name, data={
-            'state': config.STATE_READY,
+            'state': config.STATE_STAGED,
             'timestamp': timestamp
         })
 
