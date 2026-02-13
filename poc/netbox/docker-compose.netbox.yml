@@ -78,7 +78,7 @@ services:
       REDIS_CACHE_DATABASE: 1
 
       # NetBox Configuration
-      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AH}
+      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AHx2}
       SUPERUSER_NAME: ${NETBOX_SUPERUSER_NAME:-admin}
       SUPERUSER_EMAIL: ${NETBOX_SUPERUSER_EMAIL:-admin@example.com}
       SUPERUSER_PASSWORD: ${NETBOX_SUPERUSER_PASSWORD:-admin}
@@ -136,7 +136,7 @@ services:
       REDIS_CACHE_HOST: netbox-redis-cache
       REDIS_CACHE_PORT: 6379
       REDIS_CACHE_DATABASE: 1
-      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AH}
+      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AHx2}
     command: /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py rqworker
     volumes:
       - netbox_media:/opt/netbox/netbox/media
@@ -165,7 +165,7 @@ services:
       REDIS_CACHE_HOST: netbox-redis-cache
       REDIS_CACHE_PORT: 6379
       REDIS_CACHE_DATABASE: 1
-      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AH}
+      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AHx2}
     command: /opt/netbox/housekeeping.sh
     volumes:
       - ./netbox-config/configuration.py:/etc/netbox/config/configuration.py:ro

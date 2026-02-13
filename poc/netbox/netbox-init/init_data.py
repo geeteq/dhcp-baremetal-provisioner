@@ -87,14 +87,17 @@ def create_custom_fields():
 
     for field_data in fields:
         choices = field_data.pop('choices', None)
+
+        # For select fields, add choices to the field data
+        if choices and field_data.get('type') == 'select':
+            field_data['choice_set'] = choices
+
         field, created = CustomField.objects.get_or_create(
             name=field_data['name'],
             defaults=field_data
         )
         if created:
             field.content_types.set([device_content_type])
-            if choices:
-                field.choices = choices
             field.save()
             print(f"  ✓ Created custom field: {field_data['name']}")
         else:
