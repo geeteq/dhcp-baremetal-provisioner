@@ -1,0 +1,191 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database for NetBox
+  netbox-postgres:
+    image: postgres:15-alpine
+    container_name: netbox-postgres
+    environment:
+      POSTGRES_DB: netbox
+      POSTGRES_USER: netbox
+      POSTGRES_PASSWORD: netbox_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - netbox_postgres_data:/var/lib/postgresql/data
+    networks:
+      - netbox
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U netbox"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache for NetBox
+  netbox-redis:
+    image: redis:7-alpine
+    container_name: netbox-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - netbox_redis_data:/data
+    networks:
+      - netbox
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache (tasks/caching)
+  netbox-redis-cache:
+    image: redis:7-alpine
+    container_name: netbox-redis-cache
+    command: redis-server
+    networks:
+      - netbox
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NetBox Application
+  netbox:
+    image: netboxcommunity/netbox:v3.7.3
+    container_name: netbox
+    depends_on:
+      netbox-postgres:
+        condition: service_healthy
+      netbox-redis:
+        condition: service_healthy
+      netbox-redis-cache:
+        condition: service_healthy
+    environment:
+      # Database
+      DB_HOST: netbox-postgres
+      DB_NAME: netbox
+      DB_USER: netbox
+      DB_PASSWORD: netbox_password
+
+      # Redis
+      REDIS_HOST: netbox-redis
+      REDIS_PORT: 6379
+      REDIS_DATABASE: 0
+      REDIS_CACHE_HOST: netbox-redis-cache
+      REDIS_CACHE_PORT: 6379
+      REDIS_CACHE_DATABASE: 1
+
+      # NetBox Configuration
+      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AH}
+      SUPERUSER_NAME: ${NETBOX_SUPERUSER_NAME:-admin}
+      SUPERUSER_EMAIL: ${NETBOX_SUPERUSER_EMAIL:-admin@example.com}
+      SUPERUSER_PASSWORD: ${NETBOX_SUPERUSER_PASSWORD:-admin}
+      SUPERUSER_API_TOKEN: ${NETBOX_API_TOKEN:-0123456789abcdef0123456789abcdef01234567}
+
+      # Email (optional, for testing)
+      EMAIL_SERVER: localhost
+      EMAIL_PORT: 25
+      EMAIL_USERNAME: netbox
+      EMAIL_PASSWORD: ""
+      EMAIL_FROM: netbox@example.com
+      EMAIL_TIMEOUT: 5
+
+      # Security
+      ALLOWED_HOSTS: "*"
+      CORS_ORIGIN_ALLOW_ALL: "True"
+
+      # Misc
+      SKIP_SUPERUSER: "false"
+      WEBHOOKS_ENABLED: "true"
+
+    volumes:
+      - netbox_media:/opt/netbox/netbox/media
+      - netbox_reports:/opt/netbox/netbox/reports
+      - netbox_scripts:/opt/netbox/netbox/scripts
+      - ./netbox-config/configuration.py:/etc/netbox/config/configuration.py:ro
+      - ./netbox-init:/opt/netbox-init:ro
+    ports:
+      - "8000:8080"
+    networks:
+      - netbox
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+
+  # NetBox Worker for background tasks
+  netbox-worker:
+    image: netboxcommunity/netbox:v3.7.3
+    container_name: netbox-worker
+    depends_on:
+      netbox:
+        condition: service_healthy
+    environment:
+      DB_HOST: netbox-postgres
+      DB_NAME: netbox
+      DB_USER: netbox
+      DB_PASSWORD: netbox_password
+      REDIS_HOST: netbox-redis
+      REDIS_PORT: 6379
+      REDIS_DATABASE: 0
+      REDIS_CACHE_HOST: netbox-redis-cache
+      REDIS_CACHE_PORT: 6379
+      REDIS_CACHE_DATABASE: 1
+      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AH}
+    command: /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py rqworker
+    volumes:
+      - netbox_media:/opt/netbox/netbox/media
+      - netbox_reports:/opt/netbox/netbox/reports
+      - netbox_scripts:/opt/netbox/netbox/scripts
+      - ./netbox-config/configuration.py:/etc/netbox/config/configuration.py:ro
+    networks:
+      - netbox
+    restart: unless-stopped
+
+  # NetBox Housekeeping (cleanup tasks)
+  netbox-housekeeping:
+    image: netboxcommunity/netbox:v3.7.3
+    container_name: netbox-housekeeping
+    depends_on:
+      netbox:
+        condition: service_healthy
+    environment:
+      DB_HOST: netbox-postgres
+      DB_NAME: netbox
+      DB_USER: netbox
+      DB_PASSWORD: netbox_password
+      REDIS_HOST: netbox-redis
+      REDIS_PORT: 6379
+      REDIS_DATABASE: 0
+      REDIS_CACHE_HOST: netbox-redis-cache
+      REDIS_CACHE_PORT: 6379
+      REDIS_CACHE_DATABASE: 1
+      SECRET_KEY: ${NETBOX_SECRET_KEY:-r8OwDzn!y@NqRsx#5!JlH7M*IaBh1h4WfW8g6qO^sK3&D9AH}
+    command: /opt/netbox/housekeeping.sh
+    volumes:
+      - ./netbox-config/configuration.py:/etc/netbox/config/configuration.py:ro
+    networks:
+      - netbox
+    restart: unless-stopped
+
+networks:
+  netbox:
+    name: netbox_network
+    driver: bridge
+
+volumes:
+  netbox_postgres_data:
+    name: netbox_postgres_data
+  netbox_redis_data:
+    name: netbox_redis_data
+  netbox_media:
+    name: netbox_media
+  netbox_reports:
+    name: netbox_reports
+  netbox_scripts:
+    name: netbox_scripts
