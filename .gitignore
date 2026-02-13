@@ -68,3 +68,4 @@ poc/pki/ca/ca-key.pem
 # Temporary files
 *.tmp
 *.temp
+*.tar.gz
