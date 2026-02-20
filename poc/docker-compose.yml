@@ -212,6 +212,8 @@ services:
       NETBOX_URL: ${NETBOX_URL}
       NETBOX_TOKEN: ${NETBOX_TOKEN}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      VAPI_PUBLIC_KEY: ${VAPI_PUBLIC_KEY:-}
+      VAPI_SERVER_URL: ${VAPI_SERVER_URL:-}
     restart: unless-stopped
 
 volumes:

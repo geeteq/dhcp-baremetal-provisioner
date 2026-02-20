@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/balacodeio/Vapi-Web-UMD@latest/dist/latest/vapi-web-bundle.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -283,6 +284,72 @@
     }
     .send-btn:disabled { opacity: .4; cursor: not-allowed; }
     .send-btn:not(:disabled):hover { opacity: .9; }
+
+    /* ---- Voice button ---- */
+    .voice-btn {
+      height: 34px; padding: 0 14px;
+      border: none; border-radius: 17px;
+      background: rgba(255,255,255,.18);
+      color: #fff; font-size: 13px; font-weight: 500;
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
+      transition: background .15s; font-family: inherit; flex-shrink: 0;
+      margin-left: 8px;
+    }
+    .voice-btn:hover { background: rgba(255,255,255,.3); }
+    .voice-btn.connecting { background: rgba(251,191,36,.5); }
+    .voice-btn.active {
+      background: #ef4444;
+      animation: voice-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes voice-pulse { 0%,100%{opacity:1} 50%{opacity:.65} }
+
+    .voice-btn .mic-icon { font-size: 15px; }
+
+    /* ---- Voice call banner ---- */
+    .voice-banner {
+      background: #1e293b;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 13px; flex-shrink: 0;
+      border-bottom: 1px solid #334155;
+    }
+    .voice-banner.hidden { display: none; }
+
+    .voice-orb {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+    }
+    .voice-orb.speaking { animation: orb-pulse .55s ease-in-out infinite alternate; }
+    @keyframes orb-pulse { from{transform:scale(1)} to{transform:scale(1.25)} }
+
+    .voice-bars {
+      display: flex; align-items: center; gap: 3px; height: 20px;
+    }
+    .voice-bar {
+      width: 3px; border-radius: 2px;
+      background: #667eea;
+      animation: bar-bounce .7s ease-in-out infinite alternate;
+    }
+    .voice-bar:nth-child(1){height:6px;  animation-delay:0s}
+    .voice-bar:nth-child(2){height:14px; animation-delay:.1s}
+    .voice-bar:nth-child(3){height:20px; animation-delay:.2s}
+    .voice-bar:nth-child(4){height:10px; animation-delay:.3s}
+    .voice-bar:nth-child(5){height:16px; animation-delay:.15s}
+    .voice-bars.idle .voice-bar { animation: none; height: 4px; background: #475569; }
+    @keyframes bar-bounce { from{transform:scaleY(1)} to{transform:scaleY(1.8)} }
+
+    #voice-transcript { flex: 1; color: #94a3b8; font-style: italic; }
+    #voice-transcript.active { color: #e2e8f0; font-style: normal; }
+
+    .voice-end-btn {
+      padding: 5px 14px; border: 1px solid #ef444466; border-radius: 6px;
+      background: transparent; color: #f87171; font-size: 12px; cursor: pointer;
+      font-family: inherit; transition: all .15s;
+    }
+    .voice-end-btn:hover { background: #ef44440d; }
   </style>
 </head>
 <body>
@@ -291,7 +358,24 @@
   <div class="logo">&#9964;</div>
   <h1>Baremetal Services AI Assistant</h1>
   <p>Powered by live NetBox data</p>
+  <button id="voice-btn" class="voice-btn" onclick="toggleVoice()" title="Start voice call">
+    <span class="mic-icon">🎙️</span>
+    <span id="voice-btn-label">Voice</span>
+  </button>
 </header>
+
+<div class="voice-banner hidden" id="voice-banner">
+  <div class="voice-orb" id="voice-orb">🎙️</div>
+  <div class="voice-bars idle" id="voice-bars">
+    <div class="voice-bar"></div>
+    <div class="voice-bar"></div>
+    <div class="voice-bar"></div>
+    <div class="voice-bar"></div>
+    <div class="voice-bar"></div>
+  </div>
+  <span id="voice-transcript">Connecting…</span>
+  <button class="voice-end-btn" onclick="endVoiceCall()">End Call</button>
+</div>
 
 <div class="body">
   <!-- Sidebar -->
@@ -664,9 +748,140 @@
     c.scrollTop = c.scrollHeight;
   }
 
+  // ─── Vapi voice ───────────────────────────────────────────────────────────
+  const VAPI_PUBLIC_KEY  = "{{ vapi_public_key }}";
+  const VAPI_SERVER_URL  = "{{ vapi_server_url }}";  // public URL for Vapi to reach /api/vapi
+
+  let vapi            = null;
+  let vapiCallActive  = false;
+
+  function initVapi() {
+    if (!VAPI_PUBLIC_KEY || typeof Vapi === 'undefined') return;
+    try {
+      vapi = new Vapi(VAPI_PUBLIC_KEY);
+    } catch (e) {
+      console.warn('Vapi init failed:', e);
+      return;
+    }
+
+    vapi.on('call-start', () => {
+      vapiCallActive = true;
+      setVoiceState('listening');
+      document.getElementById('empty-state').style.display = 'none';
+    });
+
+    vapi.on('call-end', () => {
+      vapiCallActive = false;
+      setVoiceState('idle');
+    });
+
+    vapi.on('speech-start', () => {
+      // User started speaking
+      setVoiceBars('active');
+      document.getElementById('voice-transcript').textContent = '…';
+      document.getElementById('voice-transcript').className = 'active';
+      document.getElementById('voice-orb').classList.remove('speaking');
+    });
+
+    vapi.on('speech-end', () => {
+      setVoiceBars('idle');
+      document.getElementById('voice-transcript').textContent = 'Processing…';
+    });
+
+    vapi.on('message', (msg) => {
+      if (msg.type === 'transcript' && msg.transcriptType === 'final') {
+        if (msg.role === 'user' && msg.transcript) {
+          appendMsg('user', msg.transcript);
+          document.getElementById('voice-transcript').textContent = msg.transcript;
+          document.getElementById('voice-transcript').className = 'active';
+        }
+        if (msg.role === 'assistant' && msg.transcript) {
+          appendMsg('ai', msg.transcript);
+          document.getElementById('voice-transcript').textContent = msg.transcript;
+          document.getElementById('voice-orb').classList.add('speaking');
+          setVoiceBars('active');
+        }
+      }
+    });
+
+    vapi.on('error', (err) => {
+      console.error('Vapi error:', err);
+      setVoiceState('idle');
+    });
+  }
+
+  function toggleVoice() {
+    if (!vapi) {
+      alert('Voice not configured.\n\nAdd VAPI_PUBLIC_KEY and VAPI_SERVER_URL to your .env and restart the portal.');
+      return;
+    }
+    vapiCallActive ? endVoiceCall() : startVoiceCall();
+  }
+
+  function startVoiceCall() {
+    setVoiceState('connecting');
+    const serverUrl = (VAPI_SERVER_URL || window.location.origin).replace(/\/$/, '');
+    vapi.start({
+      model: {
+        provider: "custom-llm",
+        url: `${serverUrl}/api/vapi`,
+        model: "claude-sonnet-4-6",
+      },
+      voice: {
+        provider: "openai",
+        voiceId: "alloy",
+      },
+      transcriber: {
+        provider: "deepgram",
+        model: "nova-2",
+        language: "en",
+      },
+      firstMessage: "Hello! I'm your baremetal services assistant. I can check server availability, datacenter capacity, and power infrastructure in real time. What would you like to know?",
+      endCallMessage: "Thank you for contacting Baremetal Services. Goodbye!",
+    });
+  }
+
+  function endVoiceCall() {
+    if (vapi) vapi.stop();
+  }
+
+  function setVoiceState(state) {
+    const btn    = document.getElementById('voice-btn');
+    const label  = document.getElementById('voice-btn-label');
+    const banner = document.getElementById('voice-banner');
+    const transcript = document.getElementById('voice-transcript');
+
+    btn.className = 'voice-btn';
+
+    if (state === 'idle') {
+      label.textContent = 'Voice';
+      banner.classList.add('hidden');
+      setVoiceBars('idle');
+      document.getElementById('voice-orb').classList.remove('speaking');
+    } else if (state === 'connecting') {
+      btn.classList.add('connecting');
+      label.textContent = 'Connecting…';
+      banner.classList.remove('hidden');
+      transcript.textContent = 'Connecting…';
+      transcript.className = '';
+    } else if (state === 'listening') {
+      btn.classList.add('active');
+      label.textContent = 'End Call';
+      banner.classList.remove('hidden');
+      transcript.textContent = 'Listening…';
+      transcript.className = '';
+    }
+  }
+
+  function setVoiceBars(mode) {
+    document.getElementById('voice-bars').className =
+      'voice-bars' + (mode === 'active' ? '' : ' idle');
+  }
+
   // ─── Init ─────────────────────────────────────────────────────────────────
   initMap();
   loadSites();
+  initVapi();
 </script>
 </body>
 </html>

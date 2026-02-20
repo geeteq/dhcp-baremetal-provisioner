@@ -19,6 +19,10 @@ CORS(app)
 NETBOX_URL = os.environ.get("NETBOX_URL", "http://localhost:8000").rstrip("/")
 NETBOX_TOKEN = os.environ.get("NETBOX_TOKEN", "")
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+VAPI_PUBLIC_KEY = os.environ.get("VAPI_PUBLIC_KEY", "")
+# Public URL Vapi's servers use to reach our /api/vapi endpoint.
+# For local dev use ngrok; for production set to your domain.
+VAPI_SERVER_URL = os.environ.get("VAPI_SERVER_URL", "").rstrip("/")
 
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
@@ -490,7 +494,11 @@ def serialize_content(content):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template(
+        "index.html",
+        vapi_public_key=VAPI_PUBLIC_KEY,
+        vapi_server_url=VAPI_SERVER_URL,
+    )
 
 
 @app.route("/api/sites")
@@ -569,6 +577,91 @@ def api_chat():
         break
 
     return jsonify({"reply": "I encountered an issue. Please try again.", "messages": messages})
+
+
+@app.route("/api/vapi", methods=["POST"])
+def api_vapi():
+    """
+    OpenAI-compatible custom LLM endpoint for Vapi voice assistant.
+    Vapi sends messages in OpenAI chat format; we run Claude with tool_use
+    and return a plain-text response (no markdown) suitable for TTS.
+    """
+    SYSTEM_VOICE = """You are a voice assistant for a baremetal server hosting company.
+Your responses will be spoken aloud, so follow these rules strictly:
+- Use plain conversational sentences only — no markdown, no bullet points, no asterisks, no headers, no tables.
+- Keep answers to 2 to 4 short sentences maximum.
+- Speak numbers naturally: say "two hundred servers" not "200".
+- Avoid technical jargon unless the caller uses it first.
+
+COMPANY: We provide baremetal dedicated server hosting across 6 Canadian datacenters —
+Toronto, Vancouver, Calgary, Montreal, Edmonton, and Ottawa.
+We stock HPE ProLiant and Dell PowerEdge servers only. No VMs, no OS installation, no GPU servers.
+Servers ship same week if in stock, or 4 to 6 weeks for custom orders.
+BMC access via iLO or iDRAC is included. Firmware management and Ansible hardening are applied before delivery.
+
+Always call the available tools to get live data before answering availability or capacity questions."""
+
+    body = request.get_json(force=True)
+
+    # Vapi sends OpenAI-format messages; strip any system turns (we use ours)
+    vapi_messages = body.get("messages", [])
+    messages = [
+        {"role": m["role"], "content": m["content"]}
+        for m in vapi_messages
+        if m.get("role") in ("user", "assistant") and m.get("content")
+    ]
+
+    if not messages:
+        return jsonify({
+            "choices": [{"message": {"role": "assistant",
+                                     "content": "Hello, how can I help you?"},
+                         "finish_reason": "stop"}]
+        })
+
+    reply_text = "I'm sorry, I couldn't process that request. Please try again."
+
+    for _ in range(10):
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=512,
+            system=SYSTEM_VOICE,
+            tools=TOOLS,
+            messages=messages,
+        )
+
+        content_blocks = serialize_content(response.content)
+        messages = messages + [{"role": "assistant", "content": content_blocks}]
+
+        if response.stop_reason == "end_turn":
+            reply_text = " ".join(
+                b["text"] for b in content_blocks if b.get("type") == "text"
+            ).strip()
+            break
+
+        if response.stop_reason == "tool_use":
+            tool_results = [
+                {
+                    "type": "tool_result",
+                    "tool_use_id": b["id"],
+                    "content": dispatch_tool(b["name"], b.get("input", {})),
+                }
+                for b in content_blocks if b.get("type") == "tool_use"
+            ]
+            messages = messages + [{"role": "user", "content": tool_results}]
+            continue
+
+        break
+
+    return jsonify({
+        "id": "chatcmpl-vapi",
+        "object": "chat.completion",
+        "choices": [{
+            "index": 0,
+            "message": {"role": "assistant", "content": reply_text},
+            "finish_reason": "stop",
+        }],
+        "model": "claude-sonnet-4-6",
+    })
 
 
 if __name__ == "__main__":
