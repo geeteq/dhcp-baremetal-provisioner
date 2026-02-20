@@ -37,6 +37,7 @@ from netbox_utils import NetBoxJournalMixin
 # Configuration
 REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = int(os.getenv('REDIS_PORT', '6379'))
+REDIS_PASSWORD = os.getenv('REDIS_PASSWORD') or None
 REDIS_QUEUE = os.getenv('REDIS_QUEUE', 'netbox:bmc:discovered')
 NETBOX_URL = os.getenv('NETBOX_URL', 'http://localhost:8000')
 NETBOX_TOKEN = os.getenv('NETBOX_TOKEN', '0123456789abcdef0123456789abcdef01234567')
@@ -282,6 +283,7 @@ def main():
         redis_client = redis.Redis(
             host=REDIS_HOST,
             port=REDIS_PORT,
+            password=REDIS_PASSWORD,
             decode_responses=False
         )
         redis_client.ping()

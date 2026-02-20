@@ -8,9 +8,9 @@ services:
       - "6380:6379"
     volumes:
       - redis-data:/data
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -25,6 +25,7 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_QUEUE=netbox:bmc:discovered
       - NETBOX_URL=http://host.docker.internal:8000
       - NETBOX_TOKEN=0123456789abcdef0123456789abcdef01234567

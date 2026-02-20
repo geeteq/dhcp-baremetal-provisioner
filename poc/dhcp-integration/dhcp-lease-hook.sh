@@ -24,6 +24,7 @@ set -e
 # Configuration
 REDIS_HOST="${REDIS_HOST:-localhost}"
 REDIS_PORT="${REDIS_PORT:-6379}"
+REDIS_PASSWORD="${REDIS_PASSWORD:-}"
 REDIS_QUEUE="${REDIS_QUEUE:-netbox:bmc:discovered}"
 LOG_FILE="${LOG_FILE:-/var/log/dhcp-lease-hook.log}"
 
@@ -67,7 +68,9 @@ EOF
 
 # Push to Redis queue (using redis-cli)
 if command -v redis-cli &> /dev/null; then
-    echo "$EVENT_JSON" | redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" LPUSH "$REDIS_QUEUE" 2>&1 >> "$LOG_FILE"
+    REDIS_AUTH_ARGS=()
+    [ -n "$REDIS_PASSWORD" ] && REDIS_AUTH_ARGS=(-a "$REDIS_PASSWORD")
+    echo "$EVENT_JSON" | redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" "${REDIS_AUTH_ARGS[@]}" LPUSH "$REDIS_QUEUE" 2>&1 >> "$LOG_FILE"
     echo "$(date) - Event pushed to Redis: $REDIS_QUEUE" >> "$LOG_FILE"
 else
     echo "$(date) - ERROR: redis-cli not found!" >> "$LOG_FILE"

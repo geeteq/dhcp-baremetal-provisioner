@@ -1,18 +1,16 @@
 version: '3.8'
 
 services:
-  # Redis - Event Queue
+  # Redis - Event Queue (no public port; internal Docker network only)
   redis:
     image: redis:7-alpine
     container_name: bm-redis
-    ports:
-      - "6379:6379"
     volumes:
       - redis-data:/data
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -37,6 +35,7 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_DB: 0
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
 
       # iLO Configuration
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
@@ -79,6 +78,7 @@ services:
       WORKER_TYPE: dhcp-tailer
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       LOG_DIR: /var/log/bm
     volumes:
       - ./logs:/var/log/bm
@@ -99,6 +99,7 @@ services:
       NETBOX_TENANT: ${NETBOX_TENANT:-baremetal-staging}
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       LOG_DIR: /var/log/bm
     volumes:
       - ./logs:/var/log/bm
@@ -118,6 +119,7 @@ services:
       NETBOX_TOKEN: ${NETBOX_TOKEN}
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
       ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
       ILO_VERIFY_SSL: "false"
@@ -140,6 +142,7 @@ services:
       NETBOX_TOKEN: ${NETBOX_TOKEN}
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       CALLBACK_API_HOST: 0.0.0.0
       CALLBACK_API_PORT: 5000
       LOG_DIR: /var/log/bm
@@ -163,6 +166,7 @@ services:
       NETBOX_TOKEN: ${NETBOX_TOKEN}
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
       ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
       ILO_VERIFY_SSL: "false"
@@ -186,6 +190,7 @@ services:
       NETBOX_TOKEN: ${NETBOX_TOKEN}
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
       ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
       ILO_VERIFY_SSL: "false"
@@ -197,6 +202,17 @@ services:
     restart: unless-stopped
     profiles:
       - separate
+
+  portal:
+    build: ./portal
+    container_name: bm-portal
+    ports:
+      - "8080:8080"
+    environment:
+      NETBOX_URL: ${NETBOX_URL}
+      NETBOX_TOKEN: ${NETBOX_TOKEN}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    restart: unless-stopped
 
 volumes:
   redis-data:
