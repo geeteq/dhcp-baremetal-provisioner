@@ -1,433 +1,224 @@
-# Baremetal Server Automation - Proof of Concept
+# DHCP Baremetal Provisioner
 
-Automated workflow for baremetal server discovery, validation, hardening, and monitoring.
+An event-driven automation pipeline for baremetal server provisioning — from physical rack installation through tenant delivery. When a server BMC powers on and requests a DHCP lease, this system automatically discovers it, validates its physical configuration, hardens it, and transitions it through a full lifecycle tracked in NetBox.
 
-## Overview
-
-This PoC implements an event-driven pipeline that automates the complete lifecycle from BMC power-on through monitoring:
+## What It Does
 
 ```
-BMC Powers On → DHCP Hook → Discovery → Provisioning →
-PXE Boot → Validation → Hardening → Monitoring
+Server Racked
+     │
+     ▼
+BMC Powers On ──► DHCP Lease ──► Redis Event ──► NetBox Discovery
+                                                        │
+                                               lifecycle: offline
+                                                        │
+                                                        ▼
+                                               lifecycle: discovered
+                                                        │
+                                               PXE Boot / Validation
+                                               (LLDP, port mapping)
+                                                        │
+                                                        ▼
+                                               lifecycle: provisioning
+                                                        │
+                                               Ansible BMC Hardening
+                                               Firmware Updates
+                                                        │
+                                                        ▼
+                                               lifecycle: ready
+                                                        │
+                                               Assign to Tenant
+                                                        │
+                                                        ▼
+                                               lifecycle: active
 ```
+
+No manual steps between rack and ready. Each stage is triggered automatically by the previous one via a Redis event bus.
+
+## Business Context
+
+This system supports a baremetal hosting operation across 5 datacenters. It handles:
+
+- Procurement of HPE and Dell servers
+- Physical installation and cabling documentation (NetBox DCIM)
+- Automated discovery via DHCP BMC lease hooks
+- Vendor tool provisioning (HPE OneView, Dell OpenManage)
+- BMC hardening via Ansible
+- Hardware monitoring via Redfish API → Prometheus → Grafana
+- Tenant portal with per-server usage metrics
+- Warranty tracking and hardware failure ticketing (Jira)
+- Decommission planning with consolidation calculator
 
 ## Architecture
 
+### Event Bus
+
+Redis acts as the message broker. Each lifecycle stage publishes an event that triggers the next worker:
+
+| Queue | Published by | Consumed by |
+|-------|-------------|-------------|
+| `netbox:bmc:discovered` | DHCP hook | BMC worker |
+| `netbox:server:validated` | Validation callback | Hardening worker |
+| `netbox:server:hardened` | Hardening worker | Monitoring worker |
+| `netbox:server:ready` | Monitoring worker | Tenant assignment |
+
 ### Components
 
-1. **DHCP Hook** (`scripts/dhcp_hook.sh`)
-   - Captures DHCP lease events
-   - Writes to append-only log file
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| DHCP lease hook | `dhcp-integration/dhcp-lease-hook.sh` | Fires on DHCP commit, publishes BMC MAC + IP to Redis |
+| BMC worker | `dhcp-integration/netbox-bmc-worker.py` | Looks up device by MAC, assigns IP, transitions state in NetBox |
+| Status dashboard | `dhcp-integration/status-dashboard/` | Real-time web UI showing per-server lifecycle timeline |
+| NetBox init scripts | `netbox-init/` | Populates infrastructure (sites, racks, devices, IP ranges) |
+| Ansible hardening | `ansible/bmc_hardening.yml` | BMC security hardening playbook |
+| Shared libs | `lib/` | NetBox client, Redfish client, Redis queue, JSON logger |
+| Services | `services/` | Discovery, provisioning, callback API, hardening, monitoring workers |
 
-2. **DHCP Tailer** (`services/dhcp_tailer.py`)
-   - Tails DHCP event log
-   - Publishes events to Redis queue
+### Tech Stack
 
-3. **Discovery Worker** (`services/discovery_worker.py`)
-   - Finds devices in NetBox by MAC address
-   - Assigns IP addresses
-   - Transitions to 'discovered' state
-
-4. **Provisioning Worker** (`services/provisioning_worker.py`)
-   - Connects to iLO via Redfish API
-   - Configures one-time PXE boot
-   - Powers on/restarts server
-
-5. **Validation Script** (`scripts/validate_server.sh`)
-   - Runs in PXE-booted RHEL9 ISO
-   - Collects LLDP neighbors, hardware info, interfaces
-   - POSTs results to callback API
-
-6. **Callback API** (`services/callback_api.py`)
-   - Receives validation reports
-   - Updates NetBox with collected data
-   - Transitions to 'validated' state
-
-7. **Hardening Worker** (`services/hardening_worker.py`)
-   - Executes Ansible playbook
-   - Hardens BMC security settings
-   - Transitions to 'ready' state
-
-8. **Monitoring Worker** (`services/monitoring_worker.py`)
-   - Polls Redfish for metrics (CPU, memory, power, thermal)
-   - Saves to JSON files
-   - Updates NetBox timestamp
-
-### Technology Stack
-
-- **Language**: Python 3.9+
-- **Event Bus**: Redis
-- **APIs**: NetBox REST API, Redfish API
+- **Event bus**: Redis
+- **DCIM**: NetBox 3.7.3
 - **Automation**: Ansible
-- **Web Framework**: Flask
+- **BMC APIs**: HPE iLO via Redfish, Dell iDRAC via Redfish
+- **Vendor tools**: HPE OneView, Dell OpenManage
+- **Provisioning**: Canonical MaaS (PXE)
+- **Monitoring**: Prometheus + Grafana
+- **Ticketing**: Jira
+- **Language**: Python 3.11+
+- **Containerization**: Docker / Docker Compose
 
-### Dependencies
-
-Minimal dependencies:
-- `redis` - Event queue
-- `requests` - HTTP client
-- `flask` - Callback API
-- `ansible` - BMC hardening
-
-## Prerequisites
-
-### System Requirements
-
-- RHEL 9 or compatible Linux
-- Python 3.9 or higher
-- Redis server
-- Ansible
-- Access to:
-  - NetBox instance with API token
-  - HPE iLO Gen10 BMCs
-  - DHCP server (ISC DHCP)
-
-### NetBox Setup
-
-1. Create custom fields for `dcim.device`:
-   - `lifecycle_state` (selection)
-   - `discovered_at` (date & time)
-   - `pxe_boot_initiated_at` (date & time)
-   - `hardened_at` (date & time)
-   - `last_monitored_at` (date & time)
-   - `last_power_watts` (integer)
-
-2. Create lifecycle_state choices:
-   - `racked`
-   - `discovered`
-   - `validating`
-   - `validated`
-   - `hardening`
-   - `ready`
-   - `monitored`
-
-3. Create device in NetBox:
-   - Add to "baremetal-staging" tenant
-   - Create BMC interface with MAC address
-   - Set `lifecycle_state` to `racked`
-
-## Installation
-
-### Option 1: Docker (Recommended)
-
-**Fastest way to get started!**
-
-```bash
-cd /Users/gabe/ai/bm/poc
-
-# Configure environment
-cp .env.example .env
-vi .env  # Add your NetBox URL, token, and iLO password
-
-# Run all workers in single container
-docker-compose --profile all-in-one up -d
-
-# View logs
-docker-compose logs -f
-```
-
-See [DOCKER.md](DOCKER.md) for complete Docker documentation.
-
-### Option 2: Native Installation
-
-### 1. Clone and Setup
-
-```bash
-# Clone repository
-cd /opt
-git clone <repo-url> bm
-cd bm/poc
-
-# Create Python virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 2. Install and Configure Redis
-
-```bash
-# Install Redis
-sudo dnf install redis
-
-# Start Redis
-sudo systemctl enable --now redis
-```
-
-### 3. Create Log Directories
-
-```bash
-sudo mkdir -p /var/log/bm/metrics
-sudo chown -R $USER:$USER /var/log/bm
-```
-
-### 4. Configure Environment Variables
-
-Create `/opt/bm/poc/.env`:
-
-```bash
-# NetBox Configuration
-export NETBOX_URL="http://netbox.example.com"
-export NETBOX_TOKEN="your-api-token-here"
-export NETBOX_TENANT="baremetal-staging"
-
-# Redis Configuration
-export REDIS_HOST="localhost"
-export REDIS_PORT="6379"
-
-# iLO Configuration
-export ILO_DEFAULT_USER="Administrator"
-export ILO_DEFAULT_PASSWORD="your-ilo-password"
-export ILO_VERIFY_SSL="false"
-
-# Callback API
-export CALLBACK_API_URL="http://10.1.100.5:5000"
-
-# Paths
-export LOG_DIR="/var/log/bm"
-export ANSIBLE_PLAYBOOK_DIR="/opt/bm/poc/ansible"
-
-# Monitoring
-export MONITORING_INTERVAL_SECONDS="300"
-```
-
-Load environment:
-
-```bash
-source /opt/bm/poc/.env
-```
-
-### 5. Configure DHCP Server
-
-Edit `/etc/dhcp/dhcpd.conf` and add:
+## Repository Structure
 
 ```
-on commit {
-    set clientIP = binary-to-ascii(10, 8, ".", leased-address);
-    set clientMAC = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
-    execute("/opt/bm/poc/scripts/dhcp_hook.sh", clientIP, clientMAC);
-}
-```
-
-Restart DHCP:
-
-```bash
-sudo systemctl restart dhcpd
-```
-
-## Running the Services
-
-### Manual Execution (for testing)
-
-Start each service in a separate terminal:
-
-```bash
-# Terminal 1: DHCP Tailer
-source /opt/bm/poc/.env
-cd /opt/bm/poc
-./services/dhcp_tailer.py
-
-# Terminal 2: Discovery Worker
-source /opt/bm/poc/.env
-cd /opt/bm/poc
-./services/discovery_worker.py
-
-# Terminal 3: Provisioning Worker
-source /opt/bm/poc/.env
-cd /opt/bm/poc
-./services/provisioning_worker.py
-
-# Terminal 4: Callback API
-source /opt/bm/poc/.env
-cd /opt/bm/poc
-./services/callback_api.py
-
-# Terminal 5: Hardening Worker
-source /opt/bm/poc/.env
-cd /opt/bm/poc
-./services/hardening_worker.py
-
-# Terminal 6: Monitoring Worker
-source /opt/bm/poc/.env
-cd /opt/bm/poc
-./services/monitoring_worker.py
-```
-
-### Systemd Services (production)
-
-Create systemd service files in `/etc/systemd/system/`:
-
-Example: `bm-discovery.service`
-
-```ini
-[Unit]
-Description=Baremetal Discovery Worker
-After=network.target redis.service
-
-[Service]
-Type=simple
-User=bm
-WorkingDirectory=/opt/bm/poc
-EnvironmentFile=/opt/bm/poc/.env
-ExecStart=/opt/bm/poc/venv/bin/python3 /opt/bm/poc/services/discovery_worker.py
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start:
-
-```bash
-sudo systemctl enable bm-discovery bm-provisioning bm-callback-api bm-hardening bm-monitoring
-sudo systemctl start bm-discovery bm-provisioning bm-callback-api bm-hardening bm-monitoring
-```
-
-## Testing
-
-### 1. Test DHCP Hook
-
-```bash
-# Simulate DHCP event
-/opt/bm/poc/scripts/dhcp_hook.sh 10.1.100.50 94:40:c9:5e:7a:b0
-
-# Check log
-tail /var/log/bm/dhcp_events.log
-```
-
-### 2. Test Discovery Worker
-
-```bash
-# Publish test event to Redis
-redis-cli LPUSH bm:events:dhcp_lease '{"event_type":"dhcp_lease_assigned","timestamp":"2026-02-11T10:00:00Z","data":{"ip":"10.1.100.50","mac":"94:40:c9:5e:7a:b0"}}'
-
-# Watch logs
-tail -f /var/log/bm/discovery_worker.log
-```
-
-### 3. Test Callback API
-
-```bash
-curl -X POST http://localhost:5000/api/v1/validation/report \
-  -H "Content-Type: application/json" \
-  -d '{
-    "device_id": "123",
-    "timestamp": "2026-02-11T10:00:00Z",
-    "hardware": {
-      "manufacturer": "HPE",
-      "model": "ProLiant DL360 Gen10",
-      "serial": "ABC123"
-    },
-    "lldp": {},
-    "interfaces": [
-      {"name": "eno1", "mac": "aa:bb:cc:dd:ee:01"},
-      {"name": "eno2", "mac": "aa:bb:cc:dd:ee:02"}
-    ]
-  }'
-```
-
-### 4. End-to-End Test
-
-1. Ensure test device exists in NetBox with BMC interface and MAC
-2. Power on server BMC
-3. Watch logs for each service
-4. Verify state transitions in NetBox:
-   - `racked` → `discovered` → `validating` → `validated` → `hardening` → `ready`
-5. Check metrics files: `ls -lh /var/log/bm/metrics/`
-
-## Monitoring
-
-### Check Service Status
-
-```bash
-# View logs
-tail -f /var/log/bm/*.log
-
-# Check Redis queues
-redis-cli LLEN bm:events:dhcp_lease
-redis-cli LLEN bm:events:device_discovered
-redis-cli LLEN bm:events:validation_completed
-
-# View metrics
-ls -lh /var/log/bm/metrics/
-cat /var/log/bm/metrics/<device-name>-<timestamp>.json | jq .
-```
-
-### Common Issues
-
-**DHCP hook not firing**
-- Check dhcpd.conf syntax: `dhcpd -t`
-- Verify execute permissions: `chmod +x /opt/bm/poc/scripts/dhcp_hook.sh`
-- Check dhcpd logs: `journalctl -u dhcpd -f`
-
-**MAC not found in NetBox**
-- Check error log: `tail /var/log/bm/errors.log`
-- Verify MAC address in NetBox interface
-- Check NetBox API connectivity
-
-**iLO connection fails**
-- Verify IP reachability: `ping <ilo-ip>`
-- Test credentials manually: `curl -k -u user:pass https://<ilo-ip>/redfish/v1/Systems/1`
-- Check ILO_DEFAULT_PASSWORD environment variable
-
-**Ansible playbook fails**
-- Test Ansible manually: `ansible-playbook -i <ip>, ansible/bmc_hardening.yml`
-- Check Ansible is installed: `ansible-playbook --version`
-- Verify playbook path in config.py
-
-## Project Structure
-
-```
-poc/
-├── config.py                   # Central configuration
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-├── lib/                        # Shared libraries
-│   ├── __init__.py
-│   ├── logger.py              # JSON logging
-│   ├── queue.py               # Redis queue wrapper
-│   ├── netbox_client.py       # NetBox API client
-│   └── redfish_client.py      # Redfish API client
-├── scripts/                    # Shell scripts
-│   ├── dhcp_hook.sh           # DHCP event capture
-│   └── validate_server.sh     # PXE boot validation
-├── services/                   # Python workers
-│   ├── dhcp_tailer.py         # DHCP log tailer
+.
+├── dhcp-integration/          # DHCP-triggered BMC discovery pipeline
+│   ├── dhcp-lease-hook.sh     # DHCP server hook (fires on lease commit)
+│   ├── netbox-bmc-worker.py   # Redis consumer → NetBox updater
+│   ├── status-dashboard/      # Real-time lifecycle timeline UI
+│   ├── state-management/      # Lifecycle state transition logic
+│   ├── docker-compose.yml     # Worker + Redis stack
+│   ├── QUICKSTART.md
+│   └── PHASE1-GUIDE.md
+│
+├── netbox/                    # NetBox Docker setup
+│   ├── docker-compose.netbox.yml
+│   ├── netbox-config/
+│   └── netbox-init/           # Data initialization scripts
+│
+├── netbox-init/               # Infrastructure population scripts
+│   ├── populate_infrastructure.py
+│   ├── create_infrastructure_final.py
+│   └── export_mac_addresses.py
+│
+├── services/                  # Python worker services
+│   ├── dhcp_tailer.py         # Tails DHCP log → Redis
 │   ├── discovery_worker.py    # Device discovery
 │   ├── provisioning_worker.py # PXE boot trigger
-│   ├── callback_api.py        # Validation callback API
-│   ├── hardening_worker.py    # BMC hardening
-│   └── monitoring_worker.py   # Metrics collection
-└── ansible/                    # Ansible playbooks
-    └── bmc_hardening.yml      # BMC security hardening
+│   ├── callback_api.py        # Validation result receiver
+│   ├── hardening_worker.py    # Ansible BMC hardening
+│   └── monitoring_worker.py   # Redfish metrics collection
+│
+├── lib/                       # Shared libraries
+│   ├── netbox_client.py       # NetBox REST API wrapper
+│   ├── redfish_client.py      # HPE iLO / Dell iDRAC Redfish client
+│   ├── queue.py               # Redis queue wrapper
+│   └── logger.py              # Structured JSON logger
+│
+├── ansible/
+│   └── bmc_hardening.yml      # BMC security hardening playbook
+│
+├── pki/                       # mTLS certificates (keys excluded from repo)
+├── scripts/                   # Shell utilities
+├── docs/                      # Additional documentation
+├── config.py                  # Central configuration
+├── docker-compose.yml         # Full stack compose file
+└── PHASES.md                  # Implementation phases and roadmap
 ```
 
-## Next Steps
+## Getting Started
 
-After validating the PoC:
+### Prerequisites
 
-1. **Replace Redis with Kafka** - For production durability and scale
-2. **Add Temporal.io** - For workflow orchestration
-3. **Integrate Prometheus** - Replace JSON files with proper metrics
-4. **Add Grafana** - Visualize metrics and state
-5. **Build Custom ISO** - Create RHEL9 validation ISO with scripts
-6. **Add More Vendors** - Support Dell OpenManage
-7. **Enhance Error Handling** - Add retry logic and dead letter queues
-8. **Add Web UI** - Dashboard for ops team
+- Docker and Docker Compose
+- NetBox 3.7.3+ (see `netbox/NETBOX_SETUP.md`)
+- Redis 5.0+
+- ISC DHCP server or dnsmasq (on your network)
+- NetBox API token
 
-## Contributing
+### Quick Start
 
-This is a proof of concept. Feedback and improvements welcome!
+```bash
+# 1. Configure environment
+cp .env.example .env
+# Edit .env with your NetBox URL, token, and iLO credentials
 
-## License
+# 2. Start NetBox (if not already running)
+cd netbox
+docker compose -f docker-compose.netbox.yml up -d
 
-Internal use only.
+# 3. Populate infrastructure data
+python3 netbox-init/populate_infrastructure.py
 
----
+# 4. Start the DHCP integration stack
+cd dhcp-integration
+docker compose up -d
 
-**Version**: 1.0
-**Last Updated**: 2026-02-11
-**Status**: Proof of Concept
+# 5. Watch the logs
+docker compose logs -f bmc-worker
+```
+
+See `dhcp-integration/QUICKSTART.md` for a full walkthrough including test simulation.
+
+### Simulate a Server Discovery (no real hardware needed)
+
+```bash
+cd dhcp-integration
+
+# Inject a fake DHCP event into Redis
+./test-bmc-discovery.sh A0:36:9F:01:00:00 10.0.100.50
+
+# Watch the worker process it
+docker compose logs -f bmc-worker
+```
+
+## Lifecycle States
+
+| State | Meaning |
+|-------|---------|
+| `offline` | Exists in NetBox, not yet seen on network |
+| `discovered` | BMC detected via DHCP lease |
+| `provisioning` | PXE validation and firmware updates in progress |
+| `ready` | Hardened and validated, available for tenant assignment |
+| `active` | Assigned to a tenant, in production |
+
+All transitions are logged as journal entries in NetBox for a full audit trail.
+
+## Supported Hardware
+
+| Vendor | BMC | OUI Prefix |
+|--------|-----|-----------|
+| HPE ProLiant | iLO | `A0:36:9F` |
+| Dell PowerEdge | iDRAC | `D0:67:E5`, `14:18:77` |
+| Supermicro | IPMI | `18:FB:7B` |
+
+## Roadmap
+
+See `PHASES.md` for the detailed implementation plan.
+
+- **Phase 0** — Reset server to initial state
+- **Phase 1** — DHCP discovery, NetBox state transition, journal logging *(complete)*
+- **Phase 2** — PXE boot, LLDP validation, port assignment
+- **Phase 3** — Firmware updates via HPE OneView / Dell OpenManage
+- **Phase 4** — Ansible BMC hardening
+- **Phase 5** — Prometheus metrics via Redfish, Grafana dashboards
+- **Phase 6** — Tenant portal, warranty tracking, Jira integration
+- **Phase 7** — Decommission workflow and consolidation calculator
+
+## Documentation
+
+- `dhcp-integration/PHASE1-GUIDE.md` — Phase 1 detailed guide and journal logging
+- `dhcp-integration/QUICKSTART.md` — Quick start for DHCP integration
+- `netbox/NETBOX_SETUP.md` — NetBox installation and configuration
+- `docs/PKI.md` — mTLS certificate setup
+- `docs/redis_install.md` — Redis installation guide
+- `DOCKER.md` — Docker deployment guide
