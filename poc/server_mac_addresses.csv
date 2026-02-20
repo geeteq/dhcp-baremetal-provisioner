@@ -1,0 +1,1201 @@
+Datacenter,Rack,Server,Interface,MAC Address,Type,Description
+DC-Center,CENT-R01,CENT-SRV-001,bmc,A0:36:9F:C1:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-001,ens1f0,3C:FD:FE:C1:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-001,ens2f0,3C:FD:FE:C1:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-001,mgmt0,A0:36:9F:A9:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-002,bmc,A0:36:9F:C2:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-002,ens1f0,3C:FD:FE:C2:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-002,ens2f0,3C:FD:FE:C2:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-002,mgmt0,A0:36:9F:AA:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-003,bmc,A0:36:9F:C3:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-003,ens1f0,3C:FD:FE:C3:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-003,ens2f0,3C:FD:FE:C3:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-003,mgmt0,A0:36:9F:AB:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-004,bmc,A0:36:9F:C4:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-004,ens1f0,3C:FD:FE:C4:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-004,ens2f0,3C:FD:FE:C4:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-004,mgmt0,A0:36:9F:AC:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-005,bmc,A0:36:9F:C5:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-005,ens1f0,3C:FD:FE:C5:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-005,ens2f0,3C:FD:FE:C5:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-005,mgmt0,A0:36:9F:AD:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-006,bmc,A0:36:9F:C6:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-006,ens1f0,3C:FD:FE:C6:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-006,ens2f0,3C:FD:FE:C6:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-006,mgmt0,A0:36:9F:AE:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-007,bmc,A0:36:9F:C7:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-007,ens1f0,3C:FD:FE:C7:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-007,ens2f0,3C:FD:FE:C7:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-007,mgmt0,A0:36:9F:AF:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-008,bmc,A0:36:9F:C8:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-008,ens1f0,3C:FD:FE:C8:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-008,ens2f0,3C:FD:FE:C8:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-008,mgmt0,A0:36:9F:B0:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-009,bmc,A0:36:9F:C9:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-009,ens1f0,3C:FD:FE:C9:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-009,ens2f0,3C:FD:FE:C9:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-009,mgmt0,A0:36:9F:B1:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-010,bmc,A0:36:9F:CA:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-010,ens1f0,3C:FD:FE:CA:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-010,ens2f0,3C:FD:FE:CA:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-010,mgmt0,A0:36:9F:B2:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-011,bmc,A0:36:9F:CB:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-011,ens1f0,3C:FD:FE:CB:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-011,ens2f0,3C:FD:FE:CB:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-011,mgmt0,A0:36:9F:B3:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-012,bmc,A0:36:9F:CC:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-012,ens1f0,3C:FD:FE:CC:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-012,ens2f0,3C:FD:FE:CC:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-012,mgmt0,A0:36:9F:B4:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-013,bmc,A0:36:9F:CD:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-013,ens1f0,3C:FD:FE:CD:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-013,ens2f0,3C:FD:FE:CD:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-013,mgmt0,A0:36:9F:B5:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-014,bmc,A0:36:9F:CE:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-014,ens1f0,3C:FD:FE:CE:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-014,ens2f0,3C:FD:FE:CE:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-014,mgmt0,A0:36:9F:B6:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-015,bmc,A0:36:9F:CF:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-015,ens1f0,3C:FD:FE:CF:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-015,ens2f0,3C:FD:FE:CF:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-015,mgmt0,A0:36:9F:B7:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-016,bmc,A0:36:9F:D0:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-016,ens1f0,3C:FD:FE:D0:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-016,ens2f0,3C:FD:FE:D0:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-016,mgmt0,A0:36:9F:B8:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R01,CENT-SRV-017,bmc,A0:36:9F:D1:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R01,CENT-SRV-017,ens1f0,3C:FD:FE:D1:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R01,CENT-SRV-017,ens2f0,3C:FD:FE:D1:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R01,CENT-SRV-017,mgmt0,A0:36:9F:B9:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-018,bmc,A0:36:9F:D7:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-018,ens1f0,3C:FD:FE:D7:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-018,ens2f0,3C:FD:FE:D7:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-018,mgmt0,A0:36:9F:BF:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-019,bmc,A0:36:9F:D8:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-019,ens1f0,3C:FD:FE:D8:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-019,ens2f0,3C:FD:FE:D8:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-019,mgmt0,A0:36:9F:C0:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-020,bmc,A0:36:9F:D9:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-020,ens1f0,3C:FD:FE:D9:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-020,ens2f0,3C:FD:FE:D9:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-020,mgmt0,A0:36:9F:C1:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-021,bmc,A0:36:9F:DA:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-021,ens1f0,3C:FD:FE:DA:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-021,ens2f0,3C:FD:FE:DA:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-021,mgmt0,A0:36:9F:C2:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-022,bmc,A0:36:9F:DB:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-022,ens1f0,3C:FD:FE:DB:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-022,ens2f0,3C:FD:FE:DB:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-022,mgmt0,A0:36:9F:C3:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-023,bmc,A0:36:9F:DC:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-023,ens1f0,3C:FD:FE:DC:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-023,ens2f0,3C:FD:FE:DC:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-023,mgmt0,A0:36:9F:C4:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-024,bmc,A0:36:9F:DD:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-024,ens1f0,3C:FD:FE:DD:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-024,ens2f0,3C:FD:FE:DD:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-024,mgmt0,A0:36:9F:C5:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-025,bmc,A0:36:9F:DE:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-025,ens1f0,3C:FD:FE:DE:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-025,ens2f0,3C:FD:FE:DE:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-025,mgmt0,A0:36:9F:C6:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-026,bmc,A0:36:9F:DF:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-026,ens1f0,3C:FD:FE:DF:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-026,ens2f0,3C:FD:FE:DF:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-026,mgmt0,A0:36:9F:C7:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-027,bmc,A0:36:9F:E0:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-027,ens1f0,3C:FD:FE:E0:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-027,ens2f0,3C:FD:FE:E0:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-027,mgmt0,A0:36:9F:C8:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-028,bmc,A0:36:9F:E1:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-028,ens1f0,3C:FD:FE:E1:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-028,ens2f0,3C:FD:FE:E1:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-028,mgmt0,A0:36:9F:C9:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-029,bmc,A0:36:9F:E2:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-029,ens1f0,3C:FD:FE:E2:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-029,ens2f0,3C:FD:FE:E2:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-029,mgmt0,A0:36:9F:CA:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-030,bmc,A0:36:9F:E3:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-030,ens1f0,3C:FD:FE:E3:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-030,ens2f0,3C:FD:FE:E3:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-030,mgmt0,A0:36:9F:CB:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-031,bmc,A0:36:9F:E4:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-031,ens1f0,3C:FD:FE:E4:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-031,ens2f0,3C:FD:FE:E4:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-031,mgmt0,A0:36:9F:CC:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-032,bmc,A0:36:9F:E5:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-032,ens1f0,3C:FD:FE:E5:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-032,ens2f0,3C:FD:FE:E5:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-032,mgmt0,A0:36:9F:CD:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-033,bmc,A0:36:9F:E6:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-033,ens1f0,3C:FD:FE:E6:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-033,ens2f0,3C:FD:FE:E6:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-033,mgmt0,A0:36:9F:CE:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R02,CENT-SRV-034,bmc,A0:36:9F:E7:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R02,CENT-SRV-034,ens1f0,3C:FD:FE:E7:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R02,CENT-SRV-034,ens2f0,3C:FD:FE:E7:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R02,CENT-SRV-034,mgmt0,A0:36:9F:CF:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-035,bmc,A0:36:9F:ED:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-035,ens1f0,3C:FD:FE:ED:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-035,ens2f0,3C:FD:FE:ED:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-035,mgmt0,A0:36:9F:D5:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-036,bmc,A0:36:9F:EE:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-036,ens1f0,3C:FD:FE:EE:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-036,ens2f0,3C:FD:FE:EE:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-036,mgmt0,A0:36:9F:D6:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-037,bmc,A0:36:9F:EF:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-037,ens1f0,3C:FD:FE:EF:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-037,ens2f0,3C:FD:FE:EF:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-037,mgmt0,A0:36:9F:D7:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-038,bmc,A0:36:9F:F0:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-038,ens1f0,3C:FD:FE:F0:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-038,ens2f0,3C:FD:FE:F0:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-038,mgmt0,A0:36:9F:D8:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-039,bmc,A0:36:9F:F1:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-039,ens1f0,3C:FD:FE:F1:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-039,ens2f0,3C:FD:FE:F1:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-039,mgmt0,A0:36:9F:D9:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-040,bmc,A0:36:9F:F2:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-040,ens1f0,3C:FD:FE:F2:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-040,ens2f0,3C:FD:FE:F2:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-040,mgmt0,A0:36:9F:DA:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-041,bmc,A0:36:9F:F3:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-041,ens1f0,3C:FD:FE:F3:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-041,ens2f0,3C:FD:FE:F3:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-041,mgmt0,A0:36:9F:DB:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-042,bmc,A0:36:9F:F4:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-042,ens1f0,3C:FD:FE:F4:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-042,ens2f0,3C:FD:FE:F4:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-042,mgmt0,A0:36:9F:DC:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-043,bmc,A0:36:9F:F5:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-043,ens1f0,3C:FD:FE:F5:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-043,ens2f0,3C:FD:FE:F5:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-043,mgmt0,A0:36:9F:DD:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-044,bmc,A0:36:9F:F6:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-044,ens1f0,3C:FD:FE:F6:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-044,ens2f0,3C:FD:FE:F6:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-044,mgmt0,A0:36:9F:DE:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-045,bmc,A0:36:9F:F7:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-045,ens1f0,3C:FD:FE:F7:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-045,ens2f0,3C:FD:FE:F7:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-045,mgmt0,A0:36:9F:DF:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-046,bmc,A0:36:9F:F8:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-046,ens1f0,3C:FD:FE:F8:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-046,ens2f0,3C:FD:FE:F8:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-046,mgmt0,A0:36:9F:E0:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-047,bmc,A0:36:9F:F9:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-047,ens1f0,3C:FD:FE:F9:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-047,ens2f0,3C:FD:FE:F9:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-047,mgmt0,A0:36:9F:E1:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-048,bmc,A0:36:9F:FA:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-048,ens1f0,3C:FD:FE:FA:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-048,ens2f0,3C:FD:FE:FA:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-048,mgmt0,A0:36:9F:E2:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-049,bmc,A0:36:9F:FB:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-049,ens1f0,3C:FD:FE:FB:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-049,ens2f0,3C:FD:FE:FB:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-049,mgmt0,A0:36:9F:E3:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-050,bmc,A0:36:9F:FC:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-050,ens1f0,3C:FD:FE:FC:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-050,ens2f0,3C:FD:FE:FC:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-050,mgmt0,A0:36:9F:E4:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R03,CENT-SRV-051,bmc,A0:36:9F:FD:02:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R03,CENT-SRV-051,ens1f0,3C:FD:FE:FD:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R03,CENT-SRV-051,ens2f0,3C:FD:FE:FD:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R03,CENT-SRV-051,mgmt0,A0:36:9F:E5:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-052,bmc,A0:36:9F:03:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-052,ens1f0,3C:FD:FE:03:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-052,ens2f0,3C:FD:FE:03:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-052,mgmt0,A0:36:9F:EB:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-053,bmc,A0:36:9F:04:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-053,ens1f0,3C:FD:FE:04:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-053,ens2f0,3C:FD:FE:04:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-053,mgmt0,A0:36:9F:EC:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-054,bmc,A0:36:9F:05:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-054,ens1f0,3C:FD:FE:05:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-054,ens2f0,3C:FD:FE:05:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-054,mgmt0,A0:36:9F:ED:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-055,bmc,A0:36:9F:06:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-055,ens1f0,3C:FD:FE:06:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-055,ens2f0,3C:FD:FE:06:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-055,mgmt0,A0:36:9F:EE:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-056,bmc,A0:36:9F:07:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-056,ens1f0,3C:FD:FE:07:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-056,ens2f0,3C:FD:FE:07:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-056,mgmt0,A0:36:9F:EF:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-057,bmc,A0:36:9F:08:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-057,ens1f0,3C:FD:FE:08:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-057,ens2f0,3C:FD:FE:08:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-057,mgmt0,A0:36:9F:F0:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-058,bmc,A0:36:9F:09:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-058,ens1f0,3C:FD:FE:09:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-058,ens2f0,3C:FD:FE:09:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-058,mgmt0,A0:36:9F:F1:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-059,bmc,A0:36:9F:0A:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-059,ens1f0,3C:FD:FE:0A:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-059,ens2f0,3C:FD:FE:0A:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-059,mgmt0,A0:36:9F:F2:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-060,bmc,A0:36:9F:0B:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-060,ens1f0,3C:FD:FE:0B:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-060,ens2f0,3C:FD:FE:0B:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-060,mgmt0,A0:36:9F:F3:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-061,bmc,A0:36:9F:0C:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-061,ens1f0,3C:FD:FE:0C:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-061,ens2f0,3C:FD:FE:0C:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-061,mgmt0,A0:36:9F:F4:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-062,bmc,A0:36:9F:0D:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-062,ens1f0,3C:FD:FE:0D:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-062,ens2f0,3C:FD:FE:0D:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-062,mgmt0,A0:36:9F:F5:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-063,bmc,A0:36:9F:0E:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-063,ens1f0,3C:FD:FE:0E:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-063,ens2f0,3C:FD:FE:0E:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-063,mgmt0,A0:36:9F:F6:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-064,bmc,A0:36:9F:0F:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-064,ens1f0,3C:FD:FE:0F:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-064,ens2f0,3C:FD:FE:0F:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-064,mgmt0,A0:36:9F:F7:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-065,bmc,A0:36:9F:10:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-065,ens1f0,3C:FD:FE:10:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-065,ens2f0,3C:FD:FE:10:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-065,mgmt0,A0:36:9F:F8:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-066,bmc,A0:36:9F:11:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-066,ens1f0,3C:FD:FE:11:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-066,ens2f0,3C:FD:FE:11:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-066,mgmt0,A0:36:9F:F9:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-067,bmc,A0:36:9F:12:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-067,ens1f0,3C:FD:FE:12:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-067,ens2f0,3C:FD:FE:12:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-067,mgmt0,A0:36:9F:FA:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R04,CENT-SRV-068,bmc,A0:36:9F:13:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R04,CENT-SRV-068,ens1f0,3C:FD:FE:13:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R04,CENT-SRV-068,ens2f0,3C:FD:FE:13:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R04,CENT-SRV-068,mgmt0,A0:36:9F:FB:06:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-069,bmc,A0:36:9F:19:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-069,ens1f0,3C:FD:FE:19:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-069,ens2f0,3C:FD:FE:19:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-069,mgmt0,A0:36:9F:01:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-070,bmc,A0:36:9F:1A:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-070,ens1f0,3C:FD:FE:1A:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-070,ens2f0,3C:FD:FE:1A:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-070,mgmt0,A0:36:9F:02:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-071,bmc,A0:36:9F:1B:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-071,ens1f0,3C:FD:FE:1B:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-071,ens2f0,3C:FD:FE:1B:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-071,mgmt0,A0:36:9F:03:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-072,bmc,A0:36:9F:1C:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-072,ens1f0,3C:FD:FE:1C:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-072,ens2f0,3C:FD:FE:1C:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-072,mgmt0,A0:36:9F:04:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-073,bmc,A0:36:9F:1D:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-073,ens1f0,3C:FD:FE:1D:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-073,ens2f0,3C:FD:FE:1D:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-073,mgmt0,A0:36:9F:05:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-074,bmc,A0:36:9F:1E:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-074,ens1f0,3C:FD:FE:1E:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-074,ens2f0,3C:FD:FE:1E:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-074,mgmt0,A0:36:9F:06:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-075,bmc,A0:36:9F:1F:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-075,ens1f0,3C:FD:FE:1F:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-075,ens2f0,3C:FD:FE:1F:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-075,mgmt0,A0:36:9F:07:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-076,bmc,A0:36:9F:20:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-076,ens1f0,3C:FD:FE:20:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-076,ens2f0,3C:FD:FE:20:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-076,mgmt0,A0:36:9F:08:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-077,bmc,A0:36:9F:21:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-077,ens1f0,3C:FD:FE:21:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-077,ens2f0,3C:FD:FE:21:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-077,mgmt0,A0:36:9F:09:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-078,bmc,A0:36:9F:22:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-078,ens1f0,3C:FD:FE:22:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-078,ens2f0,3C:FD:FE:22:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-078,mgmt0,A0:36:9F:0A:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-079,bmc,A0:36:9F:23:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-079,ens1f0,3C:FD:FE:23:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-079,ens2f0,3C:FD:FE:23:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-079,mgmt0,A0:36:9F:0B:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-080,bmc,A0:36:9F:24:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-080,ens1f0,3C:FD:FE:24:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-080,ens2f0,3C:FD:FE:24:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-080,mgmt0,A0:36:9F:0C:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-081,bmc,A0:36:9F:25:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-081,ens1f0,3C:FD:FE:25:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-081,ens2f0,3C:FD:FE:25:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-081,mgmt0,A0:36:9F:0D:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-082,bmc,A0:36:9F:26:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-082,ens1f0,3C:FD:FE:26:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-082,ens2f0,3C:FD:FE:26:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-082,mgmt0,A0:36:9F:0E:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-083,bmc,A0:36:9F:27:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-083,ens1f0,3C:FD:FE:27:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-083,ens2f0,3C:FD:FE:27:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-083,mgmt0,A0:36:9F:0F:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R05,CENT-SRV-084,bmc,A0:36:9F:28:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R05,CENT-SRV-084,ens1f0,3C:FD:FE:28:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R05,CENT-SRV-084,ens2f0,3C:FD:FE:28:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R05,CENT-SRV-084,mgmt0,A0:36:9F:10:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-085,bmc,A0:36:9F:2E:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-085,ens1f0,3C:FD:FE:2E:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-085,ens2f0,3C:FD:FE:2E:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-085,mgmt0,A0:36:9F:16:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-086,bmc,A0:36:9F:2F:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-086,ens1f0,3C:FD:FE:2F:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-086,ens2f0,3C:FD:FE:2F:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-086,mgmt0,A0:36:9F:17:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-087,bmc,A0:36:9F:30:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-087,ens1f0,3C:FD:FE:30:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-087,ens2f0,3C:FD:FE:30:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-087,mgmt0,A0:36:9F:18:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-088,bmc,A0:36:9F:31:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-088,ens1f0,3C:FD:FE:31:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-088,ens2f0,3C:FD:FE:31:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-088,mgmt0,A0:36:9F:19:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-089,bmc,A0:36:9F:32:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-089,ens1f0,3C:FD:FE:32:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-089,ens2f0,3C:FD:FE:32:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-089,mgmt0,A0:36:9F:1A:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-090,bmc,A0:36:9F:33:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-090,ens1f0,3C:FD:FE:33:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-090,ens2f0,3C:FD:FE:33:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-090,mgmt0,A0:36:9F:1B:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-091,bmc,A0:36:9F:34:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-091,ens1f0,3C:FD:FE:34:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-091,ens2f0,3C:FD:FE:34:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-091,mgmt0,A0:36:9F:1C:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-092,bmc,A0:36:9F:35:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-092,ens1f0,3C:FD:FE:35:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-092,ens2f0,3C:FD:FE:35:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-092,mgmt0,A0:36:9F:1D:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-093,bmc,A0:36:9F:36:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-093,ens1f0,3C:FD:FE:36:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-093,ens2f0,3C:FD:FE:36:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-093,mgmt0,A0:36:9F:1E:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-094,bmc,A0:36:9F:37:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-094,ens1f0,3C:FD:FE:37:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-094,ens2f0,3C:FD:FE:37:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-094,mgmt0,A0:36:9F:1F:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-095,bmc,A0:36:9F:38:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-095,ens1f0,3C:FD:FE:38:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-095,ens2f0,3C:FD:FE:38:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-095,mgmt0,A0:36:9F:20:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-096,bmc,A0:36:9F:39:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-096,ens1f0,3C:FD:FE:39:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-096,ens2f0,3C:FD:FE:39:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-096,mgmt0,A0:36:9F:21:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-097,bmc,A0:36:9F:3A:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-097,ens1f0,3C:FD:FE:3A:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-097,ens2f0,3C:FD:FE:3A:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-097,mgmt0,A0:36:9F:22:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-098,bmc,A0:36:9F:3B:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-098,ens1f0,3C:FD:FE:3B:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-098,ens2f0,3C:FD:FE:3B:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-098,mgmt0,A0:36:9F:23:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-099,bmc,A0:36:9F:3C:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-099,ens1f0,3C:FD:FE:3C:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-099,ens2f0,3C:FD:FE:3C:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-099,mgmt0,A0:36:9F:24:07:00,1000base-t,Management Interface (PCI Card)
+DC-Center,CENT-R06,CENT-SRV-100,bmc,A0:36:9F:3D:03:00,1000base-t,BMC Management Interface
+DC-Center,CENT-R06,CENT-SRV-100,ens1f0,3C:FD:FE:3D:03:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-Center,CENT-R06,CENT-SRV-100,ens2f0,3C:FD:FE:3D:03:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-Center,CENT-R06,CENT-SRV-100,mgmt0,A0:36:9F:25:07:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-001,bmc,A0:36:9F:BD:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-001,ens1f0,3C:FD:FE:BD:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-001,ens2f0,3C:FD:FE:BD:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-001,mgmt0,A0:36:9F:A5:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-002,bmc,A0:36:9F:BE:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-002,ens1f0,3C:FD:FE:BE:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-002,ens2f0,3C:FD:FE:BE:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-002,mgmt0,A0:36:9F:A6:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-003,bmc,A0:36:9F:BF:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-003,ens1f0,3C:FD:FE:BF:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-003,ens2f0,3C:FD:FE:BF:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-003,mgmt0,A0:36:9F:A7:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-004,bmc,A0:36:9F:C0:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-004,ens1f0,3C:FD:FE:C0:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-004,ens2f0,3C:FD:FE:C0:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-004,mgmt0,A0:36:9F:A8:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-005,bmc,A0:36:9F:C1:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-005,ens1f0,3C:FD:FE:C1:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-005,ens2f0,3C:FD:FE:C1:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-005,mgmt0,A0:36:9F:A9:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-006,bmc,A0:36:9F:C2:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-006,ens1f0,3C:FD:FE:C2:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-006,ens2f0,3C:FD:FE:C2:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-006,mgmt0,A0:36:9F:AA:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-007,bmc,A0:36:9F:C3:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-007,ens1f0,3C:FD:FE:C3:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-007,ens2f0,3C:FD:FE:C3:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-007,mgmt0,A0:36:9F:AB:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-008,bmc,A0:36:9F:C4:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-008,ens1f0,3C:FD:FE:C4:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-008,ens2f0,3C:FD:FE:C4:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-008,mgmt0,A0:36:9F:AC:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-009,bmc,A0:36:9F:C5:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-009,ens1f0,3C:FD:FE:C5:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-009,ens2f0,3C:FD:FE:C5:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-009,mgmt0,A0:36:9F:AD:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-010,bmc,A0:36:9F:C6:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-010,ens1f0,3C:FD:FE:C6:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-010,ens2f0,3C:FD:FE:C6:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-010,mgmt0,A0:36:9F:AE:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-011,bmc,A0:36:9F:C7:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-011,ens1f0,3C:FD:FE:C7:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-011,ens2f0,3C:FD:FE:C7:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-011,mgmt0,A0:36:9F:AF:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-012,bmc,A0:36:9F:C8:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-012,ens1f0,3C:FD:FE:C8:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-012,ens2f0,3C:FD:FE:C8:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-012,mgmt0,A0:36:9F:B0:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-013,bmc,A0:36:9F:C9:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-013,ens1f0,3C:FD:FE:C9:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-013,ens2f0,3C:FD:FE:C9:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-013,mgmt0,A0:36:9F:B1:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-014,bmc,A0:36:9F:CA:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-014,ens1f0,3C:FD:FE:CA:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-014,ens2f0,3C:FD:FE:CA:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-014,mgmt0,A0:36:9F:B2:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-015,bmc,A0:36:9F:CB:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-015,ens1f0,3C:FD:FE:CB:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-015,ens2f0,3C:FD:FE:CB:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-015,mgmt0,A0:36:9F:B3:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-016,bmc,A0:36:9F:CC:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-016,ens1f0,3C:FD:FE:CC:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-016,ens2f0,3C:FD:FE:CC:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-016,mgmt0,A0:36:9F:B4:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R01,EAST-SRV-017,bmc,A0:36:9F:CD:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R01,EAST-SRV-017,ens1f0,3C:FD:FE:CD:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R01,EAST-SRV-017,ens2f0,3C:FD:FE:CD:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R01,EAST-SRV-017,mgmt0,A0:36:9F:B5:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-018,bmc,A0:36:9F:D3:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-018,ens1f0,3C:FD:FE:D3:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-018,ens2f0,3C:FD:FE:D3:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-018,mgmt0,A0:36:9F:BB:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-019,bmc,A0:36:9F:D4:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-019,ens1f0,3C:FD:FE:D4:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-019,ens2f0,3C:FD:FE:D4:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-019,mgmt0,A0:36:9F:BC:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-020,bmc,A0:36:9F:D5:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-020,ens1f0,3C:FD:FE:D5:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-020,ens2f0,3C:FD:FE:D5:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-020,mgmt0,A0:36:9F:BD:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-021,bmc,A0:36:9F:D6:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-021,ens1f0,3C:FD:FE:D6:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-021,ens2f0,3C:FD:FE:D6:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-021,mgmt0,A0:36:9F:BE:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-022,bmc,A0:36:9F:D7:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-022,ens1f0,3C:FD:FE:D7:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-022,ens2f0,3C:FD:FE:D7:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-022,mgmt0,A0:36:9F:BF:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-023,bmc,A0:36:9F:D8:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-023,ens1f0,3C:FD:FE:D8:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-023,ens2f0,3C:FD:FE:D8:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-023,mgmt0,A0:36:9F:C0:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-024,bmc,A0:36:9F:D9:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-024,ens1f0,3C:FD:FE:D9:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-024,ens2f0,3C:FD:FE:D9:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-024,mgmt0,A0:36:9F:C1:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-025,bmc,A0:36:9F:DA:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-025,ens1f0,3C:FD:FE:DA:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-025,ens2f0,3C:FD:FE:DA:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-025,mgmt0,A0:36:9F:C2:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-026,bmc,A0:36:9F:DB:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-026,ens1f0,3C:FD:FE:DB:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-026,ens2f0,3C:FD:FE:DB:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-026,mgmt0,A0:36:9F:C3:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-027,bmc,A0:36:9F:DC:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-027,ens1f0,3C:FD:FE:DC:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-027,ens2f0,3C:FD:FE:DC:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-027,mgmt0,A0:36:9F:C4:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-028,bmc,A0:36:9F:DD:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-028,ens1f0,3C:FD:FE:DD:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-028,ens2f0,3C:FD:FE:DD:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-028,mgmt0,A0:36:9F:C5:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-029,bmc,A0:36:9F:DE:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-029,ens1f0,3C:FD:FE:DE:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-029,ens2f0,3C:FD:FE:DE:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-029,mgmt0,A0:36:9F:C6:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-030,bmc,A0:36:9F:DF:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-030,ens1f0,3C:FD:FE:DF:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-030,ens2f0,3C:FD:FE:DF:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-030,mgmt0,A0:36:9F:C7:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-031,bmc,A0:36:9F:E0:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-031,ens1f0,3C:FD:FE:E0:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-031,ens2f0,3C:FD:FE:E0:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-031,mgmt0,A0:36:9F:C8:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-032,bmc,A0:36:9F:E1:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-032,ens1f0,3C:FD:FE:E1:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-032,ens2f0,3C:FD:FE:E1:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-032,mgmt0,A0:36:9F:C9:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-033,bmc,A0:36:9F:E2:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-033,ens1f0,3C:FD:FE:E2:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-033,ens2f0,3C:FD:FE:E2:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-033,mgmt0,A0:36:9F:CA:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R02,EAST-SRV-034,bmc,A0:36:9F:E3:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R02,EAST-SRV-034,ens1f0,3C:FD:FE:E3:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R02,EAST-SRV-034,ens2f0,3C:FD:FE:E3:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R02,EAST-SRV-034,mgmt0,A0:36:9F:CB:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-035,bmc,A0:36:9F:E9:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-035,ens1f0,3C:FD:FE:E9:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-035,ens2f0,3C:FD:FE:E9:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-035,mgmt0,A0:36:9F:D1:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-036,bmc,A0:36:9F:EA:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-036,ens1f0,3C:FD:FE:EA:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-036,ens2f0,3C:FD:FE:EA:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-036,mgmt0,A0:36:9F:D2:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-037,bmc,A0:36:9F:EB:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-037,ens1f0,3C:FD:FE:EB:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-037,ens2f0,3C:FD:FE:EB:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-037,mgmt0,A0:36:9F:D3:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-038,bmc,A0:36:9F:EC:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-038,ens1f0,3C:FD:FE:EC:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-038,ens2f0,3C:FD:FE:EC:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-038,mgmt0,A0:36:9F:D4:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-039,bmc,A0:36:9F:ED:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-039,ens1f0,3C:FD:FE:ED:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-039,ens2f0,3C:FD:FE:ED:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-039,mgmt0,A0:36:9F:D5:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-040,bmc,A0:36:9F:EE:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-040,ens1f0,3C:FD:FE:EE:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-040,ens2f0,3C:FD:FE:EE:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-040,mgmt0,A0:36:9F:D6:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-041,bmc,A0:36:9F:EF:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-041,ens1f0,3C:FD:FE:EF:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-041,ens2f0,3C:FD:FE:EF:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-041,mgmt0,A0:36:9F:D7:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-042,bmc,A0:36:9F:F0:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-042,ens1f0,3C:FD:FE:F0:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-042,ens2f0,3C:FD:FE:F0:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-042,mgmt0,A0:36:9F:D8:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-043,bmc,A0:36:9F:F1:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-043,ens1f0,3C:FD:FE:F1:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-043,ens2f0,3C:FD:FE:F1:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-043,mgmt0,A0:36:9F:D9:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-044,bmc,A0:36:9F:F2:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-044,ens1f0,3C:FD:FE:F2:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-044,ens2f0,3C:FD:FE:F2:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-044,mgmt0,A0:36:9F:DA:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-045,bmc,A0:36:9F:F3:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-045,ens1f0,3C:FD:FE:F3:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-045,ens2f0,3C:FD:FE:F3:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-045,mgmt0,A0:36:9F:DB:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-046,bmc,A0:36:9F:F4:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-046,ens1f0,3C:FD:FE:F4:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-046,ens2f0,3C:FD:FE:F4:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-046,mgmt0,A0:36:9F:DC:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-047,bmc,A0:36:9F:F5:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-047,ens1f0,3C:FD:FE:F5:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-047,ens2f0,3C:FD:FE:F5:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-047,mgmt0,A0:36:9F:DD:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-048,bmc,A0:36:9F:F6:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-048,ens1f0,3C:FD:FE:F6:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-048,ens2f0,3C:FD:FE:F6:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-048,mgmt0,A0:36:9F:DE:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-049,bmc,A0:36:9F:F7:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-049,ens1f0,3C:FD:FE:F7:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-049,ens2f0,3C:FD:FE:F7:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-049,mgmt0,A0:36:9F:DF:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-050,bmc,A0:36:9F:F8:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-050,ens1f0,3C:FD:FE:F8:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-050,ens2f0,3C:FD:FE:F8:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-050,mgmt0,A0:36:9F:E0:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R03,EAST-SRV-051,bmc,A0:36:9F:F9:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R03,EAST-SRV-051,ens1f0,3C:FD:FE:F9:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R03,EAST-SRV-051,ens2f0,3C:FD:FE:F9:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R03,EAST-SRV-051,mgmt0,A0:36:9F:E1:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-052,bmc,A0:36:9F:FF:01:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-052,ens1f0,3C:FD:FE:FF:01:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-052,ens2f0,3C:FD:FE:FF:01:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-052,mgmt0,A0:36:9F:E7:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-053,bmc,A0:36:9F:00:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-053,ens1f0,3C:FD:FE:00:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-053,ens2f0,3C:FD:FE:00:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-053,mgmt0,A0:36:9F:E8:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-054,bmc,A0:36:9F:01:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-054,ens1f0,3C:FD:FE:01:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-054,ens2f0,3C:FD:FE:01:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-054,mgmt0,A0:36:9F:E9:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-055,bmc,A0:36:9F:02:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-055,ens1f0,3C:FD:FE:02:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-055,ens2f0,3C:FD:FE:02:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-055,mgmt0,A0:36:9F:EA:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-056,bmc,A0:36:9F:03:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-056,ens1f0,3C:FD:FE:03:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-056,ens2f0,3C:FD:FE:03:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-056,mgmt0,A0:36:9F:EB:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-057,bmc,A0:36:9F:04:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-057,ens1f0,3C:FD:FE:04:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-057,ens2f0,3C:FD:FE:04:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-057,mgmt0,A0:36:9F:EC:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-058,bmc,A0:36:9F:05:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-058,ens1f0,3C:FD:FE:05:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-058,ens2f0,3C:FD:FE:05:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-058,mgmt0,A0:36:9F:ED:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-059,bmc,A0:36:9F:06:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-059,ens1f0,3C:FD:FE:06:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-059,ens2f0,3C:FD:FE:06:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-059,mgmt0,A0:36:9F:EE:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-060,bmc,A0:36:9F:07:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-060,ens1f0,3C:FD:FE:07:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-060,ens2f0,3C:FD:FE:07:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-060,mgmt0,A0:36:9F:EF:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-061,bmc,A0:36:9F:08:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-061,ens1f0,3C:FD:FE:08:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-061,ens2f0,3C:FD:FE:08:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-061,mgmt0,A0:36:9F:F0:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-062,bmc,A0:36:9F:09:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-062,ens1f0,3C:FD:FE:09:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-062,ens2f0,3C:FD:FE:09:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-062,mgmt0,A0:36:9F:F1:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-063,bmc,A0:36:9F:0A:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-063,ens1f0,3C:FD:FE:0A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-063,ens2f0,3C:FD:FE:0A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-063,mgmt0,A0:36:9F:F2:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-064,bmc,A0:36:9F:0B:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-064,ens1f0,3C:FD:FE:0B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-064,ens2f0,3C:FD:FE:0B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-064,mgmt0,A0:36:9F:F3:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-065,bmc,A0:36:9F:0C:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-065,ens1f0,3C:FD:FE:0C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-065,ens2f0,3C:FD:FE:0C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-065,mgmt0,A0:36:9F:F4:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-066,bmc,A0:36:9F:0D:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-066,ens1f0,3C:FD:FE:0D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-066,ens2f0,3C:FD:FE:0D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-066,mgmt0,A0:36:9F:F5:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-067,bmc,A0:36:9F:0E:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-067,ens1f0,3C:FD:FE:0E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-067,ens2f0,3C:FD:FE:0E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-067,mgmt0,A0:36:9F:F6:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R04,EAST-SRV-068,bmc,A0:36:9F:0F:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R04,EAST-SRV-068,ens1f0,3C:FD:FE:0F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R04,EAST-SRV-068,ens2f0,3C:FD:FE:0F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R04,EAST-SRV-068,mgmt0,A0:36:9F:F7:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-069,bmc,A0:36:9F:15:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-069,ens1f0,3C:FD:FE:15:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-069,ens2f0,3C:FD:FE:15:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-069,mgmt0,A0:36:9F:FD:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-070,bmc,A0:36:9F:16:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-070,ens1f0,3C:FD:FE:16:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-070,ens2f0,3C:FD:FE:16:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-070,mgmt0,A0:36:9F:FE:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-071,bmc,A0:36:9F:17:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-071,ens1f0,3C:FD:FE:17:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-071,ens2f0,3C:FD:FE:17:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-071,mgmt0,A0:36:9F:FF:05:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-072,bmc,A0:36:9F:18:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-072,ens1f0,3C:FD:FE:18:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-072,ens2f0,3C:FD:FE:18:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-072,mgmt0,A0:36:9F:00:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-073,bmc,A0:36:9F:19:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-073,ens1f0,3C:FD:FE:19:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-073,ens2f0,3C:FD:FE:19:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-073,mgmt0,A0:36:9F:01:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-074,bmc,A0:36:9F:1A:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-074,ens1f0,3C:FD:FE:1A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-074,ens2f0,3C:FD:FE:1A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-074,mgmt0,A0:36:9F:02:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-075,bmc,A0:36:9F:1B:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-075,ens1f0,3C:FD:FE:1B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-075,ens2f0,3C:FD:FE:1B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-075,mgmt0,A0:36:9F:03:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-076,bmc,A0:36:9F:1C:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-076,ens1f0,3C:FD:FE:1C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-076,ens2f0,3C:FD:FE:1C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-076,mgmt0,A0:36:9F:04:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-077,bmc,A0:36:9F:1D:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-077,ens1f0,3C:FD:FE:1D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-077,ens2f0,3C:FD:FE:1D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-077,mgmt0,A0:36:9F:05:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-078,bmc,A0:36:9F:1E:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-078,ens1f0,3C:FD:FE:1E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-078,ens2f0,3C:FD:FE:1E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-078,mgmt0,A0:36:9F:06:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-079,bmc,A0:36:9F:1F:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-079,ens1f0,3C:FD:FE:1F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-079,ens2f0,3C:FD:FE:1F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-079,mgmt0,A0:36:9F:07:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-080,bmc,A0:36:9F:20:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-080,ens1f0,3C:FD:FE:20:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-080,ens2f0,3C:FD:FE:20:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-080,mgmt0,A0:36:9F:08:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-081,bmc,A0:36:9F:21:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-081,ens1f0,3C:FD:FE:21:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-081,ens2f0,3C:FD:FE:21:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-081,mgmt0,A0:36:9F:09:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-082,bmc,A0:36:9F:22:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-082,ens1f0,3C:FD:FE:22:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-082,ens2f0,3C:FD:FE:22:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-082,mgmt0,A0:36:9F:0A:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-083,bmc,A0:36:9F:23:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-083,ens1f0,3C:FD:FE:23:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-083,ens2f0,3C:FD:FE:23:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-083,mgmt0,A0:36:9F:0B:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R05,EAST-SRV-084,bmc,A0:36:9F:24:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R05,EAST-SRV-084,ens1f0,3C:FD:FE:24:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R05,EAST-SRV-084,ens2f0,3C:FD:FE:24:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R05,EAST-SRV-084,mgmt0,A0:36:9F:0C:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-085,bmc,A0:36:9F:2A:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-085,ens1f0,3C:FD:FE:2A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-085,ens2f0,3C:FD:FE:2A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-085,mgmt0,A0:36:9F:12:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-086,bmc,A0:36:9F:2B:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-086,ens1f0,3C:FD:FE:2B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-086,ens2f0,3C:FD:FE:2B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-086,mgmt0,A0:36:9F:13:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-087,bmc,A0:36:9F:2C:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-087,ens1f0,3C:FD:FE:2C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-087,ens2f0,3C:FD:FE:2C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-087,mgmt0,A0:36:9F:14:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-088,bmc,A0:36:9F:2D:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-088,ens1f0,3C:FD:FE:2D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-088,ens2f0,3C:FD:FE:2D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-088,mgmt0,A0:36:9F:15:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-089,bmc,A0:36:9F:2E:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-089,ens1f0,3C:FD:FE:2E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-089,ens2f0,3C:FD:FE:2E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-089,mgmt0,A0:36:9F:16:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-090,bmc,A0:36:9F:2F:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-090,ens1f0,3C:FD:FE:2F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-090,ens2f0,3C:FD:FE:2F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-090,mgmt0,A0:36:9F:17:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-091,bmc,A0:36:9F:30:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-091,ens1f0,3C:FD:FE:30:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-091,ens2f0,3C:FD:FE:30:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-091,mgmt0,A0:36:9F:18:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-092,bmc,A0:36:9F:31:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-092,ens1f0,3C:FD:FE:31:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-092,ens2f0,3C:FD:FE:31:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-092,mgmt0,A0:36:9F:19:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-093,bmc,A0:36:9F:32:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-093,ens1f0,3C:FD:FE:32:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-093,ens2f0,3C:FD:FE:32:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-093,mgmt0,A0:36:9F:1A:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-094,bmc,A0:36:9F:33:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-094,ens1f0,3C:FD:FE:33:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-094,ens2f0,3C:FD:FE:33:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-094,mgmt0,A0:36:9F:1B:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-095,bmc,A0:36:9F:34:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-095,ens1f0,3C:FD:FE:34:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-095,ens2f0,3C:FD:FE:34:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-095,mgmt0,A0:36:9F:1C:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-096,bmc,A0:36:9F:35:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-096,ens1f0,3C:FD:FE:35:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-096,ens2f0,3C:FD:FE:35:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-096,mgmt0,A0:36:9F:1D:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-097,bmc,A0:36:9F:36:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-097,ens1f0,3C:FD:FE:36:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-097,ens2f0,3C:FD:FE:36:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-097,mgmt0,A0:36:9F:1E:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-098,bmc,A0:36:9F:37:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-098,ens1f0,3C:FD:FE:37:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-098,ens2f0,3C:FD:FE:37:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-098,mgmt0,A0:36:9F:1F:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-099,bmc,A0:36:9F:38:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-099,ens1f0,3C:FD:FE:38:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-099,ens2f0,3C:FD:FE:38:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-099,mgmt0,A0:36:9F:20:06:00,1000base-t,Management Interface (PCI Card)
+DC-East,EAST-R06,EAST-SRV-100,bmc,A0:36:9F:39:02:00,1000base-t,BMC Management Interface
+DC-East,EAST-R06,EAST-SRV-100,ens1f0,3C:FD:FE:39:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-East,EAST-R06,EAST-SRV-100,ens2f0,3C:FD:FE:39:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-East,EAST-R06,EAST-SRV-100,mgmt0,A0:36:9F:21:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-001,bmc,A0:36:9F:3F:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-001,ens1f0,3C:FD:FE:3F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-001,ens2f0,3C:FD:FE:3F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-001,mgmt0,A0:36:9F:27:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-002,bmc,A0:36:9F:40:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-002,ens1f0,3C:FD:FE:40:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-002,ens2f0,3C:FD:FE:40:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-002,mgmt0,A0:36:9F:28:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-003,bmc,A0:36:9F:41:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-003,ens1f0,3C:FD:FE:41:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-003,ens2f0,3C:FD:FE:41:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-003,mgmt0,A0:36:9F:29:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-004,bmc,A0:36:9F:42:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-004,ens1f0,3C:FD:FE:42:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-004,ens2f0,3C:FD:FE:42:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-004,mgmt0,A0:36:9F:2A:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-005,bmc,A0:36:9F:43:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-005,ens1f0,3C:FD:FE:43:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-005,ens2f0,3C:FD:FE:43:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-005,mgmt0,A0:36:9F:2B:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-006,bmc,A0:36:9F:44:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-006,ens1f0,3C:FD:FE:44:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-006,ens2f0,3C:FD:FE:44:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-006,mgmt0,A0:36:9F:2C:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-007,bmc,A0:36:9F:45:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-007,ens1f0,3C:FD:FE:45:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-007,ens2f0,3C:FD:FE:45:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-007,mgmt0,A0:36:9F:2D:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-008,bmc,A0:36:9F:46:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-008,ens1f0,3C:FD:FE:46:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-008,ens2f0,3C:FD:FE:46:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-008,mgmt0,A0:36:9F:2E:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-009,bmc,A0:36:9F:47:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-009,ens1f0,3C:FD:FE:47:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-009,ens2f0,3C:FD:FE:47:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-009,mgmt0,A0:36:9F:2F:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-010,bmc,A0:36:9F:48:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-010,ens1f0,3C:FD:FE:48:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-010,ens2f0,3C:FD:FE:48:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-010,mgmt0,A0:36:9F:30:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-011,bmc,A0:36:9F:49:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-011,ens1f0,3C:FD:FE:49:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-011,ens2f0,3C:FD:FE:49:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-011,mgmt0,A0:36:9F:31:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-012,bmc,A0:36:9F:4A:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-012,ens1f0,3C:FD:FE:4A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-012,ens2f0,3C:FD:FE:4A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-012,mgmt0,A0:36:9F:32:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-013,bmc,A0:36:9F:4B:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-013,ens1f0,3C:FD:FE:4B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-013,ens2f0,3C:FD:FE:4B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-013,mgmt0,A0:36:9F:33:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-014,bmc,A0:36:9F:4C:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-014,ens1f0,3C:FD:FE:4C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-014,ens2f0,3C:FD:FE:4C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-014,mgmt0,A0:36:9F:34:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-015,bmc,A0:36:9F:4D:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-015,ens1f0,3C:FD:FE:4D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-015,ens2f0,3C:FD:FE:4D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-015,mgmt0,A0:36:9F:35:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-016,bmc,A0:36:9F:4E:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-016,ens1f0,3C:FD:FE:4E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-016,ens2f0,3C:FD:FE:4E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-016,mgmt0,A0:36:9F:36:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R01,WEST-SRV-017,bmc,A0:36:9F:4F:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R01,WEST-SRV-017,ens1f0,3C:FD:FE:4F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R01,WEST-SRV-017,ens2f0,3C:FD:FE:4F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R01,WEST-SRV-017,mgmt0,A0:36:9F:37:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-018,bmc,A0:36:9F:55:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-018,ens1f0,3C:FD:FE:55:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-018,ens2f0,3C:FD:FE:55:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-018,mgmt0,A0:36:9F:3D:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-019,bmc,A0:36:9F:56:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-019,ens1f0,3C:FD:FE:56:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-019,ens2f0,3C:FD:FE:56:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-019,mgmt0,A0:36:9F:3E:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-020,bmc,A0:36:9F:57:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-020,ens1f0,3C:FD:FE:57:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-020,ens2f0,3C:FD:FE:57:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-020,mgmt0,A0:36:9F:3F:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-021,bmc,A0:36:9F:58:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-021,ens1f0,3C:FD:FE:58:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-021,ens2f0,3C:FD:FE:58:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-021,mgmt0,A0:36:9F:40:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-022,bmc,A0:36:9F:59:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-022,ens1f0,3C:FD:FE:59:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-022,ens2f0,3C:FD:FE:59:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-022,mgmt0,A0:36:9F:41:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-023,bmc,A0:36:9F:5A:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-023,ens1f0,3C:FD:FE:5A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-023,ens2f0,3C:FD:FE:5A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-023,mgmt0,A0:36:9F:42:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-024,bmc,A0:36:9F:5B:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-024,ens1f0,3C:FD:FE:5B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-024,ens2f0,3C:FD:FE:5B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-024,mgmt0,A0:36:9F:43:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-025,bmc,A0:36:9F:5C:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-025,ens1f0,3C:FD:FE:5C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-025,ens2f0,3C:FD:FE:5C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-025,mgmt0,A0:36:9F:44:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-026,bmc,A0:36:9F:5D:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-026,ens1f0,3C:FD:FE:5D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-026,ens2f0,3C:FD:FE:5D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-026,mgmt0,A0:36:9F:45:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-027,bmc,A0:36:9F:5E:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-027,ens1f0,3C:FD:FE:5E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-027,ens2f0,3C:FD:FE:5E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-027,mgmt0,A0:36:9F:46:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-028,bmc,A0:36:9F:5F:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-028,ens1f0,3C:FD:FE:5F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-028,ens2f0,3C:FD:FE:5F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-028,mgmt0,A0:36:9F:47:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-029,bmc,A0:36:9F:60:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-029,ens1f0,3C:FD:FE:60:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-029,ens2f0,3C:FD:FE:60:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-029,mgmt0,A0:36:9F:48:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-030,bmc,A0:36:9F:61:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-030,ens1f0,3C:FD:FE:61:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-030,ens2f0,3C:FD:FE:61:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-030,mgmt0,A0:36:9F:49:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-031,bmc,A0:36:9F:62:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-031,ens1f0,3C:FD:FE:62:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-031,ens2f0,3C:FD:FE:62:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-031,mgmt0,A0:36:9F:4A:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-032,bmc,A0:36:9F:63:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-032,ens1f0,3C:FD:FE:63:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-032,ens2f0,3C:FD:FE:63:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-032,mgmt0,A0:36:9F:4B:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-033,bmc,A0:36:9F:64:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-033,ens1f0,3C:FD:FE:64:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-033,ens2f0,3C:FD:FE:64:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-033,mgmt0,A0:36:9F:4C:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R02,WEST-SRV-034,bmc,A0:36:9F:65:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R02,WEST-SRV-034,ens1f0,3C:FD:FE:65:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R02,WEST-SRV-034,ens2f0,3C:FD:FE:65:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R02,WEST-SRV-034,mgmt0,A0:36:9F:4D:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-035,bmc,A0:36:9F:6B:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-035,ens1f0,3C:FD:FE:6B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-035,ens2f0,3C:FD:FE:6B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-035,mgmt0,A0:36:9F:53:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-036,bmc,A0:36:9F:6C:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-036,ens1f0,3C:FD:FE:6C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-036,ens2f0,3C:FD:FE:6C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-036,mgmt0,A0:36:9F:54:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-037,bmc,A0:36:9F:6D:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-037,ens1f0,3C:FD:FE:6D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-037,ens2f0,3C:FD:FE:6D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-037,mgmt0,A0:36:9F:55:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-038,bmc,A0:36:9F:6E:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-038,ens1f0,3C:FD:FE:6E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-038,ens2f0,3C:FD:FE:6E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-038,mgmt0,A0:36:9F:56:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-039,bmc,A0:36:9F:6F:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-039,ens1f0,3C:FD:FE:6F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-039,ens2f0,3C:FD:FE:6F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-039,mgmt0,A0:36:9F:57:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-040,bmc,A0:36:9F:70:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-040,ens1f0,3C:FD:FE:70:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-040,ens2f0,3C:FD:FE:70:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-040,mgmt0,A0:36:9F:58:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-041,bmc,A0:36:9F:71:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-041,ens1f0,3C:FD:FE:71:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-041,ens2f0,3C:FD:FE:71:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-041,mgmt0,A0:36:9F:59:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-042,bmc,A0:36:9F:72:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-042,ens1f0,3C:FD:FE:72:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-042,ens2f0,3C:FD:FE:72:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-042,mgmt0,A0:36:9F:5A:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-043,bmc,A0:36:9F:73:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-043,ens1f0,3C:FD:FE:73:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-043,ens2f0,3C:FD:FE:73:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-043,mgmt0,A0:36:9F:5B:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-044,bmc,A0:36:9F:74:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-044,ens1f0,3C:FD:FE:74:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-044,ens2f0,3C:FD:FE:74:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-044,mgmt0,A0:36:9F:5C:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-045,bmc,A0:36:9F:75:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-045,ens1f0,3C:FD:FE:75:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-045,ens2f0,3C:FD:FE:75:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-045,mgmt0,A0:36:9F:5D:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-046,bmc,A0:36:9F:76:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-046,ens1f0,3C:FD:FE:76:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-046,ens2f0,3C:FD:FE:76:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-046,mgmt0,A0:36:9F:5E:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-047,bmc,A0:36:9F:77:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-047,ens1f0,3C:FD:FE:77:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-047,ens2f0,3C:FD:FE:77:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-047,mgmt0,A0:36:9F:5F:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-048,bmc,A0:36:9F:78:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-048,ens1f0,3C:FD:FE:78:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-048,ens2f0,3C:FD:FE:78:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-048,mgmt0,A0:36:9F:60:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-049,bmc,A0:36:9F:79:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-049,ens1f0,3C:FD:FE:79:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-049,ens2f0,3C:FD:FE:79:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-049,mgmt0,A0:36:9F:61:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-050,bmc,A0:36:9F:7A:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-050,ens1f0,3C:FD:FE:7A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-050,ens2f0,3C:FD:FE:7A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-050,mgmt0,A0:36:9F:62:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R03,WEST-SRV-051,bmc,A0:36:9F:7B:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R03,WEST-SRV-051,ens1f0,3C:FD:FE:7B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R03,WEST-SRV-051,ens2f0,3C:FD:FE:7B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R03,WEST-SRV-051,mgmt0,A0:36:9F:63:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-052,bmc,A0:36:9F:81:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-052,ens1f0,3C:FD:FE:81:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-052,ens2f0,3C:FD:FE:81:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-052,mgmt0,A0:36:9F:69:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-053,bmc,A0:36:9F:82:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-053,ens1f0,3C:FD:FE:82:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-053,ens2f0,3C:FD:FE:82:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-053,mgmt0,A0:36:9F:6A:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-054,bmc,A0:36:9F:83:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-054,ens1f0,3C:FD:FE:83:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-054,ens2f0,3C:FD:FE:83:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-054,mgmt0,A0:36:9F:6B:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-055,bmc,A0:36:9F:84:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-055,ens1f0,3C:FD:FE:84:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-055,ens2f0,3C:FD:FE:84:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-055,mgmt0,A0:36:9F:6C:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-056,bmc,A0:36:9F:85:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-056,ens1f0,3C:FD:FE:85:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-056,ens2f0,3C:FD:FE:85:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-056,mgmt0,A0:36:9F:6D:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-057,bmc,A0:36:9F:86:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-057,ens1f0,3C:FD:FE:86:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-057,ens2f0,3C:FD:FE:86:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-057,mgmt0,A0:36:9F:6E:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-058,bmc,A0:36:9F:87:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-058,ens1f0,3C:FD:FE:87:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-058,ens2f0,3C:FD:FE:87:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-058,mgmt0,A0:36:9F:6F:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-059,bmc,A0:36:9F:88:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-059,ens1f0,3C:FD:FE:88:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-059,ens2f0,3C:FD:FE:88:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-059,mgmt0,A0:36:9F:70:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-060,bmc,A0:36:9F:89:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-060,ens1f0,3C:FD:FE:89:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-060,ens2f0,3C:FD:FE:89:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-060,mgmt0,A0:36:9F:71:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-061,bmc,A0:36:9F:8A:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-061,ens1f0,3C:FD:FE:8A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-061,ens2f0,3C:FD:FE:8A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-061,mgmt0,A0:36:9F:72:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-062,bmc,A0:36:9F:8B:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-062,ens1f0,3C:FD:FE:8B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-062,ens2f0,3C:FD:FE:8B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-062,mgmt0,A0:36:9F:73:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-063,bmc,A0:36:9F:8C:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-063,ens1f0,3C:FD:FE:8C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-063,ens2f0,3C:FD:FE:8C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-063,mgmt0,A0:36:9F:74:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-064,bmc,A0:36:9F:8D:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-064,ens1f0,3C:FD:FE:8D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-064,ens2f0,3C:FD:FE:8D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-064,mgmt0,A0:36:9F:75:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-065,bmc,A0:36:9F:8E:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-065,ens1f0,3C:FD:FE:8E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-065,ens2f0,3C:FD:FE:8E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-065,mgmt0,A0:36:9F:76:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-066,bmc,A0:36:9F:8F:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-066,ens1f0,3C:FD:FE:8F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-066,ens2f0,3C:FD:FE:8F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-066,mgmt0,A0:36:9F:77:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-067,bmc,A0:36:9F:90:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-067,ens1f0,3C:FD:FE:90:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-067,ens2f0,3C:FD:FE:90:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-067,mgmt0,A0:36:9F:78:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R04,WEST-SRV-068,bmc,A0:36:9F:91:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R04,WEST-SRV-068,ens1f0,3C:FD:FE:91:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R04,WEST-SRV-068,ens2f0,3C:FD:FE:91:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R04,WEST-SRV-068,mgmt0,A0:36:9F:79:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-069,bmc,A0:36:9F:97:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-069,ens1f0,3C:FD:FE:97:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-069,ens2f0,3C:FD:FE:97:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-069,mgmt0,A0:36:9F:7F:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-070,bmc,A0:36:9F:98:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-070,ens1f0,3C:FD:FE:98:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-070,ens2f0,3C:FD:FE:98:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-070,mgmt0,A0:36:9F:80:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-071,bmc,A0:36:9F:99:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-071,ens1f0,3C:FD:FE:99:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-071,ens2f0,3C:FD:FE:99:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-071,mgmt0,A0:36:9F:81:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-072,bmc,A0:36:9F:9A:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-072,ens1f0,3C:FD:FE:9A:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-072,ens2f0,3C:FD:FE:9A:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-072,mgmt0,A0:36:9F:82:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-073,bmc,A0:36:9F:9B:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-073,ens1f0,3C:FD:FE:9B:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-073,ens2f0,3C:FD:FE:9B:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-073,mgmt0,A0:36:9F:83:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-074,bmc,A0:36:9F:9C:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-074,ens1f0,3C:FD:FE:9C:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-074,ens2f0,3C:FD:FE:9C:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-074,mgmt0,A0:36:9F:84:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-075,bmc,A0:36:9F:9D:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-075,ens1f0,3C:FD:FE:9D:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-075,ens2f0,3C:FD:FE:9D:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-075,mgmt0,A0:36:9F:85:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-076,bmc,A0:36:9F:9E:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-076,ens1f0,3C:FD:FE:9E:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-076,ens2f0,3C:FD:FE:9E:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-076,mgmt0,A0:36:9F:86:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-077,bmc,A0:36:9F:9F:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-077,ens1f0,3C:FD:FE:9F:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-077,ens2f0,3C:FD:FE:9F:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-077,mgmt0,A0:36:9F:87:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-078,bmc,A0:36:9F:A0:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-078,ens1f0,3C:FD:FE:A0:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-078,ens2f0,3C:FD:FE:A0:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-078,mgmt0,A0:36:9F:88:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-079,bmc,A0:36:9F:A1:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-079,ens1f0,3C:FD:FE:A1:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-079,ens2f0,3C:FD:FE:A1:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-079,mgmt0,A0:36:9F:89:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-080,bmc,A0:36:9F:A2:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-080,ens1f0,3C:FD:FE:A2:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-080,ens2f0,3C:FD:FE:A2:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-080,mgmt0,A0:36:9F:8A:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-081,bmc,A0:36:9F:A3:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-081,ens1f0,3C:FD:FE:A3:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-081,ens2f0,3C:FD:FE:A3:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-081,mgmt0,A0:36:9F:8B:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-082,bmc,A0:36:9F:A4:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-082,ens1f0,3C:FD:FE:A4:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-082,ens2f0,3C:FD:FE:A4:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-082,mgmt0,A0:36:9F:8C:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-083,bmc,A0:36:9F:A5:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-083,ens1f0,3C:FD:FE:A5:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-083,ens2f0,3C:FD:FE:A5:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-083,mgmt0,A0:36:9F:8D:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R05,WEST-SRV-084,bmc,A0:36:9F:A6:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R05,WEST-SRV-084,ens1f0,3C:FD:FE:A6:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R05,WEST-SRV-084,ens2f0,3C:FD:FE:A6:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R05,WEST-SRV-084,mgmt0,A0:36:9F:8E:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-085,bmc,A0:36:9F:AC:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-085,ens1f0,3C:FD:FE:AC:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-085,ens2f0,3C:FD:FE:AC:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-085,mgmt0,A0:36:9F:94:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-086,bmc,A0:36:9F:AD:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-086,ens1f0,3C:FD:FE:AD:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-086,ens2f0,3C:FD:FE:AD:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-086,mgmt0,A0:36:9F:95:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-087,bmc,A0:36:9F:AE:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-087,ens1f0,3C:FD:FE:AE:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-087,ens2f0,3C:FD:FE:AE:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-087,mgmt0,A0:36:9F:96:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-088,bmc,A0:36:9F:AF:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-088,ens1f0,3C:FD:FE:AF:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-088,ens2f0,3C:FD:FE:AF:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-088,mgmt0,A0:36:9F:97:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-089,bmc,A0:36:9F:B0:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-089,ens1f0,3C:FD:FE:B0:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-089,ens2f0,3C:FD:FE:B0:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-089,mgmt0,A0:36:9F:98:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-090,bmc,A0:36:9F:B1:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-090,ens1f0,3C:FD:FE:B1:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-090,ens2f0,3C:FD:FE:B1:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-090,mgmt0,A0:36:9F:99:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-091,bmc,A0:36:9F:B2:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-091,ens1f0,3C:FD:FE:B2:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-091,ens2f0,3C:FD:FE:B2:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-091,mgmt0,A0:36:9F:9A:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-092,bmc,A0:36:9F:B3:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-092,ens1f0,3C:FD:FE:B3:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-092,ens2f0,3C:FD:FE:B3:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-092,mgmt0,A0:36:9F:9B:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-093,bmc,A0:36:9F:B4:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-093,ens1f0,3C:FD:FE:B4:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-093,ens2f0,3C:FD:FE:B4:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-093,mgmt0,A0:36:9F:9C:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-094,bmc,A0:36:9F:B5:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-094,ens1f0,3C:FD:FE:B5:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-094,ens2f0,3C:FD:FE:B5:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-094,mgmt0,A0:36:9F:9D:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-095,bmc,A0:36:9F:B6:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-095,ens1f0,3C:FD:FE:B6:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-095,ens2f0,3C:FD:FE:B6:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-095,mgmt0,A0:36:9F:9E:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-096,bmc,A0:36:9F:B7:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-096,ens1f0,3C:FD:FE:B7:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-096,ens2f0,3C:FD:FE:B7:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-096,mgmt0,A0:36:9F:9F:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-097,bmc,A0:36:9F:B8:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-097,ens1f0,3C:FD:FE:B8:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-097,ens2f0,3C:FD:FE:B8:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-097,mgmt0,A0:36:9F:A0:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-098,bmc,A0:36:9F:B9:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-098,ens1f0,3C:FD:FE:B9:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-098,ens2f0,3C:FD:FE:B9:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-098,mgmt0,A0:36:9F:A1:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-099,bmc,A0:36:9F:BA:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-099,ens1f0,3C:FD:FE:BA:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-099,ens2f0,3C:FD:FE:BA:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-099,mgmt0,A0:36:9F:A2:06:00,1000base-t,Management Interface (PCI Card)
+DC-West,WEST-R06,WEST-SRV-100,bmc,A0:36:9F:BB:02:00,1000base-t,BMC Management Interface
+DC-West,WEST-R06,WEST-SRV-100,ens1f0,3C:FD:FE:BB:02:01,25gbase-x-sfp28,Production Network SFP Interface 1
+DC-West,WEST-R06,WEST-SRV-100,ens2f0,3C:FD:FE:BB:02:02,25gbase-x-sfp28,Production Network SFP Interface 2
+DC-West,WEST-R06,WEST-SRV-100,mgmt0,A0:36:9F:A3:06:00,1000base-t,Management Interface (PCI Card)

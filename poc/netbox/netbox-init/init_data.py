@@ -24,7 +24,7 @@ from dcim.models import (
     Site, Manufacturer, DeviceType, DeviceRole, Device,
     Interface, Rack, RackRole, Location
 )
-from extras.models import CustomField
+from extras.models import CustomField, CustomFieldChoiceSet
 from tenancy.models import Tenant
 from users.models import Token, User
 
@@ -34,22 +34,38 @@ def create_custom_fields():
 
     device_content_type = ContentType.objects.get_for_model(Device)
 
+    # First, create the ChoiceSet for lifecycle states
+    # NetBox 3.7+ requires choices as list of [value, label] pairs
+    lifecycle_choices = [
+        ['offline', 'Offline'],
+        ['planned', 'Planned'],
+        ['validating', 'Validating'],
+        ['validated', 'Validated'],
+        ['hardening', 'Hardening'],
+        ['staged', 'Staged'],
+        ['ready', 'Ready'],
+        ['monitored', 'Monitored'],
+        ['error', 'Error']
+    ]
+
+    lifecycle_choice_set, cs_created = CustomFieldChoiceSet.objects.get_or_create(
+        name='Lifecycle States',
+        defaults={
+            'extra_choices': lifecycle_choices,
+            'order_alphabetically': False
+        }
+    )
+    if cs_created:
+        print(f"  ✓ Created choice set: Lifecycle States")
+    else:
+        print(f"  - Choice set already exists: Lifecycle States")
+
     fields = [
         {
             'name': 'lifecycle_state',
             'label': 'Lifecycle State',
             'type': 'select',
-            'choices': [
-                'offline',
-                'planned',
-                'validating',
-                'validated',
-                'hardening',
-                'staged',
-                'ready',
-                'monitored',
-                'error'
-            ],
+            'choice_set': lifecycle_choice_set,
             'default': 'offline',
             'description': 'Current lifecycle state of the device in provisioning workflow',
         },
@@ -86,12 +102,6 @@ def create_custom_fields():
     ]
 
     for field_data in fields:
-        choices = field_data.pop('choices', None)
-
-        # For select fields, add choices to the field data
-        if choices and field_data.get('type') == 'select':
-            field_data['choice_set'] = choices
-
         field, created = CustomField.objects.get_or_create(
             name=field_data['name'],
             defaults=field_data

@@ -1,0 +1,31 @@
+[Unit]
+Description=NetBox BMC Discovery Worker
+After=network.target redis.service
+Wants=redis.service
+
+[Service]
+Type=simple
+User=netbox
+Group=netbox
+WorkingDirectory=/opt/netbox-bmc-worker
+ExecStart=/usr/bin/python3 /opt/netbox-bmc-worker/netbox-bmc-worker.py
+
+# Environment variables
+Environment="REDIS_HOST=localhost"
+Environment="REDIS_PORT=6379"
+Environment="REDIS_QUEUE=netbox:bmc:discovered"
+Environment="NETBOX_URL=http://localhost:8000"
+Environment="NETBOX_TOKEN=0123456789abcdef0123456789abcdef01234567"
+Environment="LOG_LEVEL=INFO"
+
+# Restart policy
+Restart=always
+RestartSec=5
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=netbox-bmc-worker
+
+[Install]
+WantedBy=multi-user.target

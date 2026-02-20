@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build: .
+    container_name: lifecycle-dashboard
+    ports:
+      - "5001:5000"
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - dhcp-integration_default
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+networks:
+  dhcp-integration_default:
+    external: true

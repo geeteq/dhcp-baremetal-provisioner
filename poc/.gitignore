@@ -1,0 +1,38 @@
+# Python virtual environment
+bin/
+lib/python*/
+include/
+pyvenv.cfg
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+
+# PKI private keys
+pki/**/*-key.pem
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+log/
+logs/
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temp
+~
+*.tmp
