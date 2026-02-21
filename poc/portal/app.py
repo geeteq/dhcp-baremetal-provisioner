@@ -501,6 +501,67 @@ def index():
     )
 
 
+@app.route("/api/event", methods=["POST"])
+def api_event():
+    """
+    Receive lifecycle events from booted servers (PXE validation image).
+    Adds a NetBox journal entry for the event. Does not modify any existing objects.
+    """
+    payload = request.get_json(force=True)
+    event   = payload.get("event", "unknown")
+    device_id   = payload.get("device_id")
+    device_name = payload.get("device_name", "unknown")
+
+    if not device_id:
+        return jsonify({"error": "device_id required"}), 400
+
+    # Write a journal entry to NetBox summarising the event
+    try:
+        hw = payload.get("hardware", {})
+        tests = payload.get("tests", {})
+        nics  = payload.get("nics", [])
+        overall = payload.get("overall_result", "UNKNOWN")
+
+        adjacency = "\n".join(
+            f"  {n['name']} ({n.get('mac','?')}) → {n.get('lldp_neighbor','?')} {n.get('lldp_port','?')}"
+            for n in nics
+        )
+        mem_info  = tests.get("memory", {})
+        disk_info = tests.get("disk_io", {})
+
+        journal_msg = (
+            f"Event: {event} | Overall: {overall}\n"
+            f"Hardware: {hw.get('vendor','')} {hw.get('model','')} | S/N: {hw.get('serial','')}\n"
+            f"CPU: {hw.get('cpu_count','')}x {hw.get('cpu_model','')} | RAM: {hw.get('memory_gb','')} GB\n"
+            f"Memory test: {mem_info.get('result','?')} — {mem_info.get('details','')}\n"
+            f"Disk I/O:    {disk_info.get('result','?')} — {disk_info.get('summary','')}\n"
+            f"Port adjacencies:\n{adjacency}"
+        )
+
+        kind = "success" if overall == "PASS" else "danger"
+        HEADERS = {
+            "Authorization": f"Token {NETBOX_TOKEN}",
+            "Content-Type":  "application/json",
+        }
+        nb_resp = requests.post(
+            f"{NETBOX_URL}/api/extras/journal-entries/",
+            headers=HEADERS,
+            json={
+                "assigned_object_type": "dcim.device",
+                "assigned_object_id":   device_id,
+                "kind":                 kind,
+                "comments":             journal_msg,
+            },
+            timeout=10,
+        )
+        nb_resp.raise_for_status()
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    print(f"[event] {event} from {device_name} (id={device_id}) overall={overall}")
+    return jsonify({"status": "accepted", "device": device_name, "event": event}), 200
+
+
 @app.route("/api/sites")
 def api_sites():
     """Return sites that have at least one ready server (for sidebar)."""

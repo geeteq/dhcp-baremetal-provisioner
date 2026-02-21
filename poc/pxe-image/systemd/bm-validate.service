@@ -1,0 +1,18 @@
+[Unit]
+Description=Baremetal Hardware Validation
+# Run after network is up but before login prompt
+After=network-online.target
+Wants=network-online.target
+# Do not start if we're in a container or installer environment
+ConditionVirtualization=no
+
+[Service]
+Type=oneshot
+ExecStart=/opt/bm-validate/main.sh
+StandardOutput=journal+console
+StandardError=journal+console
+TimeoutStartSec=1800
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
