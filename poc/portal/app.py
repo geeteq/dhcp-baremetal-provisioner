@@ -579,13 +579,16 @@ def api_chat():
     return jsonify({"reply": "I encountered an issue. Please try again.", "messages": messages})
 
 
+@app.route("/api/vapi/chat/completions", methods=["POST"])
 @app.route("/api/vapi", methods=["POST"])
 def api_vapi():
     """
     OpenAI-compatible custom LLM endpoint for Vapi voice assistant.
-    Vapi sends messages in OpenAI chat format; we run Claude with tool_use
-    and return a plain-text response (no markdown) suitable for TTS.
+    Vapi sends messages in OpenAI chat format with stream=true; we run the
+    Claude agentic loop then stream the result back as SSE chunks.
     """
+    import json as _json
+
     SYSTEM_VOICE = """You are a voice assistant for a baremetal server hosting company.
 Your responses will be spoken aloud, so follow these rules strictly:
 - Use plain conversational sentences only — no markdown, no bullet points, no asterisks, no headers, no tables.
@@ -602,8 +605,9 @@ BMC access via iLO or iDRAC is included. Firmware management and Ansible hardeni
 Always call the available tools to get live data before answering availability or capacity questions."""
 
     body = request.get_json(force=True)
+    stream = body.get("stream", False)
 
-    # Vapi sends OpenAI-format messages; strip any system turns (we use ours)
+    # Vapi sends OpenAI-format messages; strip system turns (we use ours)
     vapi_messages = body.get("messages", [])
     messages = [
         {"role": m["role"], "content": m["content"]}
@@ -612,54 +616,82 @@ Always call the available tools to get live data before answering availability o
     ]
 
     if not messages:
-        return jsonify({
-            "choices": [{"message": {"role": "assistant",
-                                     "content": "Hello, how can I help you?"},
-                         "finish_reason": "stop"}]
-        })
+        reply_text = "Hello, how can I help you today?"
+    else:
+        reply_text = "I'm sorry, I couldn't process that request. Please try again."
 
-    reply_text = "I'm sorry, I couldn't process that request. Please try again."
+        for _ in range(10):
+            response = client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=512,
+                system=SYSTEM_VOICE,
+                tools=TOOLS,
+                messages=messages,
+            )
 
-    for _ in range(10):
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=512,
-            system=SYSTEM_VOICE,
-            tools=TOOLS,
-            messages=messages,
-        )
+            content_blocks = serialize_content(response.content)
+            messages = messages + [{"role": "assistant", "content": content_blocks}]
 
-        content_blocks = serialize_content(response.content)
-        messages = messages + [{"role": "assistant", "content": content_blocks}]
+            if response.stop_reason == "end_turn":
+                reply_text = " ".join(
+                    b["text"] for b in content_blocks if b.get("type") == "text"
+                ).strip()
+                break
 
-        if response.stop_reason == "end_turn":
-            reply_text = " ".join(
-                b["text"] for b in content_blocks if b.get("type") == "text"
-            ).strip()
+            if response.stop_reason == "tool_use":
+                tool_results = [
+                    {
+                        "type": "tool_result",
+                        "tool_use_id": b["id"],
+                        "content": dispatch_tool(b["name"], b.get("input", {})),
+                    }
+                    for b in content_blocks if b.get("type") == "tool_use"
+                ]
+                messages = messages + [{"role": "user", "content": tool_results}]
+                continue
+
             break
 
-        if response.stop_reason == "tool_use":
-            tool_results = [
-                {
-                    "type": "tool_result",
-                    "tool_use_id": b["id"],
-                    "content": dispatch_tool(b["name"], b.get("input", {})),
+    if stream:
+        # Vapi requires SSE streaming response
+        def generate():
+            chunk_id = "chatcmpl-vapi"
+            # Send role delta first
+            role_chunk = {
+                "id": chunk_id,
+                "object": "chat.completion.chunk",
+                "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": None}],
+            }
+            yield f"data: {_json.dumps(role_chunk)}\n\n"
+
+            # Stream content word by word so Vapi can start TTS quickly
+            words = reply_text.split(" ")
+            for i, word in enumerate(words):
+                text = word if i == 0 else " " + word
+                content_chunk = {
+                    "id": chunk_id,
+                    "object": "chat.completion.chunk",
+                    "choices": [{"index": 0, "delta": {"content": text}, "finish_reason": None}],
                 }
-                for b in content_blocks if b.get("type") == "tool_use"
-            ]
-            messages = messages + [{"role": "user", "content": tool_results}]
-            continue
+                yield f"data: {_json.dumps(content_chunk)}\n\n"
 
-        break
+            # Final done chunk
+            done_chunk = {
+                "id": chunk_id,
+                "object": "chat.completion.chunk",
+                "choices": [{"index": 0, "delta": {}, "finish_reason": "stop"}],
+            }
+            yield f"data: {_json.dumps(done_chunk)}\n\n"
+            yield "data: [DONE]\n\n"
 
+        return app.response_class(generate(), mimetype="text/event-stream",
+                                  headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+    # Non-streaming fallback
     return jsonify({
         "id": "chatcmpl-vapi",
         "object": "chat.completion",
-        "choices": [{
-            "index": 0,
-            "message": {"role": "assistant", "content": reply_text},
-            "finish_reason": "stop",
-        }],
+        "choices": [{"index": 0, "message": {"role": "assistant", "content": reply_text}, "finish_reason": "stop"}],
         "model": "claude-sonnet-4-6",
     })
 
