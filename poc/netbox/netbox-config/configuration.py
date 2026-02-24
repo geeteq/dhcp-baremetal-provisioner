@@ -112,8 +112,12 @@ REMOTE_AUTH_AUTO_CREATE_USER = True
 REMOTE_AUTH_DEFAULT_GROUPS = []
 REMOTE_AUTH_DEFAULT_PERMISSIONS = {}
 
-# Custom fields for baremetal lifecycle tracking
-# These will be created via the initialization script
+# Custom field choices for baremetal lifecycle tracking
+FIELD_CHOICES = {
+    'dcim.Device.status+': (
+        ('discovered', 'Discovered'),
+    ),
+}
 
 # Webhooks configuration
 WEBHOOKS_ENABLED = os.environ.get('WEBHOOKS_ENABLED', 'True').lower() == 'true'
