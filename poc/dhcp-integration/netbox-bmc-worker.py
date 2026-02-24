@@ -164,6 +164,37 @@ class NetBoxClient(NetBoxJournalMixin):
         logger.info(f"IP {ip_address} assigned to interface {interface_id}")
         return response.json()
 
+    def update_bmc_ip(self, interface_id, ip_address):
+        """Update the IP address already assigned to the BMC interface."""
+        # Find existing IP on this interface
+        response = requests.get(
+            f"{self.url}/api/ipam/ip-addresses/",
+            headers=self.headers,
+            params={
+                'assigned_object_type': 'dcim.interface',
+                'assigned_object_id': interface_id,
+            }
+        )
+        response.raise_for_status()
+        results = response.json().get('results', [])
+
+        if not results:
+            # No IP yet — fall back to creating one
+            return self.assign_ip_to_interface(interface_id, ip_address)
+
+        ip_id = results[0]['id']
+        response = requests.patch(
+            f"{self.url}/api/ipam/ip-addresses/{ip_id}/",
+            headers=self.headers,
+            json={
+                'address': f"{ip_address}/24",
+                'description': f'Auto-updated by DHCP on {datetime.utcnow().isoformat()}'
+            }
+        )
+        response.raise_for_status()
+        logger.info(f"BMC IP updated to {ip_address} on interface {interface_id}")
+        return response.json()
+
     def get_device_state(self, device):
         """Get current status of device."""
         return device.get('status', {}).get('value', 'unknown')
@@ -210,7 +241,17 @@ class BMCDiscoveryWorker:
             )
 
             # State transition logic
-            if current_state == 'offline':
+            if current_state == 'active':
+                # Device is live — only update the BMC IP, touch nothing else
+                logger.info(f"Device {device_name} is active (live); updating BMC IP only")
+                ip_result = self.netbox.update_bmc_ip(interface_id, ip_address)
+                if ip_result:
+                    self.netbox.add_journal_ip_assignment(
+                        device_id, device_name, 'bmc', ip_address
+                    )
+                logger.info(f"✓ BMC IP refreshed for live device {device_name}")
+                return True
+            elif current_state == 'offline':
                 # Transition: offline → discovered
                 self.netbox.update_device_state(device_id, 'discovered')
                 self.netbox.add_journal_state_change(
