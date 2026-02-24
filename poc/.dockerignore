@@ -25,6 +25,17 @@ logs/
 metrics/
 *.log
 
+# Large VM images and test artefacts — not needed in containers
+phase1/
+pxe-image/
+netbox/
+dhcp-integration/
+scripts/
+docs/
+tests/
+*.qcow2
+*.iso
+
 # Docker files (don't copy into container)
 Dockerfile
 docker-compose.yml
