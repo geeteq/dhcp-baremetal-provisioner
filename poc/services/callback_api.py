@@ -8,9 +8,11 @@ Publishes validation_completed event.
 """
 import sys
 import os
+import ssl
 from pathlib import Path
 from datetime import datetime
 from flask import Flask, request, jsonify
+import redis as redis_lib
 
 # Add parent directory to path for imports
 _poc_dir = Path(__file__).parent.parent
@@ -191,8 +193,44 @@ def main():
         db=config.REDIS_DB
     )
 
-    if not queue.ping():
-        logger.error("Failed to connect to Redis")
+    tls_enabled = getattr(config, 'REDIS_USE_TLS', False)
+    auth_enabled = bool(getattr(config, 'REDIS_PASSWORD', None))
+    logger.info(
+        f"Connecting to Redis — host={config.REDIS_HOST} port={config.REDIS_PORT} "
+        f"db={config.REDIS_DB} tls={tls_enabled} auth={auth_enabled}"
+    )
+    if tls_enabled:
+        logger.info(
+            f"  TLS cert:  {getattr(config, 'REDIS_TLS_CERT', 'not set')}\n"
+            f"  TLS key:   {getattr(config, 'REDIS_TLS_KEY', 'not set')}\n"
+            f"  TLS CA:    {getattr(config, 'REDIS_TLS_CA', 'not set')}"
+        )
+
+    try:
+        queue.client.ping()
+    except redis_lib.AuthenticationError as e:
+        logger.error(f"Redis authentication failed — check REDIS_PASSWORD: {e}")
+        sys.exit(1)
+    except redis_lib.ConnectionError as e:
+        logger.error(
+            f"Cannot reach Redis at {config.REDIS_HOST}:{config.REDIS_PORT} — {e}"
+        )
+        if tls_enabled:
+            logger.error(
+                "TLS is enabled — verify the server is listening for TLS, "
+                "the CA cert is correct, and the client cert/key paths exist"
+            )
+        sys.exit(1)
+    except ssl.SSLError as e:
+        logger.error(f"TLS handshake failed connecting to Redis: {e}")
+        logger.error(
+            f"  cert: {getattr(config, 'REDIS_TLS_CERT', 'not set')} "
+            f"  key: {getattr(config, 'REDIS_TLS_KEY', 'not set')} "
+            f"  CA: {getattr(config, 'REDIS_TLS_CA', 'not set')}"
+        )
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"Unexpected error connecting to Redis ({type(e).__name__}): {e}")
         sys.exit(1)
 
     logger.info(f"Connected to Redis at {config.REDIS_HOST}:{config.REDIS_PORT}")
