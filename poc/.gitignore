@@ -11,8 +11,8 @@ __pycache__/
 venv/
 .venv/
 
-# PKI private keys
-pki/**/*-key.pem
+# PKI directory (certs and keys must not be committed)
+/pki/
 
 # Environment files
 .env
