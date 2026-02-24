@@ -209,7 +209,15 @@ def main():
     try:
         queue.client.ping()
     except redis_lib.AuthenticationError as e:
-        logger.error(f"Redis authentication failed — check REDIS_PASSWORD: {e}")
+        password = getattr(config, 'REDIS_PASSWORD', None)
+        logger.error(f"Redis authentication failed: {e}")
+        logger.error(f"  host:          {config.REDIS_HOST}:{config.REDIS_PORT}")
+        logger.error(f"  REDIS_PASSWORD set: {bool(password)} / length: {len(password) if password else 0}")
+        if password:
+            logger.error(f"  password preview: {password[:4]}{'*' * (len(password) - 4)}")
+        else:
+            logger.error("  REDIS_PASSWORD is empty or not set — Redis may require auth")
+        logger.error("  Verify REDIS_PASSWORD matches the 'requirepass' value in redis.conf")
         sys.exit(1)
     except redis_lib.ConnectionError as e:
         logger.error(
