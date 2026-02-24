@@ -36,7 +36,14 @@ ILO_VERIFY_SSL = os.getenv('ILO_VERIFY_SSL', 'false').lower() == 'true'
 # Callback API Configuration
 CALLBACK_API_HOST = os.getenv('CALLBACK_API_HOST', '0.0.0.0')
 CALLBACK_API_PORT = int(os.getenv('CALLBACK_API_PORT', '5000'))
-CALLBACK_API_URL = os.getenv('CALLBACK_API_URL', 'http://10.1.100.5:5000')
+CALLBACK_API_URL = os.getenv('CALLBACK_API_URL', 'https://10.1.100.5:5000')
+
+# Callback API TLS Configuration
+API_USE_TLS = os.getenv('API_USE_TLS', 'true').lower() == 'true'
+API_TLS_CERT = os.getenv('API_TLS_CERT', '/opt/bm/pki/api/api-cert.pem')
+API_TLS_KEY = os.getenv('API_TLS_KEY', '/opt/bm/pki/api/api-key.pem')
+API_TLS_CA = os.getenv('API_TLS_CA', '/opt/bm/pki/ca/ca-cert.pem')
+API_REQUIRE_CLIENT_CERT = os.getenv('API_REQUIRE_CLIENT_CERT', 'false').lower() == 'true'
 
 # Paths
 LOG_DIR = os.getenv('LOG_DIR', '/var/log/bm')

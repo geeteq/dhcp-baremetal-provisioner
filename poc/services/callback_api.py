@@ -205,13 +205,27 @@ def main():
     logger.info(f"Connected to NetBox at {config.NETBOX_URL}")
     logger.info(f"Starting API on {config.CALLBACK_API_HOST}:{config.CALLBACK_API_PORT}")
 
-    # Run Flask app
+    ssl_context = None
+    if config.API_USE_TLS:
+        import ssl
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        ssl_context.load_cert_chain(
+            certfile=config.API_TLS_CERT,
+            keyfile=config.API_TLS_KEY
+        )
+        if config.API_REQUIRE_CLIENT_CERT:
+            ssl_context.load_verify_locations(cafile=config.API_TLS_CA)
+            ssl_context.verify_mode = ssl.CERT_REQUIRED
+        logger.info(f"TLS enabled (cert: {config.API_TLS_CERT}, client cert required: {config.API_REQUIRE_CLIENT_CERT})")
+    else:
+        logger.warning("TLS is disabled — running in plain HTTP mode")
+
     app.run(
         host=config.CALLBACK_API_HOST,
         port=config.CALLBACK_API_PORT,
+        ssl_context=ssl_context,
         debug=False
     )
-
 
 if __name__ == '__main__':
     main()
