@@ -211,10 +211,7 @@ def main():
         db=config.REDIS_DB
     )
 
-    if not queue.ping():
-        logger.error("Failed to connect to Redis")
-        sys.exit(1)
-
+    queue.ping_verbose(logger)
     logger.info(f"Connected to Redis at {config.REDIS_HOST}:{config.REDIS_PORT}")
 
     # Initialize NetBox client

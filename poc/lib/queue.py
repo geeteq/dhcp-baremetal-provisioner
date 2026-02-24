@@ -4,8 +4,10 @@ Uses Redis lists for queue operations.
 Supports authentication and TLS encryption.
 """
 import json
-import redis
+import logging
 import ssl
+import sys
+import redis
 from typing import Optional, Dict, Any
 
 
@@ -27,6 +29,15 @@ class Queue:
             tls_key: Client key path (for mTLS)
             tls_ca: CA certificate path
         """
+        self._host = host
+        self._port = port
+        self._db = db
+        self._password = password
+        self._use_tls = use_tls
+        self._tls_cert = tls_cert
+        self._tls_key = tls_key
+        self._tls_ca = tls_ca
+
         connection_kwargs = {
             'host': host,
             'port': port,
@@ -143,3 +154,55 @@ class Queue:
             return self.client.ping()
         except Exception:
             return False
+
+    def ping_verbose(self, logger: logging.Logger) -> None:
+        """
+        Test Redis connection and exit with detailed diagnostics on failure.
+
+        Logs host, port, TLS config, and auth state before attempting the
+        ping. On failure, logs the specific error type and actionable hints,
+        then calls sys.exit(1).
+        """
+        auth_enabled = bool(self._password)
+        logger.info(
+            f"Connecting to Redis — host={self._host} port={self._port} "
+            f"db={self._db} tls={self._use_tls} auth={auth_enabled}"
+        )
+        if self._use_tls:
+            logger.info(
+                f"  TLS cert: {self._tls_cert or 'not set'}\n"
+                f"  TLS key:  {self._tls_key or 'not set'}\n"
+                f"  TLS CA:   {self._tls_ca or 'not set'}"
+            )
+
+        try:
+            self.client.ping()
+        except redis.AuthenticationError as e:
+            logger.error(f"Redis authentication failed: {e}")
+            logger.error(f"  host:               {self._host}:{self._port}")
+            logger.error(f"  REDIS_PASSWORD set: {auth_enabled} / length: {len(self._password) if self._password else 0}")
+            if self._password:
+                logger.error(f"  password preview:   {self._password[:4]}{'*' * (len(self._password) - 4)}")
+            else:
+                logger.error("  REDIS_PASSWORD is empty or not set — Redis may require auth")
+            logger.error("  Verify REDIS_PASSWORD matches the 'requirepass' value in redis.conf")
+            sys.exit(1)
+        except redis.ConnectionError as e:
+            logger.error(f"Cannot reach Redis at {self._host}:{self._port} — {e}")
+            if self._use_tls:
+                logger.error(
+                    "  TLS is enabled — verify the server is listening for TLS, "
+                    "the CA cert is correct, and the client cert/key paths exist"
+                )
+            sys.exit(1)
+        except ssl.SSLError as e:
+            logger.error(f"TLS handshake failed connecting to Redis: {e}")
+            logger.error(
+                f"  cert: {self._tls_cert or 'not set'}  "
+                f"key: {self._tls_key or 'not set'}  "
+                f"CA: {self._tls_ca or 'not set'}"
+            )
+            sys.exit(1)
+        except Exception as e:
+            logger.error(f"Unexpected error connecting to Redis ({type(e).__name__}): {e}")
+            sys.exit(1)
