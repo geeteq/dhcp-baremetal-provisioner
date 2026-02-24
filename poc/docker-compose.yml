@@ -45,7 +45,7 @@ services:
       NETBOX_TENANT: ${NETBOX_TENANT:-baremetal-staging}
 
       # Redis Configuration
-      REDIS_HOST: redis
+      REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: 6379
       REDIS_DB: 0
       REDIS_PASSWORD: ${REDIS_PASSWORD}
@@ -95,7 +95,7 @@ services:
         condition: service_healthy
     environment:
       WORKER_TYPE: dhcp-tailer
-      REDIS_HOST: redis
+      REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       <<: *redis-tls
@@ -118,7 +118,7 @@ services:
       NETBOX_URL: ${NETBOX_URL}
       NETBOX_TOKEN: ${NETBOX_TOKEN}
       NETBOX_TENANT: ${NETBOX_TENANT:-baremetal-staging}
-      REDIS_HOST: redis
+      REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       <<: *redis-tls
@@ -165,7 +165,7 @@ services:
       WORKER_TYPE: callback-api
       NETBOX_URL: ${NETBOX_URL}
       NETBOX_TOKEN: ${NETBOX_TOKEN}
-      REDIS_HOST: redis
+      REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       <<: *redis-tls
@@ -195,7 +195,7 @@ services:
       WORKER_TYPE: hardening
       NETBOX_URL: ${NETBOX_URL}
       NETBOX_TOKEN: ${NETBOX_TOKEN}
-      REDIS_HOST: redis
+      REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       <<: *redis-tls
@@ -221,7 +221,7 @@ services:
       WORKER_TYPE: monitoring
       NETBOX_URL: ${NETBOX_URL}
       NETBOX_TOKEN: ${NETBOX_TOKEN}
-      REDIS_HOST: redis
+      REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       <<: *redis-tls

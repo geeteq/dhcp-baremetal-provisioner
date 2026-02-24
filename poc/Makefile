@@ -102,11 +102,11 @@ workers-logs: ## Tail worker logs
 ##@ DHCP Integration
 
 .PHONY: dhcp-up
-dhcp-up: check-env ## Start DHCP integration stack (BMC worker + Redis for remote DHCP server)
+dhcp-up: check-env ## Start DHCP integration stack (BMC worker using main bm-redis on poc_default)
 	$(DHCP_COMPOSE) --env-file $(ENV_FILE) up -d --build
 	@echo "✓ DHCP integration started"
-	@echo "  Redis port 6380 is open for the DHCP server hook"
-	@echo "  Configure your DHCP server with REDIS_HOST=<this-host> REDIS_PORT=6380"
+	@echo "  BMC worker connected to local Mac Redis (host.docker.internal:6379, TLS)"
+	@echo "  Configure your DHCP hook with REDIS_HOST=<this-mac-ip> REDIS_PORT=6379"
 	@grep REDIS_PASSWORD $(ENV_FILE) | head -1
 
 .PHONY: dhcp-down
@@ -123,6 +123,7 @@ dhcp-test: ## Simulate a BMC DHCP discovery event (usage: make dhcp-test MAC=A0:
 	[ -z "$$MAC" ] && MAC="A0:36:9F:01:00:00"; \
 	[ -z "$$IP" ] && IP="10.0.100.50"; \
 	echo "Simulating BMC discovery: MAC=$$MAC IP=$$IP"; \
+	set -a; . $(ENV_FILE); set +a; \
 	cd dhcp-integration && ./test-bmc-discovery.sh $$MAC $$IP
 
 ##@ Portal

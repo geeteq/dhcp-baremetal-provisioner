@@ -1,40 +1,27 @@
 version: '3.8'
 
 services:
-  redis:
-    image: redis:7-alpine
-    container_name: bmc-redis
-    ports:
-      - "6380:6379"
-    volumes:
-      - redis-data:/data
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
-    healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
-      interval: 10s
-      timeout: 3s
-      retries: 3
-
   bmc-worker:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: netbox-bmc-worker
-    depends_on:
-      - redis
     environment:
-      - REDIS_HOST=redis
+      - REDIS_HOST=host.docker.internal
       - REDIS_PORT=6379
       - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_USE_TLS=true
+      - REDIS_TLS_CERT=/opt/bm/pki/workers/worker-cert.pem
+      - REDIS_TLS_KEY=/opt/bm/pki/workers/worker-key.pem
+      - REDIS_TLS_CA=/opt/bm/pki/ca/ca-cert.pem
       - REDIS_QUEUE=netbox:bmc:discovered
       - NETBOX_URL=http://host.docker.internal:8000
       - NETBOX_TOKEN=0123456789abcdef0123456789abcdef01234567
       - LOG_LEVEL=INFO
+      - LOG_DIR=/var/log/bm
     volumes:
-      - ./logs:/var/log
+      - ../../pki:/opt/bm/pki:ro
+      - ./logs:/var/log/bm
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
-
-volumes:
-  redis-data:

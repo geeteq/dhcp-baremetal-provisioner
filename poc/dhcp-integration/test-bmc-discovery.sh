@@ -15,6 +15,11 @@ set -e
 
 REDIS_HOST="${REDIS_HOST:-localhost}"
 REDIS_PORT="${REDIS_PORT:-6379}"
+REDIS_PASSWORD="${REDIS_PASSWORD:-}"
+REDIS_USE_TLS="${REDIS_USE_TLS:-false}"
+REDIS_TLS_CERT="${REDIS_TLS_CERT:-}"
+REDIS_TLS_KEY="${REDIS_TLS_KEY:-}"
+REDIS_TLS_CA="${REDIS_TLS_CA:-}"
 REDIS_QUEUE="${REDIS_QUEUE:-netbox:bmc:discovered}"
 
 # Get MAC address from argument or use default
@@ -51,9 +56,19 @@ echo "Event payload:"
 echo "$EVENT_JSON" | jq '.'
 echo ""
 
+# Build redis-cli args
+REDIS_ARGS=(-h "$REDIS_HOST" -p "$REDIS_PORT")
+[ -n "$REDIS_PASSWORD" ] && REDIS_ARGS+=(--no-auth-warning -a "$REDIS_PASSWORD")
+if [ "$REDIS_USE_TLS" = "true" ]; then
+    REDIS_ARGS+=(--tls --sni redis-server)
+    [ -n "$REDIS_TLS_CERT" ] && REDIS_ARGS+=(--cert "$REDIS_TLS_CERT")
+    [ -n "$REDIS_TLS_KEY" ]  && REDIS_ARGS+=(--key  "$REDIS_TLS_KEY")
+    [ -n "$REDIS_TLS_CA" ]   && REDIS_ARGS+=(--cacert "$REDIS_TLS_CA")
+fi
+
 # Push to Redis
 echo "Pushing event to Redis..."
-echo "$EVENT_JSON" | redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" LPUSH "$REDIS_QUEUE" > /dev/null
+echo "$EVENT_JSON" | redis-cli "${REDIS_ARGS[@]}" -x LPUSH "$REDIS_QUEUE" > /dev/null
 
 echo "✓ Event pushed successfully!"
 echo ""

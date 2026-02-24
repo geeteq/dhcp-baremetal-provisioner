@@ -32,6 +32,16 @@ import logging
 import redis
 import requests
 from datetime import datetime
+from pathlib import Path
+
+try:
+    from dotenv import load_dotenv
+    _env = Path(__file__).resolve().parent.parent.parent / 'config' / '.env'
+    if _env.exists():
+        load_dotenv(_env, override=False)
+except ImportError:
+    pass
+
 from netbox_utils import NetBoxJournalMixin
 
 # Configuration
@@ -39,9 +49,16 @@ REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = int(os.getenv('REDIS_PORT', '6379'))
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD') or None
 REDIS_QUEUE = os.getenv('REDIS_QUEUE', 'netbox:bmc:discovered')
+REDIS_USE_TLS = os.getenv('REDIS_USE_TLS', 'false').lower() == 'true'
+REDIS_TLS_CERT = os.getenv('REDIS_TLS_CERT')
+REDIS_TLS_KEY = os.getenv('REDIS_TLS_KEY')
+REDIS_TLS_CA = os.getenv('REDIS_TLS_CA')
 NETBOX_URL = os.getenv('NETBOX_URL', 'http://localhost:8000')
 NETBOX_TOKEN = os.getenv('NETBOX_TOKEN', '0123456789abcdef0123456789abcdef01234567')
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+LOG_DIR = os.getenv('LOG_DIR', '/var/log/bm')
+
+os.makedirs(LOG_DIR, exist_ok=True)
 
 # Setup logging
 logging.basicConfig(
@@ -49,7 +66,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('/var/log/netbox-bmc-worker.log')
+        logging.FileHandler(os.path.join(LOG_DIR, 'netbox-bmc-worker.log'))
     ]
 )
 logger = logging.getLogger('netbox-bmc-worker')
@@ -280,11 +297,21 @@ def main():
     """Main entry point."""
     # Connect to Redis
     try:
+        tls_kwargs = {}
+        if REDIS_USE_TLS:
+            tls_kwargs = dict(
+                ssl=True,
+                ssl_certfile=REDIS_TLS_CERT,
+                ssl_keyfile=REDIS_TLS_KEY,
+                ssl_ca_certs=REDIS_TLS_CA,
+                ssl_check_hostname=False,  # cert CN is redis-server, not host.docker.internal
+            )
         redis_client = redis.Redis(
             host=REDIS_HOST,
             port=REDIS_PORT,
             password=REDIS_PASSWORD,
-            decode_responses=False
+            decode_responses=False,
+            **tls_kwargs
         )
         redis_client.ping()
         logger.info(f"✓ Connected to Redis at {REDIS_HOST}:{REDIS_PORT}")
