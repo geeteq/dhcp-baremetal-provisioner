@@ -13,7 +13,9 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 
 # Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+_poc_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(_poc_dir))                              # poc/ — for lib/
+sys.path.insert(0, str(_poc_dir.parent / 'config'))            # ../config/ — for config module
 
 from lib.logger import setup_logger, log_event, log_error
 from lib.queue import Queue

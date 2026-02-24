@@ -3,14 +3,15 @@
 COMPOSE        = docker compose
 NETBOX_COMPOSE = docker compose -f netbox/docker-compose.netbox.yml
 DHCP_COMPOSE   = docker compose -f dhcp-integration/docker-compose.yml
-ENV_FILE       = .env
+ENV_FILE       = ../config/.env
 
 ##@ Setup
 
 .PHONY: setup
-setup: ## First-time setup: create .env with auto-generated secrets
+setup: ## First-time setup: create ../config/.env with auto-generated secrets
+	@mkdir -p ../config
 	@if [ -f $(ENV_FILE) ]; then \
-		echo "⚠  .env already exists. Delete it first to regenerate."; \
+		echo "⚠  $(ENV_FILE) already exists. Delete it first to regenerate."; \
 		exit 1; \
 	fi
 	@cp .env.example $(ENV_FILE)
@@ -18,10 +19,10 @@ setup: ## First-time setup: create .env with auto-generated secrets
 	 sed -i.bak "s/REDIS_PASSWORD=.*/REDIS_PASSWORD=$$REDIS_PASS/" $(ENV_FILE) && rm -f $(ENV_FILE).bak; \
 	 echo "✓ Generated Redis password"
 	@echo ""
-	@echo "✓ Created .env from .env.example"
+	@echo "✓ Created $(ENV_FILE) from .env.example"
 	@echo ""
 	@echo "Next steps:"
-	@echo "  1. Edit .env and fill in NETBOX_TOKEN, ILO_DEFAULT_PASSWORD, CALLBACK_API_URL"
+	@echo "  1. Edit $(ENV_FILE) and fill in NETBOX_TOKEN, ILO_DEFAULT_PASSWORD, CALLBACK_API_URL"
 	@echo "  2. Run: make netbox-up   (start NetBox)"
 	@echo "  3. Run: make netbox-init (populate infrastructure data)"
 	@echo "  4. Run: make up          (start all workers)"
@@ -153,11 +154,11 @@ redis-cli: ## Open a Redis CLI shell (authenticated)
 .PHONY: check-env
 check-env:
 	@if [ ! -f $(ENV_FILE) ]; then \
-	  echo "✗ .env not found. Run 'make setup' first."; \
+	  echo "✗ $(ENV_FILE) not found. Run 'make setup' first."; \
 	  exit 1; \
 	fi
 	@if grep -q "your-netbox-api-token-here\|your-ilo-password-here\|your-anthropic-api-key-here" $(ENV_FILE) 2>/dev/null; then \
-	  echo "✗ .env has unfilled placeholders. Edit .env before running."; \
+	  echo "✗ $(ENV_FILE) has unfilled placeholders. Edit it before running."; \
 	  exit 1; \
 	fi
 

@@ -1,5 +1,18 @@
 version: '3.8'
 
+# PKI is mounted read-only from ../pki into every container at /opt/bm/pki
+# Config (.env) is loaded by the Makefile via --env-file ../config/.env
+# Neither pki/ nor config/ live inside poc/ — do not add them here
+
+x-redis-tls: &redis-tls
+  REDIS_USE_TLS: "true"
+  REDIS_TLS_CERT: /opt/bm/pki/workers/worker-cert.pem
+  REDIS_TLS_KEY: /opt/bm/pki/workers/worker-key.pem
+  REDIS_TLS_CA: /opt/bm/pki/ca/ca-cert.pem
+
+x-pki-volume: &pki-volume
+  ../pki:/opt/bm/pki:ro
+
 services:
   # Redis - Event Queue (no public port; internal Docker network only)
   redis:
@@ -36,16 +49,21 @@ services:
       REDIS_PORT: 6379
       REDIS_DB: 0
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      <<: *redis-tls
 
       # iLO Configuration
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
       ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
       ILO_VERIFY_SSL: "false"
 
-      # Callback API Configuration
+      # Callback API TLS
       CALLBACK_API_HOST: 0.0.0.0
       CALLBACK_API_PORT: 5000
-      CALLBACK_API_URL: ${CALLBACK_API_URL:-http://workers-all:5000}
+      CALLBACK_API_URL: ${CALLBACK_API_URL:-https://workers-all:5000}
+      API_USE_TLS: "true"
+      API_TLS_CERT: /opt/bm/pki/api/api-cert.pem
+      API_TLS_KEY: /opt/bm/pki/api/api-key.pem
+      API_TLS_CA: /opt/bm/pki/ca/ca-cert.pem
 
       # Paths
       LOG_DIR: /var/log/bm
@@ -55,9 +73,10 @@ services:
       MONITORING_INTERVAL_SECONDS: ${MONITORING_INTERVAL_SECONDS:-300}
 
     ports:
-      - "5000:5000"  # Callback API
+      - "5000:5000"  # Callback API (TLS)
 
     volumes:
+      - *pki-volume
       - ./logs:/var/log/bm
       - ./metrics:/var/log/bm/metrics
 
@@ -79,8 +98,10 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      <<: *redis-tls
       LOG_DIR: /var/log/bm
     volumes:
+      - *pki-volume
       - ./logs:/var/log/bm
     restart: unless-stopped
     profiles:
@@ -100,8 +121,10 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      <<: *redis-tls
       LOG_DIR: /var/log/bm
     volumes:
+      - *pki-volume
       - ./logs:/var/log/bm
     restart: unless-stopped
     profiles:
@@ -120,11 +143,13 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      <<: *redis-tls
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
       ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
       ILO_VERIFY_SSL: "false"
       LOG_DIR: /var/log/bm
     volumes:
+      - *pki-volume
       - ./logs:/var/log/bm
     restart: unless-stopped
     profiles:
@@ -143,12 +168,18 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      <<: *redis-tls
       CALLBACK_API_HOST: 0.0.0.0
       CALLBACK_API_PORT: 5000
+      API_USE_TLS: "true"
+      API_TLS_CERT: /opt/bm/pki/api/api-cert.pem
+      API_TLS_KEY: /opt/bm/pki/api/api-key.pem
+      API_TLS_CA: /opt/bm/pki/ca/ca-cert.pem
       LOG_DIR: /var/log/bm
     ports:
       - "5000:5000"
     volumes:
+      - *pki-volume
       - ./logs:/var/log/bm
     restart: unless-stopped
     profiles:
@@ -167,12 +198,14 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      <<: *redis-tls
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
       ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
       ILO_VERIFY_SSL: "false"
       ANSIBLE_PLAYBOOK_DIR: /app/ansible
       LOG_DIR: /var/log/bm
     volumes:
+      - *pki-volume
       - ./logs:/var/log/bm
     restart: unless-stopped
     profiles:
@@ -191,12 +224,14 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      <<: *redis-tls
       ILO_DEFAULT_USER: ${ILO_DEFAULT_USER:-Administrator}
       ILO_DEFAULT_PASSWORD: ${ILO_DEFAULT_PASSWORD}
       ILO_VERIFY_SSL: "false"
       MONITORING_INTERVAL_SECONDS: ${MONITORING_INTERVAL_SECONDS:-300}
       LOG_DIR: /var/log/bm
     volumes:
+      - *pki-volume
       - ./logs:/var/log/bm
       - ./metrics:/var/log/bm/metrics
     restart: unless-stopped

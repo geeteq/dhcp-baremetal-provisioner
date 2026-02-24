@@ -14,8 +14,10 @@ import time
 from pathlib import Path
 from datetime import datetime
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# poc/ for lib/, ../config/ for config module
+_poc_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(_poc_dir))
+sys.path.insert(0, str(_poc_dir.parent / 'config'))
 
 from lib.logger import setup_logger, log_event, log_error
 from lib.netbox_client import NetBoxClient
