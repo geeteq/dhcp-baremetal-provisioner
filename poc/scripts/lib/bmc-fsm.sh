@@ -134,7 +134,7 @@ nb_curl_raw() {
     }
 
     cat "$tmp"; rm -f "$tmp"
-    echo "$http_code"
+    printf '\n%s\n' "$http_code"
 }
 
 nb_get()   { nb_curl GET   "$1";      }
@@ -154,7 +154,7 @@ nb_find_device_by_bmc_mac() {
     log_info "Looking up NetBox device for MAC: ${mac}"
 
     local iface_resp
-    iface_resp="$(nb_get "/api/dcim/interfaces/?mac_address=${mac}&name=bmc")" || return 1
+    iface_resp="$(nb_get "/api/dcim/interfaces/?mac_address=${mac}")" || return 1
 
     local count; count="$(echo "$iface_resp" | jq -r '.count')"
     if [[ "$count" == "0" || -z "$count" ]]; then
@@ -208,38 +208,47 @@ nb_assign_ip() {
 
     case "$http_code" in
         201) log_info "IP ${ip} assigned to interface ${iface_id}" ;;
-        400) log_warn "IP ${ip} may already exist — skipping" ;;
+        400)
+            log_warn "IP ${ip} already exists — looking up to assign to interface ${iface_id}"
+            local existing
+            existing="$(nb_get "/api/ipam/ip-addresses/?address=${ip}%2F${BMC_SUBNET_PREFIX}")" || {
+                log_error "Could not look up existing IP ${ip}"; return 1
+            }
+            local ip_id; ip_id="$(echo "$existing" | jq -r '.results[0].id // empty')"
+            if [[ -z "$ip_id" ]]; then
+                log_error "IP ${ip} not found after 400 — cannot assign"; return 1
+            fi
+            local patch_body
+            patch_body="$(jq -n \
+                --argjson obj_id "$iface_id" \
+                '{assigned_object_type:"dcim.interface", assigned_object_id:$obj_id, status:"active"}')"
+            nb_patch "/api/ipam/ip-addresses/${ip_id}/" "$patch_body" > /dev/null || return 1
+            log_info "Existing IP ${ip} (id=${ip_id}) assigned to interface ${iface_id}"
+            ;;
         *)   log_error "Failed to assign IP ${ip}: HTTP ${http_code}"; return 1 ;;
     esac
 }
 
-# nb_update_bmc_ip INTERFACE_ID IP — patches existing record, falls back to assign
+# nb_update_bmc_ip INTERFACE_ID IP — ensures IP is assigned to interface
 nb_update_bmc_ip() {
     local iface_id="$1" ip="$2"
-    local ts; ts="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 
-    local ip_resp
-    ip_resp="$(nb_get "/api/ipam/ip-addresses/?assigned_object_type=dcim.interface&assigned_object_id=${iface_id}")" || {
+    # Check if the correct IP is already assigned to this interface
+    local check
+    check="$(nb_get "/api/ipam/ip-addresses/?address=${ip}%2F${BMC_SUBNET_PREFIX}&assigned_object_type=dcim.interface&assigned_object_id=${iface_id}")" || {
         log_warn "Could not query IPs for interface ${iface_id} — falling back to assign"
         nb_assign_ip "$iface_id" "$ip"
         return
     }
 
-    local count; count="$(echo "$ip_resp" | jq -r '.count')"
-    if [[ "$count" == "0" || -z "$count" ]]; then
-        nb_assign_ip "$iface_id" "$ip"
-        return
+    local count; count="$(echo "$check" | jq -r '.count')"
+    if [[ "$count" != "0" && -n "$count" ]]; then
+        log_info "BMC IP ${ip} already assigned to interface ${iface_id} — no update needed"
+        return 0
     fi
 
-    local ip_id; ip_id="$(echo "$ip_resp" | jq -r '.results[0].id')"
-    local body
-    body="$(jq -n \
-        --arg address "${ip}/${BMC_SUBNET_PREFIX}" \
-        --arg desc    "Auto-updated by DHCP on ${ts}" \
-        '{address:$address, description:$desc}')"
-
-    nb_patch "/api/ipam/ip-addresses/${ip_id}/" "$body" > /dev/null || return 1
-    log_info "BMC IP updated to ${ip} on interface ${iface_id}"
+    # Not assigned yet — nb_assign_ip handles both new creation and existing-IP reassignment
+    nb_assign_ip "$iface_id" "$ip"
 }
 
 # nb_journal DEVICE_ID MESSAGE KIND  (journal failure is always non-fatal)
