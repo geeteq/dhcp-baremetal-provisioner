@@ -310,12 +310,30 @@ _fsm_discovered_refresh() {
     log_info "FSM: ${device_name} already discovered — IP refreshed"
 }
 
-# active → active: live tenant device; only update BMC IP, touch nothing else
+# active → active: live tenant device; check DHCP IP against NetBox record, journal mismatch
 _fsm_active_refresh() {
     local device_id="$1" device_name="$2" interface_id="$3" ip="$4" mac="$5"
-    nb_update_bmc_ip "$interface_id" "$ip"
-    nb_journal "$device_id" "IP address ${ip} assigned to interface bmc" "info"
-    log_info "FSM: ${device_name} is active (live) — BMC IP refreshed"
+
+    local ip_resp
+    ip_resp="$(nb_get "/api/ipam/ip-addresses/?assigned_object_type=dcim.interface&assigned_object_id=${interface_id}&limit=1")" || {
+        log_warn "FSM: ${device_name} — could not query BMC IP from NetBox"
+        return 0
+    }
+
+    local count; count="$(echo "$ip_resp" | jq -r '.count')"
+    if [[ "$count" == "0" || -z "$count" ]]; then
+        log_info "FSM: ${device_name} is active — no IP on record in NetBox (DHCP offered ${ip})"
+        return 0
+    fi
+
+    local recorded_ip; recorded_ip="$(echo "$ip_resp" | jq -r '.results[0].address' | cut -d/ -f1)"
+    if [[ "$recorded_ip" != "$ip" ]]; then
+        log_warn "FSM: ${device_name} IP mismatch — NetBox has ${recorded_ip}, DHCP offered ${ip}"
+        nb_journal "$device_id" \
+            "BMC IP mismatch: NetBox record=${recorded_ip}, DHCP offered=${ip}" "warning"
+    else
+        log_info "FSM: ${device_name} is active — BMC IP ${ip} matches NetBox record"
+    fi
 }
 
 # Stub actions for future stages — implement and uncomment table rows below
