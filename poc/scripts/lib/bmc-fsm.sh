@@ -235,7 +235,7 @@ nb_update_bmc_ip() {
 
     # Check if the correct IP is already assigned to this interface
     local check
-    check="$(nb_get "/api/ipam/ip-addresses/?address=${ip}%2F${BMC_SUBNET_PREFIX}&assigned_object_type=dcim.interface&assigned_object_id=${iface_id}")" || {
+    check="$(nb_get "/api/ipam/ip-addresses/?address=${ip}%2F${BMC_SUBNET_PREFIX}&interface_id=${iface_id}")" || {
         log_warn "Could not query IPs for interface ${iface_id} — falling back to assign"
         nb_assign_ip "$iface_id" "$ip"
         return
@@ -315,7 +315,7 @@ _fsm_active_refresh() {
     local device_id="$1" device_name="$2" interface_id="$3" ip="$4" mac="$5"
 
     local ip_resp
-    ip_resp="$(nb_get "/api/ipam/ip-addresses/?assigned_object_type=dcim.interface&assigned_object_id=${interface_id}&limit=1")" || {
+    ip_resp="$(nb_get "/api/ipam/ip-addresses/?interface_id=${interface_id}&limit=1")" || {
         log_warn "FSM: ${device_name} — could not query BMC IP from NetBox"
         return 0
     }
