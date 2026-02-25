@@ -1,26 +1,9 @@
 /**
- * dhcp_hook2.sh — BMC DHCP Hook Logic
- *
- * Covers:
- *   dhcp_hook2.sh          — DHCP hook entry point (called by ISC dhcpd)
- *   lib/bmc-fsm.sh         — FSM dispatcher, NetBox helpers, action functions
+ * dhcp_hook2.sh — BMC DHCP Hook State Machine
  *
  * Render:
  *   dot -Tsvg dhcp-hook2-flow.dot -o dhcp-hook2-flow.svg
  *   dot -Tpng dhcp-hook2-flow.dot -o dhcp-hook2-flow.png
- *
- * Colour key
- *   #cce5ff / #eef6ff  — entry / script header
- *   #fffde7 / #f59e0b  — FSM dispatcher
- *   #ddc9f7 / #f5eeff  — NetBox API calls
- *   #fff3cd            — decision diamonds
- *   #d4edda            — success / done
- *   #f8d7da            — error / silent-exit paths
- *   #fff9c4            — warning (non-fatal)
- *   #e3f2fd            — offline→discovered action
- *   #e0f7fa            — discovered→discovered action
- *   #e8f5e9            — active→active action
- *   #f5f5f5 / #9e9e9e  — stubbed future transitions (dashed)
  */
 
 digraph dhcp_hook2 {
@@ -29,22 +12,21 @@ digraph dhcp_hook2 {
     graph [
         fontname      = "Helvetica,Arial,sans-serif"
         fontsize      = 12
-        compound      = true
-        nodesep       = 0.55
-        ranksep       = 0.7
+        nodesep       = 0.5
+        ranksep       = 0.6
         bgcolor       = "white"
-        label         = "dhcp_hook2.sh — BMC DHCP Hook\nlib/bmc-fsm.sh"
+        label         = "dhcp_hook2.sh — BMC DHCP Hook"
         labelloc      = t
-        labelfontsize = 16
+        labelfontsize = 15
     ]
     node [
         fontname  = "Helvetica,Arial,sans-serif"
         fontsize  = 10
         style     = "filled,rounded"
         shape     = box
-        fillcolor = "#e8f4f8"
+        fillcolor = "#f0f4f8"
         color     = "#446688"
-        margin    = "0.18,0.10"
+        margin    = "0.2,0.12"
     ]
     edge [
         fontname  = "Helvetica,Arial,sans-serif"
@@ -53,309 +35,62 @@ digraph dhcp_hook2 {
         arrowsize = 0.8
     ]
 
-    /* ── shared terminals ──────────────────────────────────────────── */
-    exit_ok  [ label="Exit 0",  shape=oval, fillcolor="#d4edda", color="#28a745" ]
-    done     [ label="Done",    shape=oval, fillcolor="#d4edda", color="#28a745" ]
+    /* ── entry ─────────────────────────────────────────────────────── */
+    start  [ label="DHCP lease commit\nIP · MAC · hostname",
+             shape=oval, fillcolor="#cce5ff", color="#2255aa" ]
 
+    filter [ label="BMC OUI match?",
+             shape=diamond, fillcolor="#fff3cd", color="#856404" ]
 
-    /* ══════════════════════════════════════════════════════════════════
-     * A — dhcp_hook2.sh entry point
-     * ══════════════════════════════════════════════════════════════════ */
-    subgraph cluster_hook {
-        label     = "dhcp_hook2.sh"
-        style     = filled
-        fillcolor = "#eef6ff"
-        color     = "#2255aa"
-        fontsize  = 13
-        fontcolor = "#2255aa"
+    lookup [ label="Device found in NetBox\nby MAC address?",
+             shape=diamond, fillcolor="#fff3cd", color="#856404" ]
 
-        h_start [ label="ISC dhcpd executes hook\non commit { execute(...) }\n\$1=IP  \$2=MAC  \$3=hostname",
-                  shape=oval, fillcolor="#cce5ff", color="#2255aa" ]
+    /* ── state decision ────────────────────────────────────────────── */
+    state  [ label="Device state?",
+             shape=diamond, fillcolor="#ffe0b2", color="#e65100" ]
 
-        h_valid [ label="IP and MAC\nnot empty?",
-                  shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+    /* ── outcomes ──────────────────────────────────────────────────── */
+    act_offline    [ label="offline\n──────────────────\nPromote → discovered\nAssign BMC IP",
+                     fillcolor="#e3f2fd", color="#1565c0" ]
 
-        h_err   [ label="log_error: missing args",
-                  fillcolor="#f8d7da", color="#721c24" ]
+    act_discovered [ label="discovered\n──────────────────\nRefresh BMC IP",
+                     fillcolor="#e0f7fa", color="#00695c" ]
 
-        h_norm  [ label="Normalize MAC\nlower-case · colon-separated" ]
+    act_active_none [ label="active · no IP on record\n──────────────────\nAssign BMC IP\nJournal: IP assigned",
+                      fillcolor="#e8f5e9", color="#2e7d32" ]
 
-        h_oui   [ label="is_bmc_mac()\nOUI in BMC_OUIS[]?",
-                  shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+    act_active_ok   [ label="active · IP matches\n──────────────────\nNo action",
+                      fillcolor="#d4edda", color="#28a745" ]
 
-        h_skip  [ label="Not a BMC MAC\nsilent exit",
-                  fillcolor="#f8d7da", color="#721c24" ]
+    act_active_mismatch [ label="active · IP mismatch\n──────────────────\nJournal warning\nNo change to NetBox",
+                          fillcolor="#fff9c4", color="#856404" ]
 
-        h_log   [ label="log_info\n\"BMC DHCP lease: IP MAC HOST\"" ]
-
-        h_call  [ label="fsm_process_bmc_event()\ntrigger=dhcp_seen · mac · ip",
-                  fillcolor="#fff9c4", color="#856404" ]
-    }
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * B — fsm_process_bmc_event()
-     * ══════════════════════════════════════════════════════════════════ */
-    subgraph cluster_fsm {
-        label     = "fsm_process_bmc_event()  [lib/bmc-fsm.sh]"
-        style     = filled
-        fillcolor = "#fffde7"
-        color     = "#e6a817"
-        fontsize  = 12
-        fontcolor = "#7a5000"
-
-        fp_iface  [ label="GET /api/dcim/interfaces/\n?mac_address=MAC",
-                    fillcolor="#ddc9f7", color="#6625a8" ]
-
-        fp_ifchk  [ label="Interface\nfound?",
-                    shape=diamond, fillcolor="#fff3cd", color="#856404" ]
-
-        fp_noif   [ label="log_warn: no device for MAC\nreturn 1",
-                    fillcolor="#f8d7da", color="#721c24" ]
-
-        fp_dev    [ label="GET /api/dcim/devices/{id}/",
-                    fillcolor="#ddc9f7", color="#6625a8" ]
-
-        fp_found  [ label="Device found\n(device_id · device_name\ninterface_id · current_state)" ]
-
-        fp_jrnl   [ label="POST /api/extras/journal-entries/\nkind=success\n\"BMC discovered via DHCP — MAC / IP\"",
-                    fillcolor="#ddc9f7", color="#6625a8" ]
-
-        fp_scan   [ label="Scan FSM_TRANSITIONS[]\ntrigger=dhcp_seen · from=current_state" ]
-
-        fp_match  [ label="Transition\nmatched?",
-                    shape=diamond, fillcolor="#fff3cd", color="#856404" ]
-
-        fp_nomatch [ label="log_warn: no transition for state\nPOST journal kind=warning",
+    act_nomatch    [ label="No FSM transition\nfor this state\n──────────────────\nJournal warning",
                      fillcolor="#fff9c4", color="#856404" ]
-    }
 
+    /* ── terminals ─────────────────────────────────────────────────── */
+    ignore [ label="Ignore\n(exit 0)", shape=oval, fillcolor="#eeeeee", color="#888888" ]
+    done   [ label="Done\n(exit 0)",  shape=oval, fillcolor="#d4edda", color="#28a745" ]
 
-    /* ══════════════════════════════════════════════════════════════════
-     * C — nb_assign_ip()   shared sub-routine
-     * ══════════════════════════════════════════════════════════════════ */
-    subgraph cluster_assign {
-        label     = "nb_assign_ip()  [lib/bmc-fsm.sh]\nshared by all three action functions"
-        style     = filled
-        fillcolor = "#f5eeff"
-        color     = "#6625a8"
-        fontsize  = 11
-        fontcolor = "#6625a8"
+    /* ── edges ─────────────────────────────────────────────────────── */
+    start -> filter
+    filter -> ignore  [ label="no" color="#888888" fontcolor="#888888" ]
+    filter -> lookup  [ label="yes" ]
 
-        as_post   [ label="POST /api/ipam/ip-addresses/\naddress=IP/PREFIX · status=active\nassigned_object_type=dcim.interface\nassigned_object_id=IFACE_ID",
-                    fillcolor="#ddc9f7", color="#6625a8" ]
+    lookup -> ignore  [ label="not found" color="#888888" fontcolor="#888888" ]
+    lookup -> state   [ label="found" ]
 
-        as_code   [ label="HTTP response?",
-                    shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+    state -> act_offline         [ label="offline"    ]
+    state -> act_discovered      [ label="discovered" ]
+    state -> act_active_none     [ label="active\n(no IP on record)" ]
+    state -> act_active_ok       [ label="active\n(IP matches)"      ]
+    state -> act_active_mismatch [ label="active\n(IP mismatch)"     ]
+    state -> act_nomatch         [ label="other state" color="#888888" fontcolor="#888888" ]
 
-        as_ok     [ label="201 — IP created\nand assigned",
-                    fillcolor="#d4edda", color="#28a745" ]
-
-        as_dup    [ label="400 — duplicate\nGET /api/ipam/ip-addresses/\n?address=IP/PREFIX",
-                    fillcolor="#ddc9f7", color="#6625a8" ]
-
-        as_dupchk [ label="Existing record\nfound?",
-                    shape=diamond, fillcolor="#fff3cd", color="#856404" ]
-
-        as_duperr [ label="log_error: IP not found\nreturn 1",
-                    fillcolor="#f8d7da", color="#721c24" ]
-
-        as_patch  [ label="PATCH /api/ipam/ip-addresses/{id}/\nassigned_object_type=dcim.interface\nassigned_object_id=IFACE_ID · status=active",
-                    fillcolor="#ddc9f7", color="#6625a8" ]
-
-        as_err    [ label="Other HTTP error\nlog_error · return 1",
-                    fillcolor="#f8d7da", color="#721c24" ]
-    }
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * D — _fsm_offline_to_discovered()
-     *     Transition: dhcp_seen · offline → discovered
-     * ══════════════════════════════════════════════════════════════════ */
-    subgraph cluster_offline {
-        label     = "_fsm_offline_to_discovered()  [offline → discovered]\nFirst DHCP seen — promote device state"
-        style     = filled
-        fillcolor = "#e3f2fd"
-        color     = "#1565c0"
-        fontsize  = 11
-
-        o_patch  [ label="PATCH /api/dcim/devices/{id}/\nstatus = \"discovered\"",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
-
-        o_jrnl1  [ label="POST /api/extras/journal-entries/\nkind=success  \"offline → discovered\"",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
-
-        o_assign [ label="nb_assign_ip(interface_id, ip)",
-                   fillcolor="#f5eeff", color="#6625a8" ]
-
-        o_jrnl2  [ label="POST /api/extras/journal-entries/\nkind=info  \"IP assigned to interface bmc\"",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
-    }
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * E — _fsm_discovered_refresh()
-     *     Transition: dhcp_seen · discovered → discovered
-     * ══════════════════════════════════════════════════════════════════ */
-    subgraph cluster_discovered {
-        label     = "_fsm_discovered_refresh()  [discovered → discovered]\nDHCP renewal before staging"
-        style     = filled
-        fillcolor = "#e0f7fa"
-        color     = "#00695c"
-        fontsize  = 11
-
-        d_assign [ label="nb_assign_ip(interface_id, ip)",
-                   fillcolor="#f5eeff", color="#6625a8" ]
-
-        d_jrnl   [ label="POST /api/extras/journal-entries/\nkind=info  \"IP assigned to interface bmc\"",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
-    }
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * F — _fsm_active_refresh()
-     *     Transition: dhcp_seen · active → active
-     * ══════════════════════════════════════════════════════════════════ */
-    subgraph cluster_active {
-        label     = "_fsm_active_refresh()  [active → active]\nLive tenant device — audit only"
-        style     = filled
-        fillcolor = "#e8f5e9"
-        color     = "#2e7d32"
-        fontsize  = 11
-
-        a_getip  [ label="GET /api/ipam/ip-addresses/\n?interface_id=IFACE_ID&limit=1",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
-
-        a_count  [ label="IP on record?",
-                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
-
-        a_none   [ label="nb_assign_ip(interface_id, ip)\n(no IP was on record)",
-                   fillcolor="#f5eeff", color="#6625a8" ]
-
-        a_jrnl_n [ label="POST /api/extras/journal-entries/\nkind=info  \"BMC IP assigned (none on record)\"",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
-
-        a_cmp    [ label="DHCP IP ==\nNetBox IP?",
-                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
-
-        a_ok     [ label="log_info: IP matches\nno action",
-                   fillcolor="#d4edda", color="#28a745" ]
-
-        a_warn   [ label="log_warn: IP mismatch\nNetBox={recorded}  DHCP={offered}",
-                   fillcolor="#fff9c4", color="#856404" ]
-
-        a_jrnl_w [ label="POST /api/extras/journal-entries/\nkind=warning  \"BMC IP mismatch\"",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
-    }
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * G — Stubbed future transitions
-     * ══════════════════════════════════════════════════════════════════ */
-    subgraph cluster_stubs {
-        label     = "Future transitions — implement function + uncomment FSM_TRANSITIONS row"
-        style     = "filled,dashed"
-        fillcolor = "#f5f5f5"
-        color     = "#9e9e9e"
-        fontsize  = 11
-        fontcolor = "#9e9e9e"
-
-        s_pxe   [ label="pxe_complete: discovered → staged\n_fsm_discovered_to_staged()",
-                  style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
-        s_prov  [ label="provisioned: staged → ready\n_fsm_staged_to_ready()",
-                  style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
-        s_deliv [ label="delivered: ready → active\n_fsm_ready_to_active()",
-                  style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
-        s_decom [ label="decommission: active → decommissioned\n_fsm_active_to_decommissioned()",
-                  style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
-    }
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * EDGES — dhcp_hook2.sh entry
-     * ══════════════════════════════════════════════════════════════════ */
-    h_start -> h_valid
-    h_valid -> h_err  [ label="yes — empty" color="#dc3545" fontcolor="#dc3545" ]
-    h_valid -> h_norm [ label="no" ]
-    h_err   -> exit_ok
-    h_norm  -> h_oui
-    h_oui   -> h_skip [ label="no match" color="#dc3545" fontcolor="#dc3545" ]
-    h_oui   -> h_log  [ label="match" ]
-    h_skip  -> exit_ok
-    h_log   -> fp_iface [ lhead=cluster_fsm ]
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * EDGES — fsm_process_bmc_event() internal
-     * ══════════════════════════════════════════════════════════════════ */
-    fp_iface  -> fp_ifchk
-    fp_ifchk  -> fp_noif   [ label="no"  color="#dc3545" fontcolor="#dc3545" ]
-    fp_ifchk  -> fp_dev    [ label="yes" ]
-    fp_noif   -> done
-    fp_dev    -> fp_found
-    fp_found  -> fp_jrnl
-    fp_jrnl   -> fp_scan
-    fp_scan   -> fp_match
-    fp_match  -> fp_nomatch [ label="no match" color="#e69138" fontcolor="#e69138" ]
-    fp_nomatch -> done
-
-    /* dispatch to action functions */
-    fp_match -> o_patch  [ label="offline → discovered",    lhead=cluster_offline    ]
-    fp_match -> d_assign [ label="discovered → discovered", lhead=cluster_discovered ]
-    fp_match -> a_getip  [ label="active → active",         lhead=cluster_active     ]
-
-    /* stubbed (dashed) */
-    fp_match -> s_pxe [ label="pxe_complete:discovered", lhead=cluster_stubs,
-                        style=dashed, color="#9e9e9e", fontcolor="#9e9e9e" ]
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * EDGES — nb_assign_ip()
-     * ══════════════════════════════════════════════════════════════════ */
-    as_post   -> as_code
-    as_code   -> as_ok    [ label="201" color="#28a745" fontcolor="#28a745" ]
-    as_code   -> as_dup   [ label="400" color="#856404" fontcolor="#856404" ]
-    as_code   -> as_err   [ label="other" color="#dc3545" fontcolor="#dc3545" ]
-    as_dup    -> as_dupchk
-    as_dupchk -> as_duperr [ label="no"  color="#dc3545" fontcolor="#dc3545" ]
-    as_dupchk -> as_patch  [ label="yes" ]
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * EDGES — _fsm_offline_to_discovered()
-     * ══════════════════════════════════════════════════════════════════ */
-    o_patch  -> o_jrnl1
-    o_jrnl1  -> o_assign
-    o_assign -> as_post [ lhead=cluster_assign ]
-    as_ok    -> o_jrnl2 [ ltail=cluster_assign label="assigned" ]
-    as_patch -> o_jrnl2 [ ltail=cluster_assign label="reassigned" ]
-    o_jrnl2  -> done    [ ltail=cluster_offline ]
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * EDGES — _fsm_discovered_refresh()
-     * ══════════════════════════════════════════════════════════════════ */
-    d_assign -> as_post [ lhead=cluster_assign ]
-    d_jrnl   -> done    [ ltail=cluster_discovered ]
-
-    /* reuse assign cluster return edge — share with d_jrnl */
-    as_ok    -> d_jrnl  [ ltail=cluster_assign label="assigned"   constraint=false ]
-    as_patch -> d_jrnl  [ ltail=cluster_assign label="reassigned" constraint=false ]
-
-
-    /* ══════════════════════════════════════════════════════════════════
-     * EDGES — _fsm_active_refresh()
-     * ══════════════════════════════════════════════════════════════════ */
-    a_getip  -> a_count
-    a_count  -> a_none   [ label="no — 0 records" ]
-    a_count  -> a_cmp    [ label="yes" ]
-    a_none   -> as_post  [ lhead=cluster_assign ]
-    as_ok    -> a_jrnl_n [ ltail=cluster_assign label="assigned"   constraint=false ]
-    as_patch -> a_jrnl_n [ ltail=cluster_assign label="reassigned" constraint=false ]
-    a_jrnl_n -> done     [ ltail=cluster_active  constraint=false ]
-    a_cmp    -> a_ok     [ label="match" color="#28a745" fontcolor="#28a745" ]
-    a_cmp    -> a_warn   [ label="mismatch" color="#856404" fontcolor="#856404" ]
-    a_warn   -> a_jrnl_w
-    a_ok     -> done     [ ltail=cluster_active ]
-    a_jrnl_w -> done     [ ltail=cluster_active  constraint=false ]
+    act_offline          -> done
+    act_discovered       -> done
+    act_active_none      -> done
+    act_active_ok        -> done
+    act_active_mismatch  -> done
+    act_nomatch          -> done
 }
