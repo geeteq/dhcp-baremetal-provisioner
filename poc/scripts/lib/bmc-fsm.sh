@@ -322,7 +322,9 @@ _fsm_active_refresh() {
 
     local count; count="$(echo "$ip_resp" | jq -r '.count')"
     if [[ "$count" == "0" || -z "$count" ]]; then
-        log_info "FSM: ${device_name} is active — no IP on record in NetBox (DHCP offered ${ip})"
+        log_info "FSM: ${device_name} is active — no IP on record, assigning ${ip}"
+        nb_assign_ip "$interface_id" "$ip"
+        nb_journal "$device_id" "BMC IP ${ip} assigned to interface bmc (none was on record)" "info"
         return 0
     fi
 
