@@ -1,0 +1,381 @@
+/**
+ * BMC Discovery — DHCP → NetBox Process Flow
+ *
+ * Covers: dhcp_hook2.sh  |  netbox-bmc-worker.sh
+ *
+ * Render:
+ *   dot -Tsvg bmc-flow.dot -o bmc-flow.svg
+ *   dot -Tpng bmc-flow.dot -o bmc-flow.png
+ *
+ * Node colours
+ *   #cce5ff / #eef6ff  — entry / script headers
+ *   #ddc9f7 / #f5eeff  — NetBox API calls
+ *   #fff3cd            — decision diamonds
+ *   #d4edda            — success / done
+ *   #f8d7da            — error / skip paths
+ *   #fff9c4            — warnings (non-fatal)
+ */
+
+digraph bmc_discovery {
+
+    rankdir  = TB
+    graph [
+        fontname      = "Helvetica,Arial,sans-serif"
+        fontsize      = 12
+        compound      = true
+
+        nodesep       = 0.55
+        ranksep       = 0.65
+        bgcolor       = "white"
+        label         = "BMC Discovery — DHCP → NetBox\ndhcp_hook2.sh  |  netbox-bmc-worker.sh"
+        labelloc      = t
+        labelfontsize = 17
+    ]
+    node [
+        fontname  = "Helvetica,Arial,sans-serif"
+        fontsize  = 10
+        style     = "filled,rounded"
+        shape     = box
+        fillcolor = "#e8f4f8"
+        color     = "#446688"
+        margin    = "0.18,0.10"
+    ]
+    edge [
+        fontname  = "Helvetica,Arial,sans-serif"
+        fontsize  = 9
+        color     = "#555555"
+        arrowsize = 0.8
+    ]
+
+    /* ── shared terminals ────────────────────────────────── */
+    exit_ok  [ label="Exit 0",  shape=oval, fillcolor="#d4edda", color="#28a745" ]
+    exit_err [ label="Exit 1",  shape=oval, fillcolor="#f8d7da", color="#dc3545" ]
+    done     [ label="Done",    shape=oval, fillcolor="#d4edda", color="#28a745" ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * A — dhcp_hook2.sh  (called by dhcpd on every commit)
+     * ═══════════════════════════════════════════════════════ */
+    subgraph cluster_hook {
+        label     = "dhcp_hook2.sh"
+        style     = filled
+        fillcolor = "#eef6ff"
+        color     = "#2255aa"
+        fontsize  = 13
+        fontcolor = "#2255aa"
+
+        h_start [ label="dhcpd executes hook\n\$1=IP  \$2=MAC  \$3=hostname",
+                  shape=oval, fillcolor="#cce5ff", color="#2255aa" ]
+
+        h_valid [ label="IP and MAC\nnot empty?",
+                  shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        h_err   [ label="log_error: missing args",
+                  fillcolor="#f8d7da", color="#721c24" ]
+
+        h_norm  [ label="Normalize MAC\nlower-case · colon-separated" ]
+
+        h_oui   [ label="OUI matches known\nBMC vendor prefix?",
+                  shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        h_skip  [ label="Not a BMC MAC\n— silent exit",
+                  fillcolor="#f8d7da", color="#721c24" ]
+
+        h_log   [ label="log_info: BMC DHCP lease\nIP / MAC / hostname" ]
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+     * B — netbox-bmc-worker.sh  (long-running daemon)
+     * ═══════════════════════════════════════════════════════ */
+    subgraph cluster_worker {
+        label     = "netbox-bmc-worker.sh"
+        style     = filled
+        fillcolor = "#efffef"
+        color     = "#1a6b1a"
+        fontsize  = 13
+        fontcolor = "#1a6b1a"
+
+        w_start  [ label="Worker process starts\nlog config + banner",
+                   shape=oval, fillcolor="#c3e6cb", color="#155724" ]
+
+        w_ping   [ label="redis_cmd PING",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        w_perr   [ label="log_error: cannot connect to Redis",
+                   fillcolor="#f8d7da", color="#721c24" ]
+
+        w_loop   [ label="Main loop",
+                   shape=oval, fillcolor="#c3e6cb", color="#155724" ]
+
+        w_brpop  [ label="BRPOP  queue  timeout=1 s",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        w_rerr   [ label="log_error: BRPOP failed\nsleep 5 s · retry",
+                   fillcolor="#f8d7da", color="#721c24" ]
+
+        w_parse  [ label="Parse JSON event\nevent_type · mac_address · ip_address" ]
+
+        w_valid  [ label="mac_address and\nip_address present?",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        w_verr   [ label="log_error: missing fields",
+                   fillcolor="#f8d7da", color="#721c24" ]
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+     * C — nb_find_device_by_bmc_mac()
+     * ═══════════════════════════════════════════════════════ */
+    subgraph cluster_find {
+        label     = "nb_find_device_by_bmc_mac()"
+        style     = filled
+        fillcolor = "#f5eeff"
+        color     = "#6625a8"
+        fontsize  = 13
+        fontcolor = "#6625a8"
+
+        f_upper  [ label="Normalize MAC → UPPER:CASE" ]
+
+        f_iface  [ label="GET /api/dcim/interfaces/\n?mac_address=MAC&name=bmc\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        f_count  [ label="results.count == 0?",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        f_none   [ label="log_warn: no device for this MAC",
+                   fillcolor="#f8d7da", color="#721c24" ]
+
+        f_dev    [ label="GET /api/dcim/devices/{id}/\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        f_ret    [ label="Return\ndevice_id · device_name\ninterface_id · current_state" ]
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+     * D — Shared event processing
+     * ═══════════════════════════════════════════════════════ */
+    p_found   [ label="Device found\nin NetBox?",
+                shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+    p_nofound [ label="log_error: device not found\nno action taken",
+                fillcolor="#f8d7da", color="#721c24" ]
+
+    p_journal [ label="POST /api/extras/journal-entries/\nkind=success\n\"BMC discovered via DHCP — MAC / IP\"\ntimeout 20 s",
+                fillcolor="#ddc9f7", color="#6625a8" ]
+
+    p_state   [ label="current_state?",
+                shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * E — State: active  (live device — IP refresh only)
+     * ═══════════════════════════════════════════════════════ */
+    subgraph cluster_active {
+        label     = "State: active  (live device — BMC IP refresh only)"
+        style     = filled
+        fillcolor = "#e8f5e9"
+        color     = "#2e7d32"
+        fontsize  = 12
+
+        a_getip  [ label="GET /api/ipam/ip-addresses/\n?assigned_object_type=dcim.interface\n&assigned_object_id=IFACE_ID\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        a_exist  [ label="IP record\nalready exists?",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        a_patch  [ label="PATCH /api/ipam/ip-addresses/{id}/\naddress=IP/PREFIX · updated description\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        a_post   [ label="POST /api/ipam/ip-addresses/\n(no record yet — fallback assign)\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        a_jrnl   [ label="POST /api/extras/journal-entries/\nkind=info  \"IP assigned to interface bmc\"\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+     * F — State: offline  (new device — full onboarding)
+     * ═══════════════════════════════════════════════════════ */
+    subgraph cluster_offline {
+        label     = "State: offline  (new device — full onboarding)"
+        style     = filled
+        fillcolor = "#e3f2fd"
+        color     = "#1565c0"
+        fontsize  = 12
+
+        o_patch  [ label="PATCH /api/dcim/devices/{id}/\nstatus = \"discovered\"\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        o_jrnl1  [ label="POST /api/extras/journal-entries/\nkind=success  \"offline → discovered\"\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        o_post   [ label="POST /api/ipam/ip-addresses/\naddress=IP/PREFIX · status=active\nassigned to bmc interface\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        o_400    [ label="HTTP 400?\n(duplicate IP)",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        o_warn   [ label="log_warn: IP may already exist — skip",
+                   fillcolor="#fff9c4", color="#856404" ]
+
+        o_jrnl2  [ label="POST /api/extras/journal-entries/\nkind=info  \"IP assigned to interface bmc\"\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+     * G — State: discovered  (already seen — refresh IP)
+     * ═══════════════════════════════════════════════════════ */
+    subgraph cluster_discovered {
+        label     = "State: discovered  (already seen — refresh IP)"
+        style     = filled
+        fillcolor = "#e0f7fa"
+        color     = "#00695c"
+        fontsize  = 12
+
+        d_log    [ label="log_info: already discovered\nrefreshing IP" ]
+
+        d_post   [ label="POST /api/ipam/ip-addresses/\naddress=IP/PREFIX · status=active\nassigned to bmc interface\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        d_400    [ label="HTTP 400?\n(duplicate IP)",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        d_warn   [ label="log_warn: IP may already exist — skip",
+                   fillcolor="#fff9c4", color="#856404" ]
+
+        d_jrnl   [ label="POST /api/extras/journal-entries/\nkind=info  \"IP assigned to interface bmc\"\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+     * H — State: * (unexpected)
+     * ═══════════════════════════════════════════════════════ */
+    subgraph cluster_other {
+        label     = "State: *  (unexpected — no state change)"
+        style     = filled
+        fillcolor = "#fff3e0"
+        color     = "#bf360c"
+        fontsize  = 12
+
+        x_jrnl   [ label="POST /api/extras/journal-entries/\nkind=warning\n\"unexpected state: STATE\"\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — dhcp_hook2.sh
+     * ═══════════════════════════════════════════════════════ */
+    h_start -> h_valid
+    h_valid -> h_err   [ label="no"  ]
+    h_valid -> h_norm  [ label="yes" ]
+    h_err   -> exit_ok
+    h_norm  -> h_oui
+    h_oui   -> h_skip  [ label="no match" ]
+    h_oui   -> h_log   [ label="match"    ]
+    h_skip  -> exit_ok
+    h_log   -> f_upper [ lhead=cluster_find, label="call" ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — netbox-bmc-worker.sh
+     * ═══════════════════════════════════════════════════════ */
+    w_start -> w_ping
+    w_ping  -> w_perr  [ label="fail" ]
+    w_ping  -> w_loop  [ label="ok"   ]
+    w_perr  -> exit_err
+    w_loop  -> w_brpop
+    w_brpop -> w_rerr  [ label="error"   ]
+    w_brpop -> w_loop  [ label="timeout" ]
+    w_brpop -> w_parse [ label="event"   ]
+    w_rerr  -> w_loop
+    w_parse -> w_valid
+    w_valid -> w_verr  [ label="no"  ]
+    w_valid -> f_upper [ label="yes", lhead=cluster_find ]
+    w_verr  -> w_loop
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — nb_find_device_by_bmc_mac()
+     * ═══════════════════════════════════════════════════════ */
+    f_upper -> f_iface
+    f_iface -> f_count
+    f_count -> f_none  [ label="yes (not found)" ]
+    f_count -> f_dev   [ label="no"              ]
+    f_dev   -> f_ret
+    f_ret   -> p_found [ ltail=cluster_find, label="return JSON" ]
+    f_none  -> p_found [ ltail=cluster_find, label="return null" ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — shared event processing
+     * ═══════════════════════════════════════════════════════ */
+    p_found   -> p_nofound [ label="no"  ]
+    p_found   -> p_journal [ label="yes" ]
+    p_nofound -> exit_ok
+    p_journal -> p_state
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — state machine dispatch
+     * ═══════════════════════════════════════════════════════ */
+    p_state -> a_getip  [ label="active",     lhead=cluster_active     ]
+    p_state -> o_patch  [ label="offline",    lhead=cluster_offline    ]
+    p_state -> d_log    [ label="discovered", lhead=cluster_discovered ]
+    p_state -> x_jrnl  [ label="other",      lhead=cluster_other      ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — State: active
+     * ═══════════════════════════════════════════════════════ */
+    a_getip -> a_exist
+    a_exist -> a_patch [ label="yes" ]
+    a_exist -> a_post  [ label="no"  ]
+    a_patch -> a_jrnl
+    a_post  -> a_jrnl
+    a_jrnl  -> done    [ ltail=cluster_active ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — State: offline
+     * ═══════════════════════════════════════════════════════ */
+    o_patch -> o_jrnl1
+    o_jrnl1 -> o_post
+    o_post  -> o_400
+    o_400   -> o_warn  [ label="yes" ]
+    o_400   -> o_jrnl2 [ label="no"  ]
+    o_warn  -> o_jrnl2
+    o_jrnl2 -> done    [ ltail=cluster_offline ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — State: discovered
+     * ═══════════════════════════════════════════════════════ */
+    d_log  -> d_post
+    d_post -> d_400
+    d_400  -> d_warn  [ label="yes" ]
+    d_400  -> d_jrnl  [ label="no"  ]
+    d_warn -> d_jrnl
+    d_jrnl -> done    [ ltail=cluster_discovered ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * EDGES — State: other
+     * ═══════════════════════════════════════════════════════ */
+    x_jrnl -> done  [ ltail=cluster_other ]
+
+
+    /* ═══════════════════════════════════════════════════════
+     * Worker loops back after each processed event
+     * ═══════════════════════════════════════════════════════ */
+    done -> w_loop [
+        style      = dashed
+        color      = "#888888"
+        label      = "worker: next event"
+        constraint = false
+    ]
+}
