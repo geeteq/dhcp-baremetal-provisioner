@@ -1,7 +1,10 @@
 /**
  * BMC Discovery — DHCP → NetBox Process Flow
  *
- * Covers: dhcp_hook2.sh  |  netbox-bmc-worker.sh
+ * Covers:
+ *   dhcp_hook2.sh              — DHCP hook entry point
+ *   netbox-bmc-worker.sh       — Redis queue entry point
+ *   scripts/lib/bmc-fsm.sh     — shared FSM library (all NetBox logic)
  *
  * Render:
  *   dot -Tsvg bmc-flow.dot -o bmc-flow.svg
@@ -9,11 +12,13 @@
  *
  * Node colours
  *   #cce5ff / #eef6ff  — entry / script headers
- *   #ddc9f7 / #f5eeff  — NetBox API calls
+ *   #fffde7 / #f59e0b  — FSM dispatcher  (lib/bmc-fsm.sh)
+ *   #ddc9f7 / #f5eeff  — NetBox API calls (lib/bmc-fsm.sh)
  *   #fff3cd            — decision diamonds
  *   #d4edda            — success / done
  *   #f8d7da            — error / skip paths
  *   #fff9c4            — warnings (non-fatal)
+ *   #f5f5f5 / #9e9e9e  — stubbed future transitions (dashed)
  */
 
 digraph bmc_discovery {
@@ -23,13 +28,12 @@ digraph bmc_discovery {
         fontname      = "Helvetica,Arial,sans-serif"
         fontsize      = 12
         compound      = true
-
         nodesep       = 0.55
         ranksep       = 0.65
         bgcolor       = "white"
-        label         = "BMC Discovery — DHCP → NetBox\ndhcp_hook2.sh  |  netbox-bmc-worker.sh"
+        label         = "BMC Discovery — DHCP → NetBox\ndhcp_hook2.sh  |  netbox-bmc-worker.sh  →  scripts/lib/bmc-fsm.sh"
         labelloc      = t
-        labelfontsize = 17
+        labelfontsize = 16
     ]
     node [
         fontname  = "Helvetica,Arial,sans-serif"
@@ -75,13 +79,14 @@ digraph bmc_discovery {
 
         h_norm  [ label="Normalize MAC\nlower-case · colon-separated" ]
 
-        h_oui   [ label="OUI matches known\nBMC vendor prefix?",
+        h_oui   [ label="is_bmc_mac()\nOUI in BMC_OUIS?",
                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
 
         h_skip  [ label="Not a BMC MAC\n— silent exit",
                   fillcolor="#f8d7da", color="#721c24" ]
 
-        h_log   [ label="log_info: BMC DHCP lease\nIP / MAC / hostname" ]
+        h_call  [ label="fsm_process_bmc_event()\ntrigger=dhcp_seen · mac · ip",
+                  fillcolor="#fff9c4", color="#856404" ]
     }
 
 
@@ -121,18 +126,21 @@ digraph bmc_discovery {
 
         w_verr   [ label="log_error: missing fields",
                    fillcolor="#f8d7da", color="#721c24" ]
+
+        w_call   [ label="fsm_process_bmc_event()\ntrigger=dhcp_seen · mac · ip",
+                   fillcolor="#fff9c4", color="#856404" ]
     }
 
 
     /* ═══════════════════════════════════════════════════════
-     * C — nb_find_device_by_bmc_mac()
+     * C — nb_find_device_by_bmc_mac()  [lib/bmc-fsm.sh]
      * ═══════════════════════════════════════════════════════ */
     subgraph cluster_find {
-        label     = "nb_find_device_by_bmc_mac()"
+        label     = "nb_find_device_by_bmc_mac()  [lib/bmc-fsm.sh]"
         style     = filled
         fillcolor = "#f5eeff"
         color     = "#6625a8"
-        fontsize  = 13
+        fontsize  = 12
         fontcolor = "#6625a8"
 
         f_upper  [ label="Normalize MAC → UPPER:CASE" ]
@@ -154,30 +162,47 @@ digraph bmc_discovery {
 
 
     /* ═══════════════════════════════════════════════════════
-     * D — Shared event processing
+     * D — fsm_process_bmc_event()  [lib/bmc-fsm.sh]
      * ═══════════════════════════════════════════════════════ */
-    p_found   [ label="Device found\nin NetBox?",
-                shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+    subgraph cluster_fsm_proc {
+        label     = "fsm_process_bmc_event()  [lib/bmc-fsm.sh]"
+        style     = filled
+        fillcolor = "#fffde7"
+        color     = "#e6a817"
+        fontsize  = 12
+        fontcolor = "#7a5000"
 
-    p_nofound [ label="log_error: device not found\nno action taken",
-                fillcolor="#f8d7da", color="#721c24" ]
+        fp_find  [ label="call nb_find_device_by_bmc_mac(mac)" ]
 
-    p_journal [ label="POST /api/extras/journal-entries/\nkind=success\n\"BMC discovered via DHCP — MAC / IP\"\ntimeout 20 s",
-                fillcolor="#ddc9f7", color="#6625a8" ]
+        fp_found [ label="Device found\nin NetBox?",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
 
-    p_state   [ label="current_state?",
-                shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+        fp_nodev [ label="log_error: device not found\nno action taken",
+                   fillcolor="#f8d7da", color="#721c24" ]
+
+        fp_jrnl  [ label="POST /api/extras/journal-entries/\nkind=success\n\"BMC discovered via DHCP — MAC / IP\"\ntimeout 20 s",
+                   fillcolor="#ddc9f7", color="#6625a8" ]
+
+        fp_scan  [ label="Scan FSM_TRANSITIONS[]\nfor trigger:from_state match" ]
+
+        fp_match [ label="Match found?",
+                   shape=diamond, fillcolor="#fff3cd", color="#856404" ]
+
+        fp_nomatch [ label="log_warn: no transition\nPOST journal  kind=warning",
+                     fillcolor="#fff9c4", color="#856404" ]
+    }
 
 
     /* ═══════════════════════════════════════════════════════
-     * E — State: active  (live device — IP refresh only)
+     * E — _fsm_active_refresh()  [lib/bmc-fsm.sh]
+     *     Transition: dhcp_seen · active → active
      * ═══════════════════════════════════════════════════════ */
     subgraph cluster_active {
-        label     = "State: active  (live device — BMC IP refresh only)"
+        label     = "_fsm_active_refresh()  [active → active]\nlive device — BMC IP refresh only"
         style     = filled
         fillcolor = "#e8f5e9"
         color     = "#2e7d32"
-        fontsize  = 12
+        fontsize  = 11
 
         a_getip  [ label="GET /api/ipam/ip-addresses/\n?assigned_object_type=dcim.interface\n&assigned_object_id=IFACE_ID\ntimeout 20 s",
                    fillcolor="#ddc9f7", color="#6625a8" ]
@@ -197,14 +222,15 @@ digraph bmc_discovery {
 
 
     /* ═══════════════════════════════════════════════════════
-     * F — State: offline  (new device — full onboarding)
+     * F — _fsm_offline_to_discovered()  [lib/bmc-fsm.sh]
+     *     Transition: dhcp_seen · offline → discovered
      * ═══════════════════════════════════════════════════════ */
     subgraph cluster_offline {
-        label     = "State: offline  (new device — full onboarding)"
+        label     = "_fsm_offline_to_discovered()  [offline → discovered]\nnew device — full onboarding"
         style     = filled
         fillcolor = "#e3f2fd"
         color     = "#1565c0"
-        fontsize  = 12
+        fontsize  = 11
 
         o_patch  [ label="PATCH /api/dcim/devices/{id}/\nstatus = \"discovered\"\ntimeout 20 s",
                    fillcolor="#ddc9f7", color="#6625a8" ]
@@ -227,16 +253,15 @@ digraph bmc_discovery {
 
 
     /* ═══════════════════════════════════════════════════════
-     * G — State: discovered  (already seen — refresh IP)
+     * G — _fsm_discovered_refresh()  [lib/bmc-fsm.sh]
+     *     Transition: dhcp_seen · discovered → discovered
      * ═══════════════════════════════════════════════════════ */
     subgraph cluster_discovered {
-        label     = "State: discovered  (already seen — refresh IP)"
+        label     = "_fsm_discovered_refresh()  [discovered → discovered]\nalready seen — refresh IP"
         style     = filled
         fillcolor = "#e0f7fa"
         color     = "#00695c"
-        fontsize  = 12
-
-        d_log    [ label="log_info: already discovered\nrefreshing IP" ]
+        fontsize  = 11
 
         d_post   [ label="POST /api/ipam/ip-addresses/\naddress=IP/PREFIX · status=active\nassigned to bmc interface\ntimeout 20 s",
                    fillcolor="#ddc9f7", color="#6625a8" ]
@@ -253,17 +278,28 @@ digraph bmc_discovery {
 
 
     /* ═══════════════════════════════════════════════════════
-     * H — State: * (unexpected)
+     * H — Stubbed future transitions  [lib/bmc-fsm.sh]
+     *     Uncomment rows in FSM_TRANSITIONS to activate
      * ═══════════════════════════════════════════════════════ */
-    subgraph cluster_other {
-        label     = "State: *  (unexpected — no state change)"
-        style     = filled
-        fillcolor = "#fff3e0"
-        color     = "#bf360c"
-        fontsize  = 12
+    subgraph cluster_stubs {
+        label     = "Future transitions — add function + uncomment FSM_TRANSITIONS row"
+        style     = "filled,dashed"
+        fillcolor = "#f5f5f5"
+        color     = "#9e9e9e"
+        fontsize  = 11
+        fontcolor = "#9e9e9e"
 
-        x_jrnl   [ label="POST /api/extras/journal-entries/\nkind=warning\n\"unexpected state: STATE\"\ntimeout 20 s",
-                   fillcolor="#ddc9f7", color="#6625a8" ]
+        s_pxe    [ label="pxe_complete: discovered → staged\n_fsm_discovered_to_staged()",
+                   style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
+
+        s_prov   [ label="provisioned: staged → ready\n_fsm_staged_to_ready()",
+                   style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
+
+        s_deliv  [ label="delivered: ready → active\n_fsm_ready_to_active()",
+                   style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
+
+        s_decom  [ label="decommission: active → decommissioned\n_fsm_active_to_decommissioned()",
+                   style="filled,rounded,dashed", fillcolor="#f5f5f5", color="#9e9e9e", fontcolor="#9e9e9e" ]
     }
 
 
@@ -276,9 +312,9 @@ digraph bmc_discovery {
     h_err   -> exit_ok
     h_norm  -> h_oui
     h_oui   -> h_skip  [ label="no match" ]
-    h_oui   -> h_log   [ label="match"    ]
+    h_oui   -> h_call  [ label="match"    ]
     h_skip  -> exit_ok
-    h_log   -> f_upper [ lhead=cluster_find, label="call" ]
+    h_call  -> fp_find [ lhead=cluster_fsm_proc, label="  " ]
 
 
     /* ═══════════════════════════════════════════════════════
@@ -295,42 +331,41 @@ digraph bmc_discovery {
     w_rerr  -> w_loop
     w_parse -> w_valid
     w_valid -> w_verr  [ label="no"  ]
-    w_valid -> f_upper [ label="yes", lhead=cluster_find ]
+    w_valid -> w_call  [ label="yes" ]
     w_verr  -> w_loop
+    w_call  -> fp_find [ lhead=cluster_fsm_proc, label="  " ]
 
 
     /* ═══════════════════════════════════════════════════════
-     * EDGES — nb_find_device_by_bmc_mac()
+     * EDGES — fsm_process_bmc_event() internal
      * ═══════════════════════════════════════════════════════ */
-    f_upper -> f_iface
-    f_iface -> f_count
-    f_count -> f_none  [ label="yes (not found)" ]
-    f_count -> f_dev   [ label="no"              ]
-    f_dev   -> f_ret
-    f_ret   -> p_found [ ltail=cluster_find, label="return JSON" ]
-    f_none  -> p_found [ ltail=cluster_find, label="return null" ]
+    fp_find   -> f_upper   [ lhead=cluster_find, label="call" ]
+    f_ret     -> fp_found  [ ltail=cluster_find, label="return JSON" ]
+    f_none    -> fp_found  [ ltail=cluster_find, label="return null" ]
+
+    fp_found  -> fp_nodev  [ label="no"  ]
+    fp_found  -> fp_jrnl   [ label="yes" ]
+    fp_nodev  -> exit_ok
+    fp_jrnl   -> fp_scan
+    fp_scan   -> fp_match
+    fp_match  -> fp_nomatch [ label="no match" ]
+    fp_nomatch -> done
 
 
     /* ═══════════════════════════════════════════════════════
-     * EDGES — shared event processing
+     * EDGES — FSM dispatch to action functions
      * ═══════════════════════════════════════════════════════ */
-    p_found   -> p_nofound [ label="no"  ]
-    p_found   -> p_journal [ label="yes" ]
-    p_nofound -> exit_ok
-    p_journal -> p_state
+    fp_match -> a_getip [ label="dhcp_seen:active",     lhead=cluster_active     ]
+    fp_match -> o_patch [ label="dhcp_seen:offline",    lhead=cluster_offline    ]
+    fp_match -> d_post  [ label="dhcp_seen:discovered", lhead=cluster_discovered ]
+
+    /* Stubbed future transitions (dashed) */
+    fp_match -> s_pxe   [ label="pxe_complete:discovered", lhead=cluster_stubs,
+                          style=dashed, color="#9e9e9e", fontcolor="#9e9e9e" ]
 
 
     /* ═══════════════════════════════════════════════════════
-     * EDGES — state machine dispatch
-     * ═══════════════════════════════════════════════════════ */
-    p_state -> a_getip  [ label="active",     lhead=cluster_active     ]
-    p_state -> o_patch  [ label="offline",    lhead=cluster_offline    ]
-    p_state -> d_log    [ label="discovered", lhead=cluster_discovered ]
-    p_state -> x_jrnl  [ label="other",      lhead=cluster_other      ]
-
-
-    /* ═══════════════════════════════════════════════════════
-     * EDGES — State: active
+     * EDGES — _fsm_active_refresh()
      * ═══════════════════════════════════════════════════════ */
     a_getip -> a_exist
     a_exist -> a_patch [ label="yes" ]
@@ -341,7 +376,7 @@ digraph bmc_discovery {
 
 
     /* ═══════════════════════════════════════════════════════
-     * EDGES — State: offline
+     * EDGES — _fsm_offline_to_discovered()
      * ═══════════════════════════════════════════════════════ */
     o_patch -> o_jrnl1
     o_jrnl1 -> o_post
@@ -353,20 +388,13 @@ digraph bmc_discovery {
 
 
     /* ═══════════════════════════════════════════════════════
-     * EDGES — State: discovered
+     * EDGES — _fsm_discovered_refresh()
      * ═══════════════════════════════════════════════════════ */
-    d_log  -> d_post
     d_post -> d_400
     d_400  -> d_warn  [ label="yes" ]
     d_400  -> d_jrnl  [ label="no"  ]
     d_warn -> d_jrnl
     d_jrnl -> done    [ ltail=cluster_discovered ]
-
-
-    /* ═══════════════════════════════════════════════════════
-     * EDGES — State: other
-     * ═══════════════════════════════════════════════════════ */
-    x_jrnl -> done  [ ltail=cluster_other ]
 
 
     /* ═══════════════════════════════════════════════════════
